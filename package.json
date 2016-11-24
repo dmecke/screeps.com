@@ -1,0 +1,16 @@
+{
+    "name": "Screeps",
+    "description": "My AI implementation for Screeps.",
+    "license": "UNLICENSED",
+    "author": "Daniel Mecke",
+    "repository": "dmecke/screeps.com",
+    "devDependencies": {
+        "gulp": "github:gulpjs/gulp#4.0",
+        "gulp-clean": "*",
+        "gulp-tslint": "*",
+        "gulp-typescript": "*",
+        "gulp-flatten": "*",
+        "tslint": "*",
+        "typescript": "*"
+    }
+}
