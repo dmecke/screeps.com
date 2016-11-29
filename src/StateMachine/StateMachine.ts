@@ -10,8 +10,7 @@ export class StateMachine {
         this.currentState().execute(this.role);
     }
     public changeState(newState: string): void {
-        let state = this.role.createState(newState);
-        this.role.creep.say(state.toString());
+        this.role.creep.say(newState);
 
         this.currentState().exit(this.role);
         this.role.creep.memory.state = newState;

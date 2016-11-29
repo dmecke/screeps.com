@@ -1,12 +1,13 @@
-import { StateMachine_Builder_Build } from "../StateMachine/Builder/Build";
-import { StateMachine_Builder_Load } from "../StateMachine/Builder/Load";
-import { StateMachine_Builder_Pickup } from "../StateMachine/Builder/Pickup";
-import { StateMachine_Builder_Repair } from "../StateMachine/Builder/Repair";
-import { StateMachine_Builder_UpgradeController } from "../StateMachine/Builder/UpgradeController";
-import { StateMachine_Builder_Wait } from "../StateMachine/Builder/Wait";
-import { StateMachine_State } from "../StateMachine/State";
-import { Util_Logger } from "../Util/Logger";
-import { Role_Role } from "./Role";
+import {StateMachine_Builder_Build} from "../StateMachine/Builder/Build";
+import {StateMachine_Builder_Harvest} from "../StateMachine/Builder/Harvest";
+import {StateMachine_Builder_Load} from "../StateMachine/Builder/Load";
+import {StateMachine_Builder_Pickup} from "../StateMachine/Builder/Pickup";
+import {StateMachine_Builder_Repair} from "../StateMachine/Builder/Repair";
+import {StateMachine_Builder_UpgradeController} from "../StateMachine/Builder/UpgradeController";
+import {StateMachine_Builder_Wait} from "../StateMachine/Builder/Wait";
+import {StateMachine_State} from "../StateMachine/State";
+import {Util_Logger} from "../Util/Logger";
+import {Role_Role} from "./Role";
 
 /**
  * repairs and builds structures; helps with upgrading when nothing to do
@@ -25,6 +26,9 @@ export class Role_Builder extends Role_Role {
 
             case "Repair":
                 return new StateMachine_Builder_Repair();
+
+            case "Harvest":
+                return new StateMachine_Builder_Harvest();
 
             case "Load":
                 return new StateMachine_Builder_Load();

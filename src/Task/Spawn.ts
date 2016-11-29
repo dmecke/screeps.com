@@ -118,7 +118,7 @@ export class Task_Spawn extends Task_Task {
             role,
             state: "Wait",
         });
-        if (Number(newName)) {
+        if (!Number(newName)) {
             Util_Logger.info("Task_Spawn new " + role + ": " + newName + ".");
         } else if (this.creepsOfRole(role).length < Task_Spawn.minimumCreepCount(role)) {
             if (newName === ERR_NOT_ENOUGH_ENERGY) {
@@ -131,8 +131,6 @@ export class Task_Spawn extends Task_Task {
 
     private creepsOfRole(role: string): Creep[] {
         return _.filter(Game.creeps, function(creep: Creep) {
-            console.log(creep);
-            console.log(creep.role());
             return creep.role() === role;
         });
     }

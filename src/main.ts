@@ -16,9 +16,4 @@ export function loop() {
     new Task_Spawn().execute();
     new Task_Roles().execute();
     new Task_RoadPlanning().execute();
-    for (let name in Game.creeps) {
-        if (Game.creeps.hasOwnProperty(name)) {
-            console.log(Game.creeps[name].role());
-        }
-    }
 }
