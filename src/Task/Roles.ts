@@ -6,6 +6,7 @@ import { Role_Transporter } from "../Role/Transporter";
 import { Role_Upgrader } from "../Role/Upgrader";
 import { Role_Wallie } from "../Role/Wallie";
 import { Util_Logger } from "../Util/Logger";
+import {Role_Defender} from "../Role/Defender";
 
 export class Task_Roles {
     public execute() {
@@ -36,6 +37,10 @@ export class Task_Roles {
 
                     case Role_Wallie.role():
                         role = new Role_Wallie(creep);
+                        break;
+
+                    case Role_Defender.role():
+                        role = new Role_Defender(creep);
                         break;
 
                     default:
