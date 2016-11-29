@@ -6,10 +6,11 @@
     "repository": "dmecke/screeps.com",
     "devDependencies": {
         "gulp": "github:gulpjs/gulp#4.0",
+        "gulp-util": "*",
         "gulp-clean": "*",
         "gulp-tslint": "*",
         "gulp-typescript": "*",
-        "gulp-flatten": "*",
+        "recast": "*",
         "tslint": "*",
         "typescript": "*"
     }

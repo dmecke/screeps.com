@@ -1,0 +1,12 @@
+{
+    "extends": [
+        "tslint:recommended"
+    ],
+    "rules": {
+        "max-line-length": false,
+        "class-name": false,
+        "semicolon": false,
+        "only-arrow-functions": false,
+        "no-console": false
+    }
+}
