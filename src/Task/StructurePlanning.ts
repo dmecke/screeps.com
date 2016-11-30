@@ -4,12 +4,13 @@ export class Task_StructurePlanning extends Task_Task {
     public execute(): void {
         for (let name in Game.rooms) {
             if (Game.rooms.hasOwnProperty(name)) {
-                this.plan(Game.rooms[name]);
+                this.planContainers(Game.rooms[name]);
+                this.planExtensions(Game.rooms[name]);
             }
         }
     }
 
-    private plan(room: Room): void {
+    private planContainers(room: Room): void {
         if (!room.controller.hasCloseContainer()) {
             room.controller.buildCloseContainer();
         }
@@ -19,5 +20,9 @@ export class Task_StructurePlanning extends Task_Task {
                 spawn.buildCloseContainer();
             }
         });
+    }
+
+    private planExtensions(room: Room): void {
+        // @todo
     }
 }
