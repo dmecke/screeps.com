@@ -1,4 +1,5 @@
 import { Settings } from "../Settings";
+import {Util_Logger} from "../Util/Logger";
 
 export class Task_RoadPlanning {
     private static resetRoom(room: Room) {
@@ -27,7 +28,7 @@ export class Task_RoadPlanning {
     }
     private static incrementAtPosition(room: Room, position: RoomPosition) {
         let coordinate = position.x + "|" + position.y;
-        if (position.lookFor(LOOK_STRUCTURES).length > 0 || position.lookFor(LOOK_CONSTRUCTION_SITES).length > 0) {
+        if (position.lookFor(LOOK_TERRAIN)[0] !== "swamp" || position.lookFor(LOOK_STRUCTURES).length > 0 || position.lookFor(LOOK_CONSTRUCTION_SITES).length > 0) {
             delete room.memory.roads[coordinate];
             return;
         }
