@@ -9,6 +9,10 @@ interface Room {
     findNearestFilledStorage(creep: Creep): Array<StructureStorage|StructureContainer>;
     findSpawnsInNeedOfEnergy(creep: Creep): Array<StructureSpawn|StructureExtension|StructureContainer>;
 }
+interface Structure {
+    hasCloseContainer(): boolean;
+    buildCloseContainer(): void;
+}
 interface Source {
     priority(creep: Creep): number;
 }
