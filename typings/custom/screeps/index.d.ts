@@ -1,3 +1,7 @@
+interface RoomPosition {
+    positionsInRange(range: number): RoomPosition[];
+    outerPositionsInRange(range: number): RoomPosition[];
+}
 interface Room {
     hasTransporter(): boolean;
     hasSpawnSupplier(): boolean;
@@ -15,6 +19,7 @@ interface Structure {
 }
 interface Source {
     priority(creep: Creep): number;
+    harvestingSpots(): RoomPosition[];
 }
 interface Creep {
     role(): string;

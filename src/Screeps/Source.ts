@@ -1,5 +1,5 @@
 let loadSourcePrototype = function() {
-    Source.prototype.priority = function (this: Source, creep: Creep): number
+    Source.prototype.priority = function(this: Source, creep: Creep): number
     {
         if (this.energy === 0) {
             return -10000;
@@ -8,13 +8,21 @@ let loadSourcePrototype = function() {
             return 10000;
         }
 
-        let energy = this.energy;
-        let creeps = this.pos.findInRange(FIND_CREEPS, 1, {
-                filter: (c: Creep) => c.id !== creep.id,
-            }).length * 1000;
-        let distance = this.pos.getRangeTo(creep) * 60;
+        let energyAvailable = this.energy;
+        let availableSpotsMalus = 3000 - this.harvestingSpots().length * 1000;
+        let distanceMalus = this.pos.getRangeTo(creep) * 60;
 
-        return energy - creeps - distance;
+        return energyAvailable - availableSpotsMalus - distanceMalus;
+    };
+
+    Source.prototype.harvestingSpots = function(this: Source): RoomPosition[]
+    {
+        let potentialHarvestingPositions = this.pos.outerPositionsInRange(1);
+
+        return _.filter(potentialHarvestingPositions, function(position: RoomPosition) {
+            let terrain = position.lookFor(LOOK_TERRAIN)[0];
+            return (terrain === "plain" || terrain === "swamp") && position.lookFor(LOOK_CREEPS).length === 0;
+        });
     };
 };
 

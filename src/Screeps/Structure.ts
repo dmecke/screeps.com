@@ -17,15 +17,7 @@ let loadStructurePrototype = function() {
 
     Structure.prototype.buildCloseContainer = function(this: Structure): void
     {
-        let positions: RoomPosition[] = [];
-        for (let x = -Settings.BUILD_DISTANCE_CONTAINER; x <= Settings.BUILD_DISTANCE_CONTAINER; x++) {
-            for (let y = -Settings.BUILD_DISTANCE_CONTAINER; y <= Settings.BUILD_DISTANCE_CONTAINER; y++) {
-                let position = new RoomPosition(this.pos.x + x, this.pos.y + y, this.room.name);
-                if (this.pos.getRangeTo(position) === Settings.BUILD_DISTANCE_CONTAINER) {
-                    positions.push(position);
-                }
-            }
-        }
+        let positions = this.pos.outerPositionsInRange(Settings.BUILD_DISTANCE_CONTAINER);
         let position = this.pos.findClosestByPath(positions);
         position.createConstructionSite(STRUCTURE_CONTAINER);
 
