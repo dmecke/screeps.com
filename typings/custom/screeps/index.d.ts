@@ -1,6 +1,8 @@
 interface RoomPosition {
     positionsInRange(range: number): RoomPosition[];
     outerPositionsInRange(range: number): RoomPosition[];
+    hasCloseContainer(): boolean;
+    buildCloseContainer(): void;
 }
 interface Room {
     hasTransporter(): boolean;
@@ -12,10 +14,6 @@ interface Room {
     findNearestDroppedEnergy(creep: Creep): Array<Resource>;
     findNearestFilledStorage(creep: Creep): Array<StructureStorage|StructureContainer>;
     findSpawnsInNeedOfEnergy(creep: Creep): Array<StructureSpawn|StructureExtension|StructureContainer>;
-}
-interface Structure {
-    hasCloseContainer(): boolean;
-    buildCloseContainer(): void;
 }
 interface Source {
     priority(creep: Creep): number;

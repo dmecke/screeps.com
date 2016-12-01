@@ -11,13 +11,19 @@ export class Task_StructurePlanning extends Task_Task {
     }
 
     private planContainers(room: Room): void {
-        if (!room.controller.hasCloseContainer()) {
-            room.controller.buildCloseContainer();
+        if (!room.controller.pos.hasCloseContainer()) {
+            room.controller.pos.buildCloseContainer();
         }
 
         _.each(room.find(FIND_MY_SPAWNS), function(spawn: Spawn) {
-            if (!spawn.hasCloseContainer()) {
-                spawn.buildCloseContainer();
+            if (!spawn.pos.hasCloseContainer()) {
+                spawn.pos.buildCloseContainer();
+            }
+        });
+
+        _.each(room.find(FIND_SOURCES), function(source: Source) {
+            if (!source.pos.hasCloseContainer()) {
+                source.pos.buildCloseContainer();
             }
         });
     }

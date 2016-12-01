@@ -1,13 +1,11 @@
 import loadRoomPositionPrototype = require("./Screeps/RoomPosition");
 import loadCreepPrototype = require("./Screeps/Creep");
 import loadRoomPrototype = require("./Screeps/Room");
-import loadStructurePrototype = require("./Screeps/Structure");
 import loadSourcePrototype = require("./Screeps/Source");
 
 loadRoomPositionPrototype();
 loadCreepPrototype();
 loadRoomPrototype();
-loadStructurePrototype();
 loadSourcePrototype();
 
 import {Task_Cleanup} from "./Task/Cleanup";

@@ -1,3 +1,6 @@
+import {Settings} from "../Settings";
+import {Util_Logger} from "../Util/Logger";
+
 let loadRoomPositionPrototype = function() {
     RoomPosition.prototype.positionsInRange = function(this: RoomPosition, range: number): RoomPosition[]
     {
@@ -18,6 +21,32 @@ let loadRoomPositionPrototype = function() {
         return _.filter(this.positionsInRange(range), function(position: RoomPosition) {
             return self.getRangeTo(position) === range;
         });
+    };
+
+    RoomPosition.prototype.hasCloseContainer = function(this: RoomPosition): boolean
+    {
+        let hasStructure = this.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, {
+            filter: (structure: Structure) => structure.structureType === STRUCTURE_CONTAINER,
+        }).length > 0;
+
+        let hasConstructionSite = this.findInRange(FIND_CONSTRUCTION_SITES, Settings.BUILD_DISTANCE_CONTAINER, {
+            filter: (constructionSite: ConstructionSite) => constructionSite.structureType === STRUCTURE_CONTAINER,
+        }).length > 0;
+
+        return hasStructure || hasConstructionSite;
+    };
+
+    RoomPosition.prototype.buildCloseContainer = function(this: RoomPosition): void
+    {
+        let positions = this.outerPositionsInRange(Settings.BUILD_DISTANCE_CONTAINER);
+        let position = this.findClosestByPath(positions);
+        if (null === position) {
+            Util_Logger.warn("Could not find a position to build a container near " + this.x + "|" + this.y + ".");
+            return;
+        }
+
+        position.createConstructionSite(STRUCTURE_CONTAINER);
+        Util_Logger.info("Added container construction site at " + position.x + "|" + position.y + ".");
     };
 };
 
