@@ -45,8 +45,9 @@ let loadRoomPositionPrototype = function() {
             return;
         }
 
-        position.createConstructionSite(STRUCTURE_CONTAINER);
-        Util_Logger.info("Added container construction site at " + position.x + "|" + position.y + ".");
+        if (position.createConstructionSite(STRUCTURE_CONTAINER) > 0) {
+            Util_Logger.info("Added container construction site at " + position.x + "|" + position.y + " in " + position.roomName + ".");
+        }
     };
 };
 
