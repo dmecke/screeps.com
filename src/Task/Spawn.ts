@@ -7,6 +7,7 @@ import { Role_Wallie } from "../Role/Wallie";
 import { Util_Logger } from "../Util/Logger";
 import { Task_Task } from "./Task";
 import {Role_Defender} from "../Role/Defender";
+import {Role_Scout} from "../Role/Scout";
 
 export class Task_Spawn extends Task_Task {
     public static NUMBER_OF_HARVESTER = 4;
@@ -15,6 +16,7 @@ export class Task_Spawn extends Task_Task {
     public static NUMBER_OF_SPAWN_SUPPLIER = 3;
     public static NUMBER_OF_WALLIE = 1;
     public static NUMBER_OF_DEFENDER = 1;
+    public static NUMBER_OF_SCOUT = 1;
     public static BUILDER_MINIMUM = 1;
     public static BUILDER_MAXIMUM = 10;
 
@@ -41,6 +43,9 @@ export class Task_Spawn extends Task_Task {
             case Role_Defender.role():
                 return Task_Spawn.NUMBER_OF_DEFENDER;
 
+            case Role_Scout.role():
+                return Task_Spawn.NUMBER_OF_SCOUT;
+
             default:
                 Util_Logger.error("Cannot find minimum creep count for illegal role '" + role + "'");
                 throw new Error();
@@ -48,7 +53,7 @@ export class Task_Spawn extends Task_Task {
     }
 
     private static roles(): string[] {
-        return [Role_Defender.role(), Role_Wallie.role(), Role_Builder.role(), Role_Upgrader.role(), Role_Transporter.role(), Role_SpawnSupplier.role(), Role_Harvester.role()];
+        return [Role_Defender.role(), Role_Wallie.role(), Role_Builder.role(), Role_Upgrader.role(), Role_Transporter.role(), Role_SpawnSupplier.role(), Role_Harvester.role(), Role_Scout.role()];
     }
 
     private static bodyParts(role: string, spawn: StructureSpawn) {
@@ -88,6 +93,11 @@ export class Task_Spawn extends Task_Task {
             case Role_Defender.role():
                 base = [ATTACK, ATTACK, ATTACK, TOUGH, MOVE];
                 big = [ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE];
+                break;
+
+            case Role_Scout.role():
+                base = [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
+                big = [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
                 break;
 
             default:

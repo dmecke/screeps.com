@@ -947,6 +947,8 @@ declare class GameMap {
      * @returns A boolean value.
      */
     isRoomProtected(roomName: string): boolean;
+
+    isRoomAvailable(roomName: string): boolean;
 }
 /**
  * A global object representing the in-game market. You can use this object to track resource transactions to/from your
