@@ -6,9 +6,7 @@ export class StateMachine_Transporter_FillStorage extends StateMachine_State {
     private name = "FillStorage";
 
     public execute(role: Role_Role) {
-        console.log(role.creep.name + " [FillStorage]: executing");
         if (role.creep.carry.energy === 0) {
-            console.log(role.creep.name + " [FillStorage]: no energy - change to Pickup");
             role.stateMachine.changeState("Pickup");
             return;
         }
@@ -17,11 +15,9 @@ export class StateMachine_Transporter_FillStorage extends StateMachine_State {
 
         if (targets.length === 0) {
             if (role.creep.isInHomeRoom()) {
-                console.log(role.creep.name + " [FillStorage]: in home room - change to TransferEnergy");
                 role.stateMachine.changeState("TransferEnergy");
                 return;
             } else {
-                console.log(role.creep.name + " [FillStorage]: no targets and not in home room - going to home room");
                 role.creep.memory.target_room = role.creep.memory.home_room;
                 role.stateMachine.changeState("ChangeRoom");
                 return;

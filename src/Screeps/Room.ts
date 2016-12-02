@@ -3,6 +3,10 @@ import { Role_SpawnSupplier } from "./../Role/SpawnSupplier";
 import { Role_Transporter } from "./../Role/Transporter";
 
 let loadRoomPrototype = function() {
+    Room.prototype.hasController = function(this: Room) {
+        return this.controller !== undefined;
+    };
+
     Room.prototype.hasTransporter = function(this: Room) {
         return this.find(FIND_MY_CREEPS, {
             filter: (creep: Creep) => creep.role() === Role_Transporter.role(),

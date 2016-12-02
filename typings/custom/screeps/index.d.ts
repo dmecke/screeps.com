@@ -5,6 +5,7 @@ interface RoomPosition {
     buildCloseContainer(): void;
 }
 interface Room {
+    hasController(): boolean;
     hasTransporter(): boolean;
     hasSpawnSupplier(): boolean;
     findSourcesByPriority(creep: Creep): Array<Source>;

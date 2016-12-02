@@ -11,7 +11,7 @@ export class Task_StructurePlanning extends Task_Task {
     }
 
     private planContainers(room: Room): void {
-        if (!room.controller.pos.hasCloseContainer()) {
+        if (room.hasController() && !room.controller.pos.hasCloseContainer()) {
             room.controller.pos.buildCloseContainer();
         }
 

@@ -561,6 +561,8 @@ declare class Creep extends RoomObject {
      * @param set to 'true' to allow other players to see this message. Default is 'false'.
      */
     say(message: string, toPublic?: boolean): number;
+
+    signController(target: StructureController, text: string): number;
     /**
      * Kill the creep immediately.
      */
@@ -1823,6 +1825,9 @@ declare class StructureController extends OwnedStructure {
      * The amount of game ticks while this controller cannot be upgraded due to attack.
      */
     upgradeBlocked: number;
+
+    sign: {username: string, text: string, time: number, datetime: Date};
+
     /**
      * Make your claimed controller neutral again.
      */
