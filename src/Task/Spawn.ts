@@ -53,7 +53,7 @@ export class Task_Spawn extends Task_Task {
     }
 
     private static roles(): string[] {
-        return [Role_Defender.role(), Role_Wallie.role(), Role_Builder.role(), Role_Upgrader.role(), Role_Transporter.role(), Role_SpawnSupplier.role(), Role_Harvester.role(), Role_Scout.role()];
+        return [Role_Scout.role(), Role_Defender.role(), Role_Wallie.role(), Role_Builder.role(), Role_Upgrader.role(), Role_Transporter.role(), Role_SpawnSupplier.role(), Role_Harvester.role()];
     }
 
     private static bodyParts(role: string, spawn: StructureSpawn) {
