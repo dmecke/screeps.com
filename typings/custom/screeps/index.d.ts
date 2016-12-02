@@ -14,6 +14,7 @@ interface Room {
     findNearestDroppedEnergy(creep: Creep): Array<Resource>;
     findNearestFilledStorage(creep: Creep): Array<StructureStorage|StructureContainer>;
     findSpawnsInNeedOfEnergy(creep: Creep): Array<StructureSpawn|StructureExtension|StructureContainer>;
+    findRandomAdjacentRoom(): string;
 }
 interface Source {
     priority(creep: Creep): number;
@@ -22,4 +23,11 @@ interface Source {
 interface Creep {
     role(): string;
     state(): string;
+    targetRoom(): string;
+    homeRoom(): string;
+    moveToTargetRoom(): void;
+    isInTargetRoom(): boolean;
+    isInHomeRoom(): boolean;
+    moveHome(): void;
+    moveToRoom(room: string): void;
 }

@@ -1,10 +1,11 @@
-import { StateMachine_State } from "../StateMachine/State";
-import { StateMachine_Transporter_FillStorage } from "../StateMachine/Transporter/FillStorage";
-import { StateMachine_Transporter_Pickup } from "../StateMachine/Transporter/Pickup";
-import { StateMachine_Transporter_TransferEnergy } from "../StateMachine/Transporter/TransferEnergy";
-import { StateMachine_Transporter_Wait } from "../StateMachine/Transporter/Wait";
-import { Util_Logger } from "../Util/Logger";
-import { Role_Role } from "./Role";
+import {StateMachine_State} from "../StateMachine/State";
+import {StateMachine_Transporter_FillStorage} from "../StateMachine/Transporter/FillStorage";
+import {StateMachine_Transporter_Pickup} from "../StateMachine/Transporter/Pickup";
+import {StateMachine_Transporter_TransferEnergy} from "../StateMachine/Transporter/TransferEnergy";
+import {StateMachine_Transporter_Wait} from "../StateMachine/Transporter/Wait";
+import {Util_Logger} from "../Util/Logger";
+import {Role_Role} from "./Role";
+import {StateMachine_Transporter_ChangeRoom} from "../StateMachine/Transporter/ChangeRoom";
 
 /**
  * transports harvested energy to containers
@@ -23,6 +24,9 @@ export class Role_Transporter extends Role_Role {
 
             case "Pickup":
                 return new StateMachine_Transporter_Pickup();
+
+            case "ChangeRoom":
+                return new StateMachine_Transporter_ChangeRoom();
 
             case "TransferEnergy":
                 return new StateMachine_Transporter_TransferEnergy();

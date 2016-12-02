@@ -111,6 +111,19 @@ let loadRoomPrototype = function() {
 
         return targets as StructureSpawn[]|StructureContainer[]|StructureExtension[];
     };
+
+    Room.prototype.findRandomAdjacentRoom = function(this: Room): string {
+        let rooms: string[] = [];
+        let exits = Game.map.describeExits(this.name);
+        for (let direction in exits) {
+            if (exits.hasOwnProperty(direction) && Game.map.isRoomAvailable(exits[direction])) {
+                rooms.push(exits[direction]);
+            }
+        }
+        let index = Math.floor(Math.random() * rooms.length);
+
+        return rooms[index];
+    };
 };
 
 export = loadRoomPrototype;

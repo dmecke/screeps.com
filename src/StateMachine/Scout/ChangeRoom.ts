@@ -1,36 +1,20 @@
-import { Role_Role } from "../../Role/Role";
-import { StateMachine_State } from "../State";
+import {Role_Role} from "../../Role/Role";
+import {StateMachine_State} from "../State";
 
 export class StateMachine_Scout_ChangeRoom extends StateMachine_State {
     private name = "ChangeRoom";
     public execute(role: Role_Role) {
         this.trackInformation(role);
 
-        if (this.isInTargetRoom(role)) {
-            this.assignNewTargetRoom(role);
+        if (role.creep.isInTargetRoom()) {
+            role.creep.memory.target_room = role.creep.room.findRandomAdjacentRoom();
         }
 
         if (!role.creep.memory.target_room) {
             return;
         }
 
-        role.creep.moveTo(new RoomPosition(25, 25, role.creep.memory.target_room));
-    }
-
-    private assignNewTargetRoom(role: Role_Role): void {
-        let rooms: string[] = [];
-        let exits = Game.map.describeExits(role.creep.room.name);
-        for (let direction in exits) {
-            if (exits.hasOwnProperty(direction) && Game.map.isRoomAvailable(exits[direction])) {
-                rooms.push(exits[direction]);
-            }
-        }
-        let index = Math.floor(Math.random() * rooms.length);
-        role.creep.memory.target_room = rooms[index];
-    }
-
-    private isInTargetRoom(role: Role_Role): boolean {
-        return role.creep.memory.target_room === role.creep.room.name || role.creep.memory.target_room === undefined;
+        role.creep.moveToTargetRoom();
     }
 
     private trackInformation(role: Role_Role): void {

@@ -135,8 +135,10 @@ export class Task_Spawn extends Task_Task {
         let spawn = Game.spawns[spawnName];
         let newName = spawn.createCreep(Task_Spawn.bodyParts(role, spawn), undefined, {
             experimental: false,
+            home_room: spawn.room.name,
             role,
             state: "Wait",
+            target_room: spawn.room.name,
         });
         if (!Number(newName)) {
             Util_Logger.info("Spawning new " + role + ": " + newName + ".");
