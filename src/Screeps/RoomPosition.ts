@@ -41,7 +41,7 @@ let loadRoomPositionPrototype = function() {
         let positions = this.outerPositionsInRange(Settings.BUILD_DISTANCE_CONTAINER);
         let position = this.findClosestByPath(positions);
         if (null === position) {
-            Util_Logger.warn("Could not find a position to build a container near " + this.x + "|" + this.y + ".");
+            Util_Logger.warn("Could not find a position to build a container near " + this.x + "|" + this.y + " in " + this.roomName + ".");
             return;
         }
 
