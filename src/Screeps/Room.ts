@@ -77,13 +77,17 @@ let loadRoomPrototype = function() {
         return targets as StructureWall[]|StructureRampart[];
     };
 
-    Room.prototype.findNearestDroppedEnergy = function(this: Room, creep: Creep) {
+    Room.prototype.findNearestDroppedEnergy = function(this: Room, creep: Creep): Resource[] {
         let targets = this.find(FIND_DROPPED_ENERGY);
         targets.sort((a: Resource, b: Resource) => {
             return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
         });
 
         return targets as Resource[];
+    };
+
+    Room.prototype.amountOfDroppedEnergy = function(this: Room): number {
+        return _.sum(this.find(FIND_DROPPED_ENERGY), (energy: Resource) => energy.amount);
     };
 
     Room.prototype.findNearestFilledStorage = function(this: Room, creep: Creep) {
@@ -123,6 +127,21 @@ let loadRoomPrototype = function() {
         let index = Math.floor(Math.random() * rooms.length);
 
         return rooms[index];
+    };
+
+    Room.prototype.trackInfo = function(this: Room): void {
+        this.memory = {
+            dropped_energy: this.amountOfDroppedEnergy(),
+            energy_available: this.energyAvailable,
+            energy_capacity_available: this.energyCapacityAvailable,
+            has_controller: this.controller !== undefined,
+            has_storage: this.storage !== undefined,
+            has_terminal: this.terminal !== undefined,
+            last_visited: new Date(),
+            number_of_hostile_creeps: this.find(FIND_HOSTILE_CREEPS).length,
+            number_of_sources: this.find(FIND_SOURCES).length,
+            rcl: this.controller !== undefined ? this.controller.level : null,
+        };
     };
 };
 

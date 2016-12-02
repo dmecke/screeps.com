@@ -9,6 +9,7 @@ export abstract class Role_Role {
         this.stateMachine = new StateMachine(this);
     }
     public update(): void {
+        this.creep.room.trackInfo();
         this.stateMachine.update();
     }
     public abstract createState(state: string): StateMachine_State;

@@ -15,6 +15,8 @@ interface Room {
     findNearestFilledStorage(creep: Creep): Array<StructureStorage|StructureContainer>;
     findSpawnsInNeedOfEnergy(creep: Creep): Array<StructureSpawn|StructureExtension|StructureContainer>;
     findRandomAdjacentRoom(): string;
+    amountOfDroppedEnergy(): number;
+    trackInfo(): void;
 }
 interface Source {
     priority(creep: Creep): number;
