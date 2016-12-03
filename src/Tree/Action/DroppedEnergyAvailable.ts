@@ -21,7 +21,7 @@ export class Tree_Action_DroppedEnergyAvailable extends Tree_Core_Action {
             return Tree_Tree.FAILURE;
         }
 
-        if (this.range === null) {
+        if (!this.range) {
             return Tree_Tree.SUCCESS;
         }
 

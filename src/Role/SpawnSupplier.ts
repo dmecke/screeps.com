@@ -45,7 +45,7 @@ export class Role_SpawnSupplier extends Role_Role {
                     ]),
                 ]),
                 new Tree_Composite_Sequence([
-                    new Tree_Action_DroppedEnergyAvailable(creep, 5),
+                    new Tree_Action_DroppedEnergyAvailable(creep),
                     new Tree_Composite_Priority([
                         new Tree_Action_PickUp(creep, room.findNearestDroppedEnergy(creep)[0]),
                         new Tree_Action_MoveTo(creep, room.findNearestDroppedEnergy(creep)[0]),
