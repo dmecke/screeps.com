@@ -20,12 +20,6 @@ export class Task_StructurePlanning extends Task_Task {
                 spawn.pos.createCloseContainerConstructionSite();
             }
         });
-
-        _.each(room.find(FIND_SOURCES), function(source: Source) {
-            if (!source.pos.hasCloseContainer()) {
-                source.pos.createCloseContainerConstructionSite();
-            }
-        });
     }
 
     private planExtensions(room: Room): void {

@@ -50,8 +50,8 @@ export class Role_Harvester extends Role_Role {
                         ]),
                         new Tree_Composite_Sequence([
                             new Tree_Composite_Priority([
-                                new Tree_Action_HasConstructionSiteNear(creep.pos, STRUCTURE_CONTAINER, 2),
-                                new Tree_Action_CreateConstructionSiteNear(creep.pos, STRUCTURE_CONTAINER, 2),
+                                new Tree_Action_HasConstructionSiteNear(bestSource.pos, STRUCTURE_CONTAINER, 2),
+                                new Tree_Action_CreateConstructionSiteNear(bestSource.pos, STRUCTURE_CONTAINER, 2),
                             ]),
                             new Tree_Composite_Priority([
                                 new Tree_Action_Build(creep, creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES) as ConstructionSite),
