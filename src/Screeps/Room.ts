@@ -1,22 +1,8 @@
 import { Settings } from "../Settings";
-import { Role_SpawnSupplier } from "./../Role/SpawnSupplier";
-import { Role_Transporter } from "./../Role/Transporter";
 
 let loadRoomPrototype = function() {
     Room.prototype.hasController = function(this: Room) {
         return this.controller !== undefined;
-    };
-
-    Room.prototype.hasTransporter = function(this: Room) {
-        return this.find(FIND_MY_CREEPS, {
-            filter: (creep: Creep) => creep.role() === Role_Transporter.role(),
-        }).length > 0;
-    };
-
-    Room.prototype.hasSpawnSupplier = function(this: Room) {
-        return this.find(FIND_MY_CREEPS, {
-            filter: (creep: Creep) => creep.role() === Role_SpawnSupplier.role(),
-        }).length > 0;
     };
 
     Room.prototype.findSourcesByPriority = function(this: Room, creep: Creep) {
@@ -94,12 +80,16 @@ let loadRoomPrototype = function() {
         return _.sum(this.find(FIND_DROPPED_ENERGY), (energy: Resource) => energy.amount);
     };
 
-    Room.prototype.findNearestFilledStorage = function(this: Room, creep: Creep) {
-        let targets = this.find(FIND_STRUCTURES, {
+    Room.prototype.findFilledStorages = function(this: Room): StructureContainer[]|StructureStorage[] {
+        return this.find(FIND_STRUCTURES, {
             filter: (structure: StructureContainer|StructureStorage) => {
                 return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] > 0;
             },
-        });
+        }) as StructureContainer[]|StructureStorage[];
+    };
+
+    Room.prototype.findNearestFilledStorage = function(this: Room, creep: Creep) {
+        let targets = this.findFilledStorages();
         targets.sort(function(a: Structure, b: Structure) {
             return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
         });
@@ -107,17 +97,36 @@ let loadRoomPrototype = function() {
         return targets as StructureContainer[]|StructureStorage[];
     };
 
-    Room.prototype.findSpawnsInNeedOfEnergy = function(this: Room, creep: Creep) {
+    Room.prototype.findNearestUnfilledStorage = function(this: Room, creep: Creep) {
+        let targets = this.find(FIND_STRUCTURES, {
+            filter: (structure: StructureContainer|StructureStorage) => {
+                return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
+            },
+        });
+        targets.sort(function(a: StructureContainer, b: StructureContainer) {
+            return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
+        });
+
+        return targets as StructureContainer[]|StructureStorage[];
+    };
+
+    Room.prototype.findSpawnsInNeedOfEnergy = function(this: Room) {
         let targets = this.find(FIND_STRUCTURES, {
             filter: (structure: StructureExtension|StructureSpawn) => {
                 return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN || structure.structureType === STRUCTURE_CONTAINER) && structure.energy < structure.energyCapacity;
             },
         });
+
+        return targets as StructureSpawn[]|StructureContainer[]|StructureExtension[];
+    };
+
+    Room.prototype.findNearestSpawnInNeedOfEnergy = function(this: Room, creep: Creep) {
+        let targets = this.findSpawnsInNeedOfEnergy();
         targets.sort(function(a: Structure, b: Structure) {
             return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
         });
 
-        return targets as StructureSpawn[]|StructureContainer[]|StructureExtension[];
+        return targets[0] as StructureSpawn|StructureContainer|StructureExtension;
     };
 
     Room.prototype.findRandomAdjacentRoom = function(this: Room): string {

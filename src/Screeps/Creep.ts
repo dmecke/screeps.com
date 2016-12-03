@@ -3,8 +3,8 @@ let loadCreepPrototype = function() {
         return this.memory.role;
     };
 
-    Creep.prototype.state = function(this: Creep): string {
-        return this.memory.state;
+    Creep.prototype.carryAmount = function(this: Creep): number {
+        return _.sum(this.carry);
     };
 
     Creep.prototype.homeRoom = function(this: Creep): string {
@@ -19,24 +19,20 @@ let loadCreepPrototype = function() {
         this.moveToRoom(this.targetRoom());
     };
 
+    Creep.prototype.isInRoom = function(this: Creep, room: string): boolean {
+        return this.room.name === room;
+    };
+
     Creep.prototype.isInTargetRoom = function(this: Creep): boolean {
-        return this.targetRoom() === this.room.name || this.targetRoom() === undefined; // @todo remove undefined case when every creep has a target_room
+        return this.isInRoom(this.targetRoom());
     };
 
     Creep.prototype.isInHomeRoom = function(this: Creep): boolean {
-        return this.homeRoom() === this.room.name || this.homeRoom() === undefined; // @todo remove undefined case when every creep has a home_room
+        return this.isInRoom(this.homeRoom());
     };
 
-    Creep.prototype.moveToRoom = function(this: Creep, room: string): void {
-        this.moveTo(new RoomPosition(25, 25, room));
-    };
-
-    Creep.prototype.moveHome = function(this: Creep): void {
-        if (this.isInHomeRoom()) {
-            return;
-        }
-
-        this.moveToRoom(this.homeRoom());
+    Creep.prototype.moveToRoom = function(this: Creep, room: string): number {
+        return this.moveTo(new RoomPosition(25, 25, room));
     };
 };
 

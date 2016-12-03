@@ -1,27 +1,31 @@
-import {StateMachine_Defender_Attack} from "../StateMachine/Defender/Attack";
-import {StateMachine_Defender_Wait} from "../StateMachine/Defender/Wait";
-import {StateMachine_State} from "../StateMachine/State";
-import {Util_Logger} from "../Util/Logger";
 import {Role_Role} from "./Role";
+import {Tree_Tree} from "../Tree/Tree_Tree";
+import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
+import {Tree_Composite_Sequence} from "../Tree/Composite/Sequence";
+import {Tree_Action_MoveTo} from "../Tree/Action/MoveTo";
+import {Tree_Action_HostileCreepInRoom} from "../Tree/Action/HostileCreepInRoom";
+import {Tree_Action_Attack} from "../Tree/Action/Attack";
 
-/**
- * repairs and builds structures; helps with upgrading when nothing to do
- */
 export class Role_Defender extends Role_Role {
+
     public static role(): string {
         return "Defender";
     }
-    public createState(state: string): StateMachine_State {
-        switch (state) {
-            case "Wait":
-                return new StateMachine_Defender_Wait();
 
-            case "Attack":
-                return new StateMachine_Defender_Attack();
+    public constructor(creep: Creep) {
+        let room = creep.room;
+        let hostileCreep = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS) as Creep;
 
-            default:
-                Util_Logger.error("Could not create state class for illegal state in Defender: '" + state + "'.");
-                throw new Error();
-        }
+        let tree = new Tree_Tree(
+            new Tree_Composite_Sequence([
+                new Tree_Action_HostileCreepInRoom(room),
+                new Tree_Composite_Priority([
+                    new Tree_Action_Attack(creep, hostileCreep),
+                    new Tree_Action_MoveTo(creep, hostileCreep),
+                ]),
+            ]),
+        );
+
+        super(creep, tree);
     }
 }

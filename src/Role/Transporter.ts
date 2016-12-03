@@ -1,39 +1,57 @@
-import {StateMachine_State} from "../StateMachine/State";
-import {StateMachine_Transporter_FillStorage} from "../StateMachine/Transporter/FillStorage";
-import {StateMachine_Transporter_Pickup} from "../StateMachine/Transporter/Pickup";
-import {StateMachine_Transporter_TransferEnergy} from "../StateMachine/Transporter/TransferEnergy";
-import {StateMachine_Transporter_Wait} from "../StateMachine/Transporter/Wait";
-import {Util_Logger} from "../Util/Logger";
 import {Role_Role} from "./Role";
-import {StateMachine_Transporter_ChangeRoom} from "../StateMachine/Transporter/ChangeRoom";
+import {Tree_Tree} from "../Tree/Tree_Tree";
+import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
+import {Tree_Action_DroppedEnergyAvailable} from "../Tree/Action/DroppedEnergyAvailable";
+import {Tree_Action_PickUp} from "../Tree/Action/PickUp";
+import {Tree_Action_MoveTo} from "../Tree/Action/MoveTo";
+import {Tree_Composite_Sequence} from "../Tree/Composite/Sequence";
+import {Tree_Action_AllSpawnsFilled} from "../Tree/Action/AllSpawnsFilled";
+import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";
+import {Tree_Action_Transfer} from "../Tree/Action/Transfer";
+import {Tree_Action_AllStoragesFilled} from "../Tree/Action/AllStoragesFilled";
 
 /**
  * transports harvested energy to containers
  */
 export class Role_Transporter extends Role_Role {
+
     public static role(): string {
         return "Transporter";
     }
-    public createState(state: string): StateMachine_State {
-        switch (state) {
-            case "Wait":
-                return new StateMachine_Transporter_Wait();
 
-            case "FillStorage":
-                return new StateMachine_Transporter_FillStorage();
+    public constructor(creep: Creep) {
+        let room = creep.room;
 
-            case "Pickup":
-                return new StateMachine_Transporter_Pickup();
+        let tree = new Tree_Tree(
+            new Tree_Composite_Priority([
+                new Tree_Composite_Sequence([
+                    new Tree_Decorator_Inverter(
+                        new Tree_Action_AllStoragesFilled(room),
+                    ),
+                    new Tree_Composite_Priority([
+                        new Tree_Action_Transfer(creep, RESOURCE_ENERGY, room.findNearestUnfilledStorage(creep)[0]),
+                        new Tree_Action_MoveTo(creep, room.findNearestUnfilledStorage(creep)[0]),
+                    ]),
+                ]),
+                new Tree_Composite_Sequence([
+                    new Tree_Decorator_Inverter(
+                        new Tree_Action_AllSpawnsFilled(room),
+                    ),
+                    new Tree_Composite_Priority([
+                        new Tree_Action_Transfer(creep, RESOURCE_ENERGY, room.findNearestSpawnInNeedOfEnergy(creep)),
+                        new Tree_Action_MoveTo(creep, room.findNearestSpawnInNeedOfEnergy(creep)),
+                    ]),
+                ]),
+                new Tree_Composite_Sequence([
+                    new Tree_Action_DroppedEnergyAvailable(creep),
+                    new Tree_Composite_Priority([
+                        new Tree_Action_PickUp(creep, room.findNearestDroppedEnergy(creep)[0]),
+                        new Tree_Action_MoveTo(creep, room.findNearestDroppedEnergy(creep)[0]),
+                    ]),
+                ]),
+            ]),
+        );
 
-            case "ChangeRoom":
-                return new StateMachine_Transporter_ChangeRoom();
-
-            case "TransferEnergy":
-                return new StateMachine_Transporter_TransferEnergy();
-
-            default:
-                Util_Logger.error("Could not create state class for illegal state in Transporter: '" + state + "'");
-                throw new Error();
-        }
+        super(creep, tree);
     }
 }

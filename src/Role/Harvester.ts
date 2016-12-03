@@ -1,10 +1,15 @@
-import { StateMachine_Harvester_DropEnergy } from "../StateMachine/Harvester/DropEnergy";
-import { StateMachine_Harvester_Harvest } from "../StateMachine/Harvester/Harvest";
-import { StateMachine_Harvester_TransferEnergy } from "../StateMachine/Harvester/TransferEnergy";
-import { StateMachine_Harvester_Wait } from "../StateMachine/Harvester/Wait";
-import { StateMachine_State } from "../StateMachine/State";
-import { Util_Logger } from "../Util/Logger";
-import { Role_Role } from "./Role";
+import {Role_Role} from "./Role";
+import {Tree_Tree} from "../Tree/Tree_Tree";
+import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";
+import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
+import {Tree_Composite_Sequence} from "../Tree/Composite/Sequence";
+import {Tree_Action_RoomHasCreepsOfRole} from "../Tree/Action/RoomHasCreepsOfRole";
+import {Tree_Action_MoveTo} from "../Tree/Action/MoveTo";
+import {Tree_Action_Harvest} from "../Tree/Action/Harvest";
+import {Tree_Action_Drop} from "../Tree/Action/Drop";
+import {Tree_Action_AllSpawnsFilled} from "../Tree/Action/AllSpawnsFilled";
+import {Tree_Action_Transfer} from "../Tree/Action/Transfer";
+import {Tree_Action_CreepIsAtCarryAmount} from "../Tree/Action/CreepIsAtCarryAmount";
 
 /**
  * harvests energy
@@ -13,23 +18,40 @@ export class Role_Harvester extends Role_Role {
     public static role(): string {
         return "Harvester";
     }
-    public createState(state: string): StateMachine_State {
-        switch (state) {
-            case "Wait":
-                return new StateMachine_Harvester_Wait();
+    public constructor(creep: Creep) {
+        let room = creep.room;
+        let bestSource = room.findSourcesByPriority(creep)[0];
+        let transferEnergyTarget = room.findNearestSpawnInNeedOfEnergy(creep);
 
-            case "DropEnergy":
-                return new StateMachine_Harvester_DropEnergy();
+        let tree = new Tree_Tree(
+            new Tree_Composite_Priority([
+                new Tree_Composite_Sequence([
+                    new Tree_Decorator_Inverter(
+                        new Tree_Action_CreepIsAtCarryAmount(creep, creep.carryCapacity),
+                    ),
+                    new Tree_Composite_Priority([
+                        new Tree_Action_Harvest(creep, bestSource),
+                        new Tree_Action_MoveTo(creep, bestSource),
+                    ]),
+                ]),
+                new Tree_Composite_Sequence([
+                    new Tree_Action_CreepIsAtCarryAmount(creep, creep.carryCapacity),
+                    new Tree_Action_RoomHasCreepsOfRole(room, "Transporter", 1),
+                    new Tree_Action_RoomHasCreepsOfRole(room, "SpawnSupplier", 1),
+                    new Tree_Action_Drop(creep, RESOURCE_ENERGY),
+                ]),
+                new Tree_Composite_Sequence([
+                    new Tree_Decorator_Inverter(
+                        new Tree_Action_AllSpawnsFilled(room),
+                    ),
+                    new Tree_Composite_Priority([
+                        new Tree_Action_Transfer(creep, RESOURCE_ENERGY, transferEnergyTarget),
+                        new Tree_Action_MoveTo(creep, transferEnergyTarget),
+                    ]),
+                ]),
+            ]),
+        );
 
-            case "Harvest":
-                return new StateMachine_Harvester_Harvest();
-
-            case "TransferEnergy":
-                return new StateMachine_Harvester_TransferEnergy();
-
-            default:
-                Util_Logger.error("Could not create state class for illegal state in Harvester: '" + state + "'");
-                throw new Error();
-        }
+        super(creep, tree);
     }
 }

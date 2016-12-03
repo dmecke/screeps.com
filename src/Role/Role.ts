@@ -1,16 +1,18 @@
-import { StateMachine_State } from "../StateMachine/State";
-import { StateMachine } from "../StateMachine/StateMachine";
+import {Tree_Tree} from "../Tree/Tree_Tree";
 
 export abstract class Role_Role {
+
     public creep: Creep;
-    public stateMachine: StateMachine;
-    constructor(creep: Creep) {
+
+    private tree: Tree_Tree;
+
+    constructor(creep: Creep, tree: Tree_Tree) {
         this.creep = creep;
-        this.stateMachine = new StateMachine(this);
+        this.tree = tree;
     }
+
     public update(): void {
         this.creep.room.trackInfo();
-        this.stateMachine.update();
+        console.log(this.tree.tick());
     }
-    public abstract createState(state: string): StateMachine_State;
 }

@@ -1,11 +1,11 @@
-import { Role_Builder } from "../Role/Builder";
-import { Role_Harvester } from "../Role/Harvester";
-import { Role_Role } from "../Role/Role";
-import { Role_SpawnSupplier } from "../Role/SpawnSupplier";
-import { Role_Transporter } from "../Role/Transporter";
-import { Role_Upgrader } from "../Role/Upgrader";
-import { Role_Wallie } from "../Role/Wallie";
-import { Util_Logger } from "../Util/Logger";
+import {Role_Builder} from "../Role/Builder";
+import {Role_Harvester} from "../Role/Harvester";
+import {Role_Role} from "../Role/Role";
+import {Role_SpawnSupplier} from "../Role/SpawnSupplier";
+import {Role_Transporter} from "../Role/Transporter";
+import {Role_Upgrader} from "../Role/Upgrader";
+import {Role_Wallie} from "../Role/Wallie";
+import {Util_Logger} from "../Util/Logger";
 import {Role_Defender} from "../Role/Defender";
 import {Role_Scout} from "../Role/Scout";
 

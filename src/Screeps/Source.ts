@@ -9,7 +9,7 @@ let loadSourcePrototype = function() {
         }
 
         let energyAvailable = this.energy;
-        let availableSpotsMalus = 3000 - this.harvestingSpots().length * 1000;
+        let availableSpotsMalus = Math.min(0, 3000 - this.harvestingSpots().length * 1000);
         let distanceMalus = this.pos.getRangeTo(creep) * 60;
 
         return energyAvailable - availableSpotsMalus - distanceMalus;

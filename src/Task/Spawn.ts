@@ -137,7 +137,6 @@ export class Task_Spawn extends Task_Task {
             experimental: false,
             home_room: spawn.room.name,
             role,
-            state: "Wait",
             target_room: spawn.room.name,
         });
         if (!Number(newName)) {

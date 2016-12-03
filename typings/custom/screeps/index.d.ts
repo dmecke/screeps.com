@@ -6,15 +6,16 @@ interface RoomPosition {
 }
 interface Room {
     hasController(): boolean;
-    hasTransporter(): boolean;
-    hasSpawnSupplier(): boolean;
     findSourcesByPriority(creep: Creep): Array<Source>;
     findConstructionSitesByPriority(creep: Creep): Array<ConstructionSite>;
     findDamagedStructuresByPriority(creep: Creep): Array<Structure>;
     findDamagedWallsByPriority(): Array<StructureWall|StructureRampart>;
     findNearestDroppedEnergy(creep: Creep): Array<Resource>;
+    findFilledStorages(): Array<StructureStorage|StructureContainer>;
     findNearestFilledStorage(creep: Creep): Array<StructureStorage|StructureContainer>;
-    findSpawnsInNeedOfEnergy(creep: Creep): Array<StructureSpawn|StructureExtension|StructureContainer>;
+    findNearestUnfilledStorage(creep: Creep): Array<StructureStorage|StructureContainer>;
+    findSpawnsInNeedOfEnergy(): Array<StructureSpawn|StructureExtension|StructureContainer>;
+    findNearestSpawnInNeedOfEnergy(creep: Creep): StructureSpawn|StructureExtension|StructureContainer;
     findRandomAdjacentRoom(): string;
     amountOfDroppedEnergy(): number;
     trackInfo(): void;
@@ -26,11 +27,12 @@ interface Source {
 interface Creep {
     role(): string;
     state(): string;
+    carryAmount(): number;
     targetRoom(): string;
     homeRoom(): string;
     moveToTargetRoom(): void;
+    isInRoom(room: string): boolean;
     isInTargetRoom(): boolean;
     isInHomeRoom(): boolean;
-    moveHome(): void;
-    moveToRoom(room: string): void;
+    moveToRoom(room: string): number;
 }
