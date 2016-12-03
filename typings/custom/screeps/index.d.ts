@@ -2,7 +2,7 @@ interface RoomPosition {
     positionsInRange(range: number): RoomPosition[];
     outerPositionsInRange(range: number): RoomPosition[];
     hasCloseContainer(): boolean;
-    buildCloseContainer(): void;
+    createCloseContainerConstructionSite(): number;
 }
 interface Room {
     hasController(): boolean;
@@ -23,6 +23,8 @@ interface Room {
 interface Source {
     priority(creep: Creep): number;
     harvestingSpots(): RoomPosition[];
+    attachedContainer(): Container;
+    hasAttachedContainer(): boolean;
 }
 interface Creep {
     role(): string;

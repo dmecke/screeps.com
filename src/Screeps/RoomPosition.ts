@@ -36,18 +36,21 @@ let loadRoomPositionPrototype = function() {
         return hasStructure || hasConstructionSite;
     };
 
-    RoomPosition.prototype.buildCloseContainer = function(this: RoomPosition): void
+    RoomPosition.prototype.createCloseContainerConstructionSite = function(this: RoomPosition): number
     {
         let positions = this.outerPositionsInRange(Settings.BUILD_DISTANCE_CONTAINER);
         let position = this.findClosestByPath(positions);
         if (null === position) {
             Util_Logger.warn("Could not find a position to build a container near " + this.x + "|" + this.y + " in " + this.roomName + ".");
-            return;
+            return ERR_INVALID_TARGET;
         }
 
-        if (position.createConstructionSite(STRUCTURE_CONTAINER) > 0) {
+        let status = position.createConstructionSite(STRUCTURE_CONTAINER);
+        if (status > 0) {
             Util_Logger.info("Added container construction site at " + position.x + "|" + position.y + " in " + position.roomName + ".");
         }
+
+        return status;
     };
 };
 

@@ -1,3 +1,5 @@
+import {Settings} from "../Settings";
+
 let loadSourcePrototype = function() {
     Source.prototype.priority = function(this: Source, creep: Creep): number
     {
@@ -23,6 +25,22 @@ let loadSourcePrototype = function() {
             let terrain = position.lookFor(LOOK_TERRAIN)[0];
             return (terrain === "plain" || terrain === "swamp") && position.lookFor(LOOK_CREEPS).length === 0;
         });
+    };
+
+    Source.prototype.hasAttachedContainer = function(this: Source): boolean {
+        return this.attachedContainer() !== undefined;
+    };
+
+    Source.prototype.attachedContainer = function(this: Source): Container {
+        let containers = _.filter(this.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER),
+            (structure: Structure) => structure.structureType === STRUCTURE_CONTAINER,
+        );
+
+        if (containers.length === 0) {
+            return undefined;
+        }
+
+        return containers[0] as Container;
     };
 };
 

@@ -27,6 +27,7 @@ export class Role_SpawnSupplier extends Role_Role {
         let tree = new Tree_Tree(
             new Tree_Composite_Priority([
                 new Tree_Composite_Sequence([
+                    new Tree_Action_CreepIsAtCarryAmount(creep, creep.carryCapacity),
                     new Tree_Decorator_Inverter(
                         new Tree_Action_AllSpawnsFilled(room),
                     ),

@@ -20,8 +20,8 @@ export class Tree_Action_RoomHasStructure extends Tree_Core_Action {
 
         if (structures > 0) {
             return Tree_Tree.SUCCESS;
-        } else {
-            return Tree_Tree.FAILURE;
         }
+
+        return Tree_Tree.FAILURE;
     }
 }
