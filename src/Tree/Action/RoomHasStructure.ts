@@ -1,5 +1,5 @@
 import {Tree_Core_Action} from "../Core/Action";
-import {Tree_Tree} from "../Tree_Tree";
+import {Settings} from "../../Settings";
 
 export class Tree_Action_RoomHasStructure extends Tree_Core_Action {
 
@@ -19,9 +19,9 @@ export class Tree_Action_RoomHasStructure extends Tree_Core_Action {
         }).length;
 
         if (structures > 0) {
-            return Tree_Tree.SUCCESS;
+            return Settings.TREE_SUCCESS;
         }
 
-        return Tree_Tree.FAILURE;
+        return Settings.TREE_FAILURE;
     }
 }

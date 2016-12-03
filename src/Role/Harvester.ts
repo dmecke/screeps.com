@@ -18,15 +18,18 @@ import {Tree_Action_CreateConstructionSiteNear} from "../Tree/Action/CreateConts
  * harvests energy
  */
 export class Role_Harvester extends Role_Role {
+
     public static role(): string {
         return "Harvester";
     }
+
     public constructor(creep: Creep) {
         let room = creep.room;
         let bestSource = room.findSourcesByPriority(creep)[0];
         let transferEnergyTarget = room.findNearestSpawnInNeedOfEnergy(creep);
 
         let tree = new Tree_Tree(
+            creep,
             new Tree_Composite_Priority([
                 new Tree_Composite_Sequence([
                     new Tree_Decorator_Inverter(

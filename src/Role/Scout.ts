@@ -22,6 +22,7 @@ export class Role_Scout extends Role_Role {
         let room = creep.room;
 
         let tree = new Tree_Tree(
+            creep,
             new Tree_Composite_Priority([
                 new Tree_Composite_Priority([
                     new Tree_Action_SignController(creep, ""),

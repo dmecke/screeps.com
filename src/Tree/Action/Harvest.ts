@@ -1,5 +1,5 @@
 import {Tree_Core_Action} from "../Core/Action";
-import {Tree_Tree} from "../Tree_Tree";
+import {Settings} from "../../Settings";
 
 export class Tree_Action_Harvest extends Tree_Core_Action {
     private creep: Creep;
@@ -12,12 +12,12 @@ export class Tree_Action_Harvest extends Tree_Core_Action {
     public tick(): number {
         if (this.creep.harvest(this.source) === OK) {
             if (this.source.energy === 0) {
-                return Tree_Tree.SUCCESS;
+                return Settings.TREE_SUCCESS;
             } else {
-                return Tree_Tree.RUNNING;
+                return Settings.TREE_RUNNING;
             }
         } else {
-            return Tree_Tree.FAILURE;
+            return Settings.TREE_FAILURE;
         }
     }
 }

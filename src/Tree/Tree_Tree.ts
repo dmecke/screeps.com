@@ -1,19 +1,24 @@
 import {Tree_Core_BaseNode} from "./Core/BaseNode";
+import {Tree_Core_Tick} from "./Core/Tick";
+import {Util_Logger} from "../Util/Logger";
 
 export class Tree_Tree {
-    public static SUCCESS = 1;
-    public static FAILURE = 2;
-    public static RUNNING = 3;
-    public static ERROR = 4;
+
+    private target: { name: string, debug(): boolean };
 
     private root: Tree_Core_BaseNode;
 
-    public constructor(root: Tree_Core_BaseNode) {
+    public constructor(target: { name: string, debug(): boolean }, root: Tree_Core_BaseNode) {
+        this.target = target;
         this.root = root;
     }
 
     public tick() {
-        console.log("===");
-        return this.root.execute();
+        let tick = new Tree_Core_Tick(this.target);
+        if (this.target.debug()) {
+            Util_Logger.debug(this.target.name + "'s behavior tree");
+        }
+
+        return this.root.execute(tick);
     }
 }

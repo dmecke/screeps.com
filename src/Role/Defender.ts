@@ -17,6 +17,7 @@ export class Role_Defender extends Role_Role {
         let hostileCreep = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS) as Creep;
 
         let tree = new Tree_Tree(
+            creep,
             new Tree_Composite_Sequence([
                 new Tree_Action_HostileCreepInRoom(room),
                 new Tree_Composite_Priority([

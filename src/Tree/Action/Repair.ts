@@ -1,5 +1,5 @@
 import {Tree_Core_Action} from "../Core/Action";
-import {Tree_Tree} from "../Tree_Tree";
+import {Settings} from "../../Settings";
 
 export class Tree_Action_Repair extends Tree_Core_Action {
 
@@ -15,13 +15,13 @@ export class Tree_Action_Repair extends Tree_Core_Action {
 
     public tick(): number {
         if (this.creep.repair(this.target) !== OK) {
-            return Tree_Tree.FAILURE;
+            return Settings.TREE_FAILURE;
         }
 
         if (this.target.hits === this.target.hitsMax) {
-            return Tree_Tree.SUCCESS;
+            return Settings.TREE_SUCCESS;
         }
 
-        return Tree_Tree.RUNNING;
+        return Settings.TREE_RUNNING;
     }
 }

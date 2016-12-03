@@ -1,18 +1,18 @@
 import {Tree_Core_Composite} from "../Core/Composite";
-import {Tree_Tree} from "../Tree_Tree";
+import {Settings} from "../../Settings";
+import {Tree_Core_Tick} from "../Core/Tick";
 
 export class Tree_Composite_Sequence extends Tree_Core_Composite {
-    public tick() {
-        for (let child of this.children) {
-            let status = child.execute();
 
-            if (status !== Tree_Tree.SUCCESS) {
-                console.log("Sequence: <span style='color: #8bc5ff'>" + status + "</span>");
+    public tick(tick: Tree_Core_Tick) {
+        for (let child of this.children) {
+            let status = child.execute(tick);
+
+            if (status !== Settings.TREE_SUCCESS) {
                 return status;
             }
         }
 
-        console.log("Sequence: <span style='color: #8bc5ff'>" + Tree_Tree.SUCCESS + "</span>");
-        return Tree_Tree.SUCCESS;
+        return Settings.TREE_SUCCESS;
     }
 }

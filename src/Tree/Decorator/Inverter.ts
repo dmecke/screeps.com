@@ -1,21 +1,19 @@
 import {Tree_Core_Decorator} from "../Core/Decorator";
-import {Tree_Tree} from "../Tree_Tree";
+import {Settings} from "../../Settings";
+import {Tree_Core_Tick} from "../Core/Tick";
 
 export class Tree_Decorator_Inverter extends Tree_Core_Decorator {
-    public tick(): number {
-        let status = this.child.execute();
+    public tick(tick: Tree_Core_Tick): number {
+        let status = this.child.execute(tick);
 
-        if (status === Tree_Tree.SUCCESS) {
-            console.log("Inverter: <span style='color: #8bc5ff'>" + Tree_Tree.FAILURE + "</span>");
-            return Tree_Tree.FAILURE;
+        if (status === Settings.TREE_SUCCESS) {
+            return Settings.TREE_FAILURE;
         }
 
-        if (status === Tree_Tree.FAILURE) {
-            console.log("Inverter: <span style='color: #8bc5ff'>" + Tree_Tree.SUCCESS + "</span>");
-            return Tree_Tree.SUCCESS;
+        if (status === Settings.TREE_FAILURE) {
+            return Settings.TREE_SUCCESS;
         }
 
-        console.log("Inverter: <span style='color: #8bc5ff'>" + status + "</span>");
         return status;
     }
 }

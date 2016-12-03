@@ -1,6 +1,11 @@
 let loadCreepPrototype = function() {
+
     Creep.prototype.role = function(this: Creep): string {
         return this.memory.role;
+    };
+
+    Creep.prototype.debug = function(this: Creep): boolean {
+        return this.memory.debug;
     };
 
     Creep.prototype.carryAmount = function(this: Creep): number {

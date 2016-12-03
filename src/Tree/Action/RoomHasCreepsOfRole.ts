@@ -1,5 +1,5 @@
 import {Tree_Core_Action} from "../Core/Action";
-import {Tree_Tree} from "../Tree_Tree";
+import {Settings} from "../../Settings";
 
 export class Tree_Action_RoomHasCreepsOfRole extends Tree_Core_Action {
 
@@ -22,9 +22,9 @@ export class Tree_Action_RoomHasCreepsOfRole extends Tree_Core_Action {
         }).length;
 
         if (creeps >= this.amount) {
-            return Tree_Tree.SUCCESS;
+            return Settings.TREE_SUCCESS;
         } else {
-            return Tree_Tree.FAILURE;
+            return Settings.TREE_FAILURE;
         }
     }
 }

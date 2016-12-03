@@ -1,5 +1,5 @@
 import {Tree_Core_Action} from "../Core/Action";
-import {Tree_Tree} from "../Tree_Tree";
+import {Settings} from "../../Settings";
 
 export class Tree_Action_AssignTargetRoom extends Tree_Core_Action {
 
@@ -16,6 +16,6 @@ export class Tree_Action_AssignTargetRoom extends Tree_Core_Action {
     public tick(): number {
         this.creep.memory.target_room = this.room;
 
-        return Tree_Tree.SUCCESS;
+        return Settings.TREE_SUCCESS;
     }
 }

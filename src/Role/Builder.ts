@@ -26,6 +26,7 @@ export class Role_Builder extends Role_Role {
         let room = creep.room;
 
         let tree = new Tree_Tree(
+            creep,
             new Tree_Composite_Priority([
                 new Tree_Composite_Sequence([
                     new Tree_Decorator_Inverter(

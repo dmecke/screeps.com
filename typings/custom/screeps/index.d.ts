@@ -28,6 +28,7 @@ interface Source {
 }
 interface Creep {
     role(): string;
+    debug(): boolean;
     state(): string;
     carryAmount(): number;
     targetRoom(): string;

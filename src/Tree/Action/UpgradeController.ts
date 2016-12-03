@@ -1,5 +1,5 @@
 import {Tree_Core_Action} from "../Core/Action";
-import {Tree_Tree} from "../Tree_Tree";
+import {Settings} from "../../Settings";
 
 export class Tree_Action_UpgradeController extends Tree_Core_Action {
 
@@ -14,13 +14,13 @@ export class Tree_Action_UpgradeController extends Tree_Core_Action {
         let room = this.creep.room;
 
         if (!room.hasController()) {
-            return Tree_Tree.FAILURE;
+            return Settings.TREE_FAILURE;
         }
 
         if (this.creep.upgradeController(room.controller) === OK) {
-            return Tree_Tree.SUCCESS;
+            return Settings.TREE_SUCCESS;
         }
 
-        return Tree_Tree.FAILURE;
+        return Settings.TREE_FAILURE;
     }
 }

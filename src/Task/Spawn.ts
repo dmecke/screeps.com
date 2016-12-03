@@ -134,6 +134,7 @@ export class Task_Spawn extends Task_Task {
     private spawn(role: string, spawnName: string) {
         let spawn = Game.spawns[spawnName];
         let newName = spawn.createCreep(Task_Spawn.bodyParts(role, spawn), undefined, {
+            debug: false,
             experimental: false,
             home_room: spawn.room.name,
             role,

@@ -12,7 +12,7 @@ export abstract class Role_Role {
     }
 
     public update(): void {
+        this.tree.tick();
         this.creep.room.trackInfo();
-        console.log(this.tree.tick());
     }
 }
