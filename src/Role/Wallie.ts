@@ -25,12 +25,14 @@ export class Role_Wallie extends Role_Role {
 
         let tree = new Tree_Tree(
             new Tree_Composite_Priority([
-                new Tree_Composite_Priority([
+                new Tree_Composite_Sequence([
                     new Tree_Decorator_Inverter(
                         new Tree_Action_CreepIsAtCarryAmount(creep, 0),
                     ),
-                    new Tree_Action_Repair(creep, room.findDamagedWallsByPriority()[0]),
-                    new Tree_Action_MoveTo(creep, room.findDamagedWallsByPriority()[0]),
+                    new Tree_Composite_Priority([
+                        new Tree_Action_Repair(creep, room.findDamagedWallsByPriority()[0]),
+                        new Tree_Action_MoveTo(creep, room.findDamagedWallsByPriority()[0]),
+                    ]),
                 ]),
                 new Tree_Composite_Sequence([
                     new Tree_Decorator_Inverter(

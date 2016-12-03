@@ -10,6 +10,7 @@ import {Tree_Action_Drop} from "../Tree/Action/Drop";
 import {Tree_Action_AllSpawnsFilled} from "../Tree/Action/AllSpawnsFilled";
 import {Tree_Action_Transfer} from "../Tree/Action/Transfer";
 import {Tree_Action_CreepIsAtCarryAmount} from "../Tree/Action/CreepIsAtCarryAmount";
+import {Tree_Action_RoomHasStructure} from "../Tree/Action/RoomHasStructure";
 
 /**
  * harvests energy
@@ -38,6 +39,7 @@ export class Role_Harvester extends Role_Role {
                     new Tree_Action_CreepIsAtCarryAmount(creep, creep.carryCapacity),
                     new Tree_Action_RoomHasCreepsOfRole(room, "Transporter", 1),
                     new Tree_Action_RoomHasCreepsOfRole(room, "SpawnSupplier", 1),
+                    new Tree_Action_RoomHasStructure(room, STRUCTURE_CONTAINER),
                     new Tree_Action_Drop(creep, RESOURCE_ENERGY),
                 ]),
                 new Tree_Composite_Sequence([
