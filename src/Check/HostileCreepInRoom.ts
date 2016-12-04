@@ -1,7 +1,7 @@
-import {Tree_Core_Action} from "../Core/Action";
-import {Settings} from "../../Settings";
+import {Tree_Core_Action} from "../Tree/Core/Action";
+import {Settings} from "../Settings";
 
-export class Tree_Action_HostileCreepInRoom extends Tree_Core_Action {
+export class Check_HostileCreepInRoom extends Tree_Core_Action {
 
     private room: Room;
 
@@ -15,8 +15,8 @@ export class Tree_Action_HostileCreepInRoom extends Tree_Core_Action {
 
         if (hostileCreeps.length > 0) {
             return Settings.TREE_SUCCESS;
-        } else {
-            return Settings.TREE_FAILURE;
         }
+
+        return Settings.TREE_FAILURE;
     }
 }

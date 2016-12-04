@@ -1,7 +1,7 @@
-import {Tree_Core_Action} from "../Core/Action";
-import {Settings} from "../../Settings";
+import {Tree_Core_Action} from "../Tree/Core/Action";
+import {Settings} from "../Settings";
 
-export class Tree_Action_MoveToRoom extends Tree_Core_Action {
+export class Check_IsInRoom extends Tree_Core_Action {
 
     private creep: Creep;
 
@@ -14,14 +14,10 @@ export class Tree_Action_MoveToRoom extends Tree_Core_Action {
     }
 
     public tick(): number {
-        if (this.creep.moveToRoom(this.room) !== OK) {
-            return Settings.TREE_FAILURE;
-        }
-
         if (this.creep.isInRoom(this.room)) {
             return Settings.TREE_SUCCESS;
         }
 
-        return Settings.TREE_RUNNING;
+        return Settings.TREE_FAILURE;
     }
 }

@@ -1,7 +1,7 @@
-import {Tree_Core_Action} from "../Core/Action";
-import {Settings} from "../../Settings";
+import {Tree_Core_Action} from "../Tree/Core/Action";
+import {Settings} from "../Settings";
 
-export class Tree_Action_CreepIsAtCarryAmount extends Tree_Core_Action {
+export class Check_CreepIsAtCarryAmount extends Tree_Core_Action {
 
     private creep: Creep;
 
@@ -16,8 +16,8 @@ export class Tree_Action_CreepIsAtCarryAmount extends Tree_Core_Action {
     public tick(): number {
         if (this.creep.carryAmount() === this.amount) {
             return Settings.TREE_SUCCESS;
-        } else {
-            return Settings.TREE_FAILURE;
         }
+
+        return Settings.TREE_FAILURE;
     }
 }

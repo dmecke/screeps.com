@@ -1,7 +1,7 @@
-import {Tree_Core_Action} from "../Core/Action";
-import {Settings} from "../../Settings";
+import {Tree_Core_Action} from "../Tree/Core/Action";
+import {Settings} from "../Settings";
 
-export class Tree_Action_RoomHasCreepsOfRole extends Tree_Core_Action {
+export class Check_RoomHasCreepsOfRole extends Tree_Core_Action {
 
     private room: Room;
 
@@ -23,8 +23,8 @@ export class Tree_Action_RoomHasCreepsOfRole extends Tree_Core_Action {
 
         if (creeps >= this.amount) {
             return Settings.TREE_SUCCESS;
-        } else {
-            return Settings.TREE_FAILURE;
         }
+
+        return Settings.TREE_FAILURE;
     }
 }

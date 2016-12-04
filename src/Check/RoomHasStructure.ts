@@ -1,7 +1,7 @@
-import {Tree_Core_Action} from "../Core/Action";
-import {Settings} from "../../Settings";
+import {Tree_Core_Action} from "../Tree/Core/Action";
+import {Settings} from "../Settings";
 
-export class Tree_Action_RoomHasStructure extends Tree_Core_Action {
+export class Check_RoomHasStructure extends Tree_Core_Action {
 
     private room: Room;
 
