@@ -3,15 +3,23 @@ import {Util_Logger} from "../../Util/Logger";
 import {Settings} from "../../Settings";
 import {Tree_Core_Composite} from "./Composite";
 import {Tree_Core_Decorator} from "./Decorator";
+import {Tree_Tree} from "../Tree_Tree";
+import {Tree_Core_Blackboard} from "./Blackboard";
 
 export class Tree_Core_Tick {
 
-    private target: { debug(): boolean };
+    public tree: Tree_Tree;
+
+    public blackboard: Tree_Core_Blackboard;
+
+    public target: { debug(): boolean };
 
     private depth: number = 0;
 
-    public constructor(target: { debug(): boolean }) {
+    public constructor(target: { debug(): boolean }, tree: Tree_Tree, blackboard: Tree_Core_Blackboard) {
         this.target = target;
+        this.tree = tree;
+        this.blackboard = blackboard;
     }
 
     public enter(node: Tree_Core_BaseNode): void {

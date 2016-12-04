@@ -9,4 +9,13 @@ export class Settings {
     public static TREE_FAILURE = 2;
     public static TREE_RUNNING = 3;
     public static TREE_ERROR = 4;
+
+    public static ROLE_HARVESTER = "Harvester";
+    public static ROLE_BUILDER = "Builder";
+    public static ROLE_DEFENDER = "Defender";
+    public static ROLE_SCOUT = "Scout";
+    public static ROLE_SPAWN_SUPPLIER = "SpawnSupplier";
+    public static ROLE_TRANSPORTER = "Transporter";
+    public static ROLE_UPGRADER = "Upgrader";
+    public static ROLE_WALLIE = "Wallie";
 }

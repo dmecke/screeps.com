@@ -39,9 +39,7 @@ let loadRoomPositionPrototype = function() {
     RoomPosition.prototype.createCloseContainerConstructionSite = function(this: RoomPosition): number
     {
         let positions = this.outerPositionsInRange(Settings.BUILD_DISTANCE_CONTAINER);
-        console.log(positions);
         let position = this.findClosestByPath(positions);
-        console.log(position);
         if (null === position) {
             Util_Logger.warn("Could not find a position to build a container near " + this.x + "|" + this.y + " in " + this.roomName + ".");
             return ERR_INVALID_TARGET;

@@ -27,7 +27,7 @@ interface Source {
     hasAttachedContainer(): boolean;
 }
 interface Creep {
-    role(): string;
+    role(): Object;
     debug(): boolean;
     state(): string;
     carryAmount(): number;

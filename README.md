@@ -57,3 +57,8 @@ Every creep as a `debug` property in it's memory. Set this to true to output deb
 ## Background
 
 I am a PHP developer in my day to day job, so please be indulgent with my coding style. Suggestions and comments are very welcome!
+
+
+## Credits
+
+The behavior tree implementation is heavily based on http://behavior3.com.

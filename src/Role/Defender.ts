@@ -1,32 +1,37 @@
-import {Role_Role} from "./Role";
 import {Tree_Tree} from "../Tree/Tree_Tree";
 import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
 import {Tree_Composite_Sequence} from "../Tree/Composite/Sequence";
-import {Action_MoveTo} from "../Action/MoveTo";
 import {Check_HostileCreepInRoom} from "../Check/HostileCreepInRoom";
 import {Action_Attack} from "../Action/Attack";
+import {Action_AssignNearestHostileCreepAsTarget} from "../Action/AssignNearestHostileCreepAsTarget";
+import {Action_MoveToTarget} from "../Action/MoveToTarget";
+import {Role_Role} from "./Role_Role";
 
 export class Role_Defender extends Role_Role {
 
-    public static role(): string {
+    public name(): string {
         return "Defender";
     }
 
-    public constructor(creep: Creep) {
-        let room = creep.room;
-        let hostileCreep = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS) as Creep;
+    public static bodyParts(energyCapacityAvailable: number): string[] {
+        if (energyCapacityAvailable < 550) {
+            return [ATTACK, ATTACK, ATTACK, TOUGH, MOVE];
+        } else {
+            return [ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE];
+        }
+    }
 
-        let tree = new Tree_Tree(
-            creep,
+    public tree(): Tree_Tree {
+        return new Tree_Tree(
+            "Defender",
             new Tree_Composite_Sequence([
-                new Check_HostileCreepInRoom(room),
+                new Check_HostileCreepInRoom(this.creep.room),
+                new Action_AssignNearestHostileCreepAsTarget(),
                 new Tree_Composite_Priority([
-                    new Action_Attack(creep, hostileCreep),
-                    new Action_MoveTo(creep, hostileCreep),
+                    new Action_Attack(this.creep, this.creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS) as Creep),
+                    new Action_MoveToTarget(),
                 ]),
             ]),
         );
-
-        super(creep, tree);
     }
 }

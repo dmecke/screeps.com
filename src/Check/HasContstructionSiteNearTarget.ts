@@ -1,23 +1,23 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Settings} from "../Settings";
+import {Tree_Core_Tick} from "../Tree/Core/Tick";
 
-export class Check_HasConstructionSiteNear extends Tree_Core_Action {
-
-    private position: RoomPosition;
+export class Check_HasConstructionSiteNearTarget extends Tree_Core_Action {
 
     private structureType: string;
 
     private range: number;
 
-    public constructor(position: RoomPosition, structureType: string, range: number) {
+    public constructor(structureType: string, range: number) {
         super();
-        this.position = position;
         this.structureType = structureType;
         this.range = range;
     }
 
-    public tick(): number {
-        let constructionSites = _.filter(this.position.findInRange(FIND_CONSTRUCTION_SITES, this.range),
+    public tick(tick: Tree_Core_Tick): number {
+        let target = tick.blackboard.get("target", tick.tree.id) as { pos: RoomPosition };
+
+        let constructionSites = _.filter(target.pos.findInRange(FIND_CONSTRUCTION_SITES, this.range),
             (constructionSite: ConstructionSite) => constructionSite.structureType === this.structureType,
         );
 
