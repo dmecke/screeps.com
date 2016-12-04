@@ -48,6 +48,12 @@ gulp deploy-world
 ```
 
 
+## Usage
+
+#### Debugging
+Every creep as a `debug` property in it's memory. Set this to true to output debugging informations to the console (like it's behavior tree).
+
+
 ## Background
 
 I am a PHP developer in my day to day job, so please be indulgent with my coding style. Suggestions and comments are very welcome!
