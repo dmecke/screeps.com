@@ -1,7 +1,7 @@
 {
     "name": "Screeps",
     "description": "My AI implementation for Screeps.",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "author": "Daniel Mecke",
     "repository": "dmecke/screeps.com",
     "devDependencies": {

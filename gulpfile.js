@@ -4,9 +4,8 @@ var tslint = require("gulp-tslint");
 var clean = require("gulp-clean");
 var typescript = require("gulp-typescript");
 var project = typescript.createProject("tsconfig.json", { typescript: require("typescript")});
+var config = require("./screeps.json");
 const gulpDotFlatten = require('./lib/gulp-dot-flatten.js');
-var screepsPathWorld = "C:\\Users\\dmecke\\AppData\\Local\\Screeps\\scripts\\screeps.com\\world";
-var screepsPathSim = "C:\\Users\\dmecke\\AppData\\Local\\Screeps\\scripts\\screeps.com\\sim";
 var PluginError = require("gulp-util").PluginError;
 
 gulp.task("default", function()
@@ -40,12 +39,12 @@ gulp.task("flatten", function()
 
 gulp.task("upload-world", function()
 {
-    return gulp.src("build/dist/*.js").pipe(gulp.dest(screepsPathWorld));
+    return gulp.src("build/dist/*.js").pipe(gulp.dest(config.screepsPathWorld));
 });
 
 gulp.task("upload-sim", function()
 {
-    return gulp.src("build/dist/*.js").pipe(gulp.dest(screepsPathSim));
+    return gulp.src("build/dist/*.js").pipe(gulp.dest(config.screepsPathSim));
 });
 
 gulp.task("build", gulp.series(["lint", "clean", "compile", "flatten"]));
