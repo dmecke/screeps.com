@@ -18,3 +18,22 @@ As I gain more and more knowledge about the mechanics of the game, I need to adj
 - [ ] mining
 - [ ] acquire new rooms and build them up
 - [ ] market logic
+
+## Setup
+
+#### install dependencies
+```
+npm install
+```
+
+#### build project and copy files into "sim" subdirectory
+(select this once when in the simulation)
+```
+gulp deploy-sim
+```
+
+#### build project and copy files into "world" subdirectory
+(select this once when in the world)
+```
+gulp deploy-world
+```
