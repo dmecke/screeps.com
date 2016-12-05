@@ -9,6 +9,7 @@ import {Action_SignController} from "../Action/SignController";
 import {Action_AssignControllerAsTarget} from "../Action/AssignControllerAsTarget";
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
 import {Role_Role} from "./Role";
+import {Check_ControllerIsSigned} from "../Check/ControllerIsSigned";
 
 /**
  * Moves from room to room and updates room informations in the memory.
@@ -32,6 +33,9 @@ export class Role_Scout extends Role_Role {
             "Scout",
             new Tree_Composite_Priority([
                 new Tree_Composite_Sequence([
+                    new Tree_Decorator_Inverter(
+                        new Check_ControllerIsSigned(this.creep, ""),
+                    ),
                     new Action_AssignControllerAsTarget(),
                     new Tree_Composite_Priority([
                         new Action_SignController(this.creep, ""),
