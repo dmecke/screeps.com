@@ -23,6 +23,17 @@ export class Task_StructurePlanning extends Task_Task {
     }
 
     private planExtensions(room: Room): void {
-        // @todo
+        let spawns = room.find(FIND_MY_SPAWNS) as Spawn[];
+        if (spawns.length === 0) {
+            return;
+        }
+
+        let position = new RoomPosition(
+            spawns[0].pos.x + Math.floor(Math.random() * 10 - 5),
+            spawns[0].pos.y + Math.floor(Math.random() * 10 - 5),
+            spawns[0].pos.roomName,
+        );
+
+        position.createConstructionSite(STRUCTURE_EXTENSION);
     }
 }
