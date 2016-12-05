@@ -8,7 +8,7 @@ import {Role_SpawnSupplier} from "../Role/SpawnSupplier";
 import {Role_Wallie} from "../Role/Wallie";
 import {Role_Defender} from "../Role/Defender";
 import {Role_Scout} from "../Role/Scout";
-import {Role_Role} from "../Role/Role_Role";
+import {Role_Role} from "../Role/Role";
 
 let loadCreepPrototype = function() {
 

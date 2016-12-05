@@ -1,7 +1,7 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Settings} from "../Settings";
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
-import {Role_Role} from "../Role/Role_Role";
+import {Role_Role} from "../Role/Role";
 
 export class Check_RoomHasCreepsOfRole extends Tree_Core_Action {
 

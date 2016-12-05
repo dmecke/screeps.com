@@ -13,7 +13,7 @@ import {Action_AssignNearestDroppedEnergyAsTarget} from "../Action/AssignNearest
 import {Action_AssignNearestFilledStorageAsTarget} from "../Action/AssignNearestFilledStorageAsTarget";
 import {Action_AssignHighestPriorityDamagedWallAsTarget} from "../Action/AssignHighestPriorityDamagedWallAsTarget";
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
-import {Role_Role} from "./Role_Role";
+import {Role_Role} from "./Role";
 
 /**
  * repairs walls and ramparts

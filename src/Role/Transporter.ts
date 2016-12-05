@@ -11,7 +11,7 @@ import {Action_AssignNearestSpawnInNeedOfEnergyAsTarget} from "../Action/AssignN
 import {Action_AssignNearestDroppedEnergyAsTarget} from "../Action/AssignNearestDroppedEnergyAsTarget";
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
 import {Action_TransferToTarget} from "../Action/TransferToTarget";
-import {Role_Role} from "./Role_Role";
+import {Role_Role} from "./Role";
 
 /**
  * transports harvested energy to containers

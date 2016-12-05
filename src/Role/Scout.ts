@@ -8,7 +8,7 @@ import {Action_AssignTargetRoom} from "../Action/AssignTargetRoom";
 import {Action_SignController} from "../Action/SignController";
 import {Action_AssignControllerAsTarget} from "../Action/AssignControllerAsTarget";
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
-import {Role_Role} from "./Role_Role";
+import {Role_Role} from "./Role";
 
 /**
  * Moves from room to room and updates room informations in the memory.

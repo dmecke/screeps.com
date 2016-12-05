@@ -5,7 +5,7 @@ import {Check_HostileCreepInRoom} from "../Check/HostileCreepInRoom";
 import {Action_Attack} from "../Action/Attack";
 import {Action_AssignNearestHostileCreepAsTarget} from "../Action/AssignNearestHostileCreepAsTarget";
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
-import {Role_Role} from "./Role_Role";
+import {Role_Role} from "./Role";
 
 export class Role_Defender extends Role_Role {
 

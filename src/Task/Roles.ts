@@ -1,5 +1,5 @@
-import {RoleCreep} from "../Role";
-import {Role_Role} from "../Role/Role_Role";
+import {RoleCreep} from "../RoleCreep";
+import {Role_Role} from "../Role/Role";
 
 export class Task_Roles {
 

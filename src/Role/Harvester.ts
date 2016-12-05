@@ -1,4 +1,4 @@
-import {Role_Role} from "./Role_Role";
+import {Role_Role} from "./Role";
 import {Check_CreepIsAtCarryLimit} from "../Check/CreepIsAtCarryLimit";
 import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";
 import {Action_AssignHighestPrioritySourceAsTarget} from "../Action/AssignHighestPrioritySourceAsTarget";

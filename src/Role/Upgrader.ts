@@ -11,7 +11,7 @@ import {Action_AssignControllerAsTarget} from "../Action/AssignControllerAsTarge
 import {Action_AssignNearestDroppedEnergyAsTarget} from "../Action/AssignNearestDroppedEnergyAsTarget";
 import {Action_AssignNearestFilledStorageAsTarget} from "../Action/AssignNearestFilledStorageAsTarget";
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
-import {Role_Role} from "./Role_Role";
+import {Role_Role} from "./Role";
 
 /**
  * upgrades the controller

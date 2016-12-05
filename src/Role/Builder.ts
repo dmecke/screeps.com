@@ -18,7 +18,7 @@ import {Action_AssignNearestFilledStorageAsTarget} from "../Action/AssignNearest
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
 import {Action_HarvestTarget} from "../Action/HarvestTarget";
 import {Action_BuildTarget} from "../Action/BuildTarget";
-import {Role_Role} from "./Role_Role";
+import {Role_Role} from "./Role";
 
 /**
  * repairs and builds structures; helps with upgrading when nothing to do

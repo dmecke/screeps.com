@@ -14,7 +14,7 @@ import {Action_AssignNearestDroppedEnergyAsTarget} from "../Action/AssignNearest
 import {Action_AssignNearestFilledStorageAsTarget} from "../Action/AssignNearestFilledStorageAsTarget";
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
 import {Action_TransferToTarget} from "../Action/TransferToTarget";
-import {Role_Role} from "./Role_Role";
+import {Role_Role} from "./Role";
 
 /**
  * supplys spawn points and extensions with energy

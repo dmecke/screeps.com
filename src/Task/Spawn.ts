@@ -2,7 +2,7 @@ import {Role_Harvester} from "../Role/Harvester";
 import {Util_Logger} from "../Util/Logger";
 import {Task_Task} from "./Task";
 import {Settings} from "../Settings";
-import {Role_Role} from "../Role/Role_Role";
+import {Role_Role} from "../Role/Role";
 import {Role_Builder} from "../Role/Builder";
 import {Role_Wallie} from "../Role/Wallie";
 import {Role_Upgrader} from "../Role/Upgrader";
@@ -14,7 +14,7 @@ import {Role_Scout} from "../Role/Scout";
 export class Task_Spawn extends Task_Task {
     public static NUMBER_OF_HARVESTER = 4;
     public static NUMBER_OF_UPGRADER = 1;
-    public static NUMBER_OF_TRANSPORTER = 4;
+    public static NUMBER_OF_TRANSPORTER = 0; // 4; currently not needed as all creeps take the energy directly from the containers near the sources
     public static NUMBER_OF_SPAWN_SUPPLIER = 3;
     public static NUMBER_OF_WALLIE = 1;
     public static NUMBER_OF_DEFENDER = 1;
