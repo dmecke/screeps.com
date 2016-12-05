@@ -27,9 +27,9 @@ export class Role_Builder extends Role_Role {
 
     public static bodyParts(energyCapacityAvailable: number): string[] {
         if (energyCapacityAvailable < 550) {
-            return [WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
-        } else {
             return [WORK, CARRY, MOVE, MOVE, MOVE];
+        } else {
+            return [WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
         }
     }
 
