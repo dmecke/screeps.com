@@ -20,7 +20,7 @@ export class Task_Spawn extends Task_Task {
     public static NUMBER_OF_DEFENDER = 1;
     public static NUMBER_OF_SCOUT = 1;
     public static NUMBER_OF_BUILDER = 1;
-    public static BUILDER_MAXIMUM = 10;
+    public static BUILDER_MAXIMUM = 5;
 
     private static minimumCreepCount(role: string) {
         switch (role) {
