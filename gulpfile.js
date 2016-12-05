@@ -2,6 +2,8 @@ var gulp = require("gulp");
 var gutil = require('gulp-util');
 var tslint = require("gulp-tslint");
 var clean = require("gulp-clean");
+var gulpRename = require("gulp-rename");
+var gulpScreepsUpload = require('./lib/gulp-screeps-upload.js');
 var typescript = require("gulp-typescript");
 var project = typescript.createProject("tsconfig.json", { typescript: require("typescript")});
 var config = require("./screeps.json");
@@ -39,12 +41,12 @@ gulp.task("flatten", function()
 
 gulp.task("upload-world", function()
 {
-    return gulp.src("build/dist/*.js").pipe(gulp.dest(config.screepsPathWorld));
+    return gulp.src("build/dist/*.js").pipe(gulpRename((path) => path.extname = "")).pipe(gulpScreepsUpload(config.user.email, config.user.password, "world", 0));
 });
 
 gulp.task("upload-sim", function()
 {
-    return gulp.src("build/dist/*.js").pipe(gulp.dest(config.screepsPathSim));
+    return gulp.src("build/dist/*.js").pipe(gulpRename((path) => path.extname = "")).pipe(gulpScreepsUpload(config.user.email, config.user.password, "sim", 0));
 });
 
 gulp.task("build", gulp.series(["lint", "clean", "compile", "flatten"]));

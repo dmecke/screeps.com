@@ -1,4 +1,6 @@
 {
-    "screepsPathWorld": "C:\\Users\\dmecke\\AppData\\Local\\Screeps\\scripts\\screeps.com\\world",
-    "screepsPathSim": "C:\\Users\\dmecke\\AppData\\Local\\Screeps\\scripts\\screeps.com\\sim"
+    "user": {
+        "email": "",
+        "password": ""
+    }
 }

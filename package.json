@@ -10,8 +10,13 @@
         "gulp-clean": "*",
         "gulp-tslint": "*",
         "gulp-typescript": "*",
+        "gulp-rename": "*",
+        "gulp-collect": "^0.1.0",
         "recast": "*",
         "tslint": "*",
-        "typescript": "*"
+        "typescript": "*",
+        "q": "^1.4.1",
+        "lodash": "^4.14.0",
+        "deep-equal": "^1.0.1"
     }
 }
