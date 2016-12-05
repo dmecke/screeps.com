@@ -15,16 +15,16 @@ import {Role_Role} from "./Role_Role";
  */
 export class Role_Scout extends Role_Role {
 
-    public name(): string {
-        return "Scout";
-    }
-
     public static bodyParts(energyCapacityAvailable: number): string[] {
         if (energyCapacityAvailable < 550) {
             return [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
         } else {
             return [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
+    }
+
+    public name(): string {
+        return "Scout";
     }
 
     public tree(): Tree_Tree {

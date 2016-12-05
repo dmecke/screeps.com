@@ -19,9 +19,10 @@ export class Check_RoomHasCreepsOfRole extends Tree_Core_Action {
         let creep = tick.target as Creep;
 
         let creeps = creep.room.find(FIND_MY_CREEPS, {
-            filter: function(c: Creep) {
+            filter: (c: Creep) => {
                 let role = c.role() as Role_Role;
-                return role.name === this.name;
+
+                return role.name() === this.role;
             },
         }).length;
 

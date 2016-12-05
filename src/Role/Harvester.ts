@@ -1,4 +1,3 @@
-import harvesterTree = require("../HarvesterTree");
 import {Role_Role} from "./Role_Role";
 import {Check_CreepIsAtCarryLimit} from "../Check/CreepIsAtCarryLimit";
 import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";
@@ -25,16 +24,16 @@ import {Tree_Tree} from "../Tree/Tree_Tree";
  */
 export class Role_Harvester extends Role_Role {
 
-    public name(): string {
-        return "Harvester";
-    }
-
     public static bodyParts(energyCapacityAvailable: number): string[] {
         if (energyCapacityAvailable < 550) {
             return [WORK, WORK, CARRY, MOVE];
         } else {
             return [WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE];
         }
+    }
+
+    public name(): string {
+        return "Harvester";
     }
 
     public tree() {

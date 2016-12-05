@@ -21,16 +21,16 @@ import {Role_Role} from "./Role_Role";
  */
 export class Role_SpawnSupplier extends Role_Role {
 
-    public name(): string {
-        return "SpawnSupplier";
-    }
-
     public static bodyParts(energyCapacityAvailable: number): string[] {
         if (energyCapacityAvailable < 550) {
             return [WORK, CARRY, CARRY, MOVE, MOVE];
         } else {
             return [WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
+    }
+
+    public name(): string {
+        return "SpawnSupplier";
     }
 
     public tree(): Tree_Tree {

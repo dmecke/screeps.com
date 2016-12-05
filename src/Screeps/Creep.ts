@@ -13,41 +13,33 @@ import {Role_Role} from "../Role/Role_Role";
 let loadCreepPrototype = function() {
 
     Creep.prototype.role = function(this: Creep): Role_Role {
-        switch (this.memory.name) {
+        switch (this.memory.role) {
             case Settings.ROLE_HARVESTER:
                 return new Role_Harvester(this);
-                break;
 
             case Settings.ROLE_BUILDER:
                 return new Role_Builder(this);
-                break;
 
             case Settings.ROLE_UPGRADER:
                 return new Role_Upgrader(this);
-                break;
 
             case Settings.ROLE_TRANSPORTER:
                 return new Role_Transporter(this);
-                break;
 
             case Settings.ROLE_SPAWN_SUPPLIER:
                 return new Role_SpawnSupplier(this);
-                break;
 
             case Settings.ROLE_WALLIE:
                 return new Role_Wallie(this);
-                break;
 
             case Settings.ROLE_DEFENDER:
                 return new Role_Defender(this);
-                break;
 
             case Settings.ROLE_SCOUT:
                 return new Role_Scout(this);
-                break;
 
             default:
-                Util_Logger.error(this.name + " has an invalid name: '" + this.memory.name + "'");
+                Util_Logger.error(this.name + " has an invalid role: '" + this.memory.role + "'");
                 throw new Error();
         }
     };

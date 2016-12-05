@@ -9,16 +9,16 @@ import {Role_Role} from "./Role_Role";
 
 export class Role_Defender extends Role_Role {
 
-    public name(): string {
-        return "Defender";
-    }
-
     public static bodyParts(energyCapacityAvailable: number): string[] {
         if (energyCapacityAvailable < 550) {
             return [ATTACK, ATTACK, ATTACK, TOUGH, MOVE];
         } else {
             return [ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE];
         }
+    }
+
+    public name(): string {
+        return "Defender";
     }
 
     public tree(): Tree_Tree {

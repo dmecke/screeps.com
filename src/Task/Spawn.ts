@@ -135,10 +135,12 @@ export class Task_Spawn extends Task_Task {
         });
         if (!Number(newName)) {
             let creep = Game.creeps[newName];
-            if (creep.role().name() === Settings.ROLE_SCOUT) {
+            let r = creep.role() as Role_Role;
+            let roleName = r.name();
+            if (roleName === Settings.ROLE_SCOUT) {
                 creep.notifyWhenAttacked(false);
             }
-            Util_Logger.info("Spawning new " + role + ": " + newName + ".");
+            Util_Logger.info("Spawning new " + roleName + ": " + newName + ".");
         } else if (this.creepsOfRole(role).length < Task_Spawn.minimumCreepCount(role)) {
             if (newName === ERR_NOT_ENOUGH_ENERGY) {
                 Util_Logger.warn("Not enough energy to spawn new " + role + ". There are only " + this.creepsOfRole(role).length + ", but there should be at least " + Task_Spawn.minimumCreepCount(role) + ".");

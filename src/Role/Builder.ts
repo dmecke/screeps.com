@@ -25,16 +25,16 @@ import {Role_Role} from "./Role_Role";
  */
 export class Role_Builder extends Role_Role {
 
-    public name(): string {
-        return "Builder";
-    }
-
     public static bodyParts(energyCapacityAvailable: number): string[] {
         if (energyCapacityAvailable < 550) {
             return [WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
         } else {
             return [WORK, CARRY, MOVE, MOVE, MOVE];
         }
+    }
+
+    public name(): string {
+        return "Builder";
     }
 
     public tree(): Tree_Tree {
