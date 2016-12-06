@@ -15,6 +15,7 @@ import {Action_AssignNearestFilledStorageAsTarget} from "../Action/AssignNearest
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
 import {Action_TransferToTarget} from "../Action/TransferToTarget";
 import {Role_Role} from "./Role";
+import {Action_AssignNearestTowerInNeedOfEnergyAsTarget} from "../Action/AssignNearestTowerInNeedOfEnergyAsTarget";
 
 /**
  * supplys spawn points and extensions with energy
@@ -45,6 +46,16 @@ export class Role_SpawnSupplier extends Role_Role {
                         new Check_AllSpawnsFilled(),
                     ),
                     new Action_AssignNearestSpawnInNeedOfEnergyAsTarget(),
+                    new Tree_Composite_Priority([
+                        new Action_TransferToTarget(RESOURCE_ENERGY),
+                        new Action_MoveToTarget(),
+                    ]),
+                ]),
+                new Tree_Composite_Sequence([
+                    new Tree_Decorator_Inverter(
+                        new Check_CreepCarriesNothing(),
+                    ),
+                    new Action_AssignNearestTowerInNeedOfEnergyAsTarget(),
                     new Tree_Composite_Priority([
                         new Action_TransferToTarget(RESOURCE_ENERGY),
                         new Action_MoveToTarget(),

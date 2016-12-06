@@ -98,6 +98,16 @@ let loadRoomPrototype = function() {
         return targets as StructureSpawn[]|StructureContainer[]|StructureExtension[];
     };
 
+    Room.prototype.findTowersInNeedOfEnergy = function(this: Room) {
+        let targets = this.find(FIND_STRUCTURES, {
+            filter: (structure: Tower) => {
+                return structure.structureType === STRUCTURE_TOWER && structure.energy < structure.energyCapacity;
+            },
+        });
+
+        return targets as Tower[];
+    };
+
     Room.prototype.findNearestSpawnInNeedOfEnergy = function(this: Room, creep: Creep) {
         let targets = this.findSpawnsInNeedOfEnergy();
         targets.sort(function(a: Structure, b: Structure) {
