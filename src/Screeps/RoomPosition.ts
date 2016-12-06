@@ -2,6 +2,7 @@ import {Settings} from "../Settings";
 import {Util_Logger} from "../Util/Logger";
 
 let loadRoomPositionPrototype = function() {
+
     RoomPosition.prototype.positionsInRange = function(this: RoomPosition, range: number): RoomPosition[]
     {
         let positions: RoomPosition[] = [];

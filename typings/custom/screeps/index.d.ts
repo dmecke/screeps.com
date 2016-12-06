@@ -8,13 +8,13 @@ interface Room {
     hasController(): boolean;
     findSourcesByPriority(creep: Creep): Array<Source>;
     findConstructionSitesByPriority(creep: Creep): Array<ConstructionSite>;
-    findDamagedStructuresByPriority(creep: Creep): Array<Structure>;
+    findDamagedStructuresByPriority(from: Creep|StructureTower): Structure[];
     findDamagedWallsByPriority(): Array<StructureWall|StructureRampart>;
     findNearestDroppedEnergy(creep: Creep): Array<Resource>;
     findFilledStorages(): Array<StructureStorage|StructureContainer>;
     findSpawnsInNeedOfEnergy(): Array<StructureSpawn|StructureExtension|StructureContainer>;
     findNearestSpawnInNeedOfEnergy(creep: Creep): StructureSpawn|StructureExtension|StructureContainer;
-    findTowersInNeedOfEnergy(): Tower[];
+    findTowersInNeedOfEnergy(): StructureTower[];
     findRandomAdjacentRoom(): string;
     amountOfDroppedEnergy(): number;
     trackInfo(): void;
@@ -42,4 +42,9 @@ interface Creep {
     findNearestFilledStorage(): StructureStorage|StructureContainer;
     findNearestUnfilledStorage(): StructureStorage|StructureContainer;
     findNearestTowerInNeedOfEnergy(): Tower;
+}
+interface StructureTower {
+    name: string;
+    memory: any;
+    debug(): boolean;
 }

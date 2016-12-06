@@ -1,6 +1,7 @@
 import {Settings} from "../Settings";
 
 let loadSourcePrototype = function() {
+
     Source.prototype.priority = function(this: Source, creep: Creep): number
     {
         if (this.energy === 0) {

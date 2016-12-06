@@ -30,14 +30,14 @@ let loadRoomPrototype = function() {
         return targets as ConstructionSite[];
     };
 
-    Room.prototype.findDamagedStructuresByPriority = function(this: Room, creep: Creep) {
+    Room.prototype.findDamagedStructuresByPriority = function(this: Room, from: Creep|StructureTower) {
         let targets = this.find(FIND_STRUCTURES, {
             filter: (structure: Structure) => {
                 return structure.hits < structure.hitsMax && (structure.structureType !== STRUCTURE_WALL && structure.structureType !== STRUCTURE_RAMPART);
             },
         });
         targets.sort(function(a: Structure, b: Structure) {
-            return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
+            return a.pos.getRangeTo(from) - b.pos.getRangeTo(from);
         });
 
         return targets as Structure[];
@@ -90,12 +90,12 @@ let loadRoomPrototype = function() {
 
     Room.prototype.findTowersInNeedOfEnergy = function(this: Room) {
         let targets = this.find(FIND_STRUCTURES, {
-            filter: (structure: Tower) => {
+            filter: (structure: StructureTower) => {
                 return structure.structureType === STRUCTURE_TOWER && structure.energy < structure.energyCapacity;
             },
         });
 
-        return targets as Tower[];
+        return targets as StructureTower[];
     };
 
     Room.prototype.findNearestSpawnInNeedOfEnergy = function(this: Room, creep: Creep) {

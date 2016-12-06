@@ -1,16 +1,22 @@
 export class Tree_Core_Blackboard {
 
-    private creep: Creep;
+    private holder: Creep|StructureTower;
 
-    public constructor(creep: Creep) {
-        this.creep = creep;
+    public constructor(creep: Creep|StructureTower) {
+        this.holder = creep;
     }
 
     public set(key: string, value: any, treeId: string = "", nodeId: string = ""): void {
-        this.creep.memory.blackboard[treeId + "|" + nodeId + "|" + key] = value;
+        if (!this.holder.memory.hasOwnProperty("blackboard")) {
+            this.holder.memory.blackboard = {};
+        }
+        this.holder.memory.blackboard[treeId + "|" + nodeId + "|" + key] = value;
     }
 
     public get(key: string, treeId: string = "", nodeId: string = ""): any {
-        return this.creep.memory.blackboard[treeId + "|" + nodeId + "|" + key];
+        if (!this.holder.memory.hasOwnProperty("blackboard")) {
+            this.holder.memory.blackboard = {};
+        }
+        return this.holder.memory.blackboard[treeId + "|" + nodeId + "|" + key];
     }
 }

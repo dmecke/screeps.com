@@ -112,14 +112,14 @@ let loadCreepPrototype = function() {
         return targets[0] as StructureContainer|StructureStorage;
     };
 
-    Creep.prototype.findNearestTowerInNeedOfEnergy = function(this: Creep): Tower {
+    Creep.prototype.findNearestTowerInNeedOfEnergy = function(this: Creep): StructureTower {
         let towers = this.room.findTowersInNeedOfEnergy();
         let creep = this;
         towers.sort(function(a: Structure, b: Structure) {
             return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
         });
 
-        return towers[0] as Tower;
+        return towers[0] as StructureTower;
     };
 };
 

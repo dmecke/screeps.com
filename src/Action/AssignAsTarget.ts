@@ -8,7 +8,7 @@ export abstract class Action_AssignAsTarget extends Tree_Core_Action {
         let creep = tick.target as Creep;
         let target = this.findTarget(creep);
 
-        if (target === undefined) {
+        if (target === undefined || target === null) {
             return Settings.TREE_FAILURE;
         }
 
