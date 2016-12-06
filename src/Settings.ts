@@ -18,4 +18,5 @@ export class Settings {
     public static ROLE_TRANSPORTER = "Transporter";
     public static ROLE_UPGRADER = "Upgrader";
     public static ROLE_WALLIE = "Wallie";
+    public static ROLE_CLAIMER = "Claimer";
 }

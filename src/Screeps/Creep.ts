@@ -9,6 +9,7 @@ import {Role_Wallie} from "../Role/Wallie";
 import {Role_Defender} from "../Role/Defender";
 import {Role_Scout} from "../Role/Scout";
 import {Role_Role} from "../Role/Role";
+import {Role_Claimer} from "../Role/Claimer";
 
 let loadCreepPrototype = function() {
 
@@ -37,6 +38,9 @@ let loadCreepPrototype = function() {
 
             case Settings.ROLE_SCOUT:
                 return new Role_Scout(this);
+
+            case Settings.ROLE_CLAIMER:
+                return new Role_Claimer(this);
 
             default:
                 Util_Logger.error(this.name + " has an invalid role: '" + this.memory.role + "'");
@@ -80,23 +84,25 @@ let loadCreepPrototype = function() {
         return this.moveTo(new RoomPosition(25, 25, room));
     };
 
-    Creep.prototype.findNearestFilledStorage = function(this: Creep) {
+    Creep.prototype.findNearestFilledStorage = function(this: Creep): StructureContainer|StructureStorage {
         let targets = this.room.findFilledStorages();
+        let creep = this;
         targets.sort(function(a: Structure, b: Structure) {
-            return a.pos.getRangeTo(this) - b.pos.getRangeTo(this);
+            return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
         });
 
         return targets[0] as StructureContainer|StructureStorage;
     };
 
-    Room.prototype.findNearestUnfilledStorage = function(this: Creep) {
+    Creep.prototype.findNearestUnfilledStorage = function(this: Creep): StructureContainer|StructureStorage {
         let targets = this.room.find(FIND_STRUCTURES, {
             filter: (structure: StructureContainer|StructureStorage) => {
                 return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
             },
         });
+        let creep = this;
         targets.sort(function(a: StructureContainer, b: StructureContainer) {
-            return a.pos.getRangeTo(this) - b.pos.getRangeTo(this);
+            return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
         });
 
         return targets[0] as StructureContainer|StructureStorage;

@@ -10,6 +10,7 @@ import {Role_Transporter} from "../Role/Transporter";
 import {Role_SpawnSupplier} from "../Role/SpawnSupplier";
 import {Role_Defender} from "../Role/Defender";
 import {Role_Scout} from "../Role/Scout";
+import {Role_Claimer} from "../Role/Claimer";
 
 export class Task_Spawn extends Task_Task {
     public static NUMBER_OF_HARVESTER = 4;
@@ -19,6 +20,7 @@ export class Task_Spawn extends Task_Task {
     public static NUMBER_OF_WALLIE = 1;
     public static NUMBER_OF_DEFENDER = 1;
     public static NUMBER_OF_SCOUT = 1;
+    public static NUMBER_OF_CLAIMER = 0;
     public static NUMBER_OF_BUILDER = 1;
     public static BUILDER_MAXIMUM = 5;
 
@@ -48,6 +50,9 @@ export class Task_Spawn extends Task_Task {
             case Settings.ROLE_SCOUT:
                 return Task_Spawn.NUMBER_OF_SCOUT;
 
+            case Settings.ROLE_CLAIMER:
+                return Task_Spawn.NUMBER_OF_CLAIMER;
+
             default:
                 Util_Logger.error("Cannot find minimum creep count for illegal name '" + role + "'");
                 throw new Error();
@@ -56,6 +61,7 @@ export class Task_Spawn extends Task_Task {
 
     private static roles(): string[] {
         return [
+            Settings.ROLE_CLAIMER,
             Settings.ROLE_SCOUT,
             Settings.ROLE_DEFENDER,
             Settings.ROLE_WALLIE,
@@ -94,6 +100,9 @@ export class Task_Spawn extends Task_Task {
             case Settings.ROLE_SCOUT:
                 return Role_Scout.bodyParts(energyCapacityAvailable);
 
+            case Settings.ROLE_CLAIMER:
+                return Role_Claimer.bodyParts(energyCapacityAvailable);
+
             default:
                 Util_Logger.error("Cannot detect body parts. Illegal name '" + role + "'");
                 throw new Error();
@@ -103,6 +112,9 @@ export class Task_Spawn extends Task_Task {
     public execute() {
         let spawnName = "Spawn1";
         let spawned = false;
+        if (Game.spawns[spawnName].memory.needs_claimer) {
+            this.spawn(Settings.ROLE_CLAIMER, spawnName);
+        }
         for (let role of Task_Spawn.roles()) {
             if (this.creepsOfRole(role).length < Task_Spawn.minimumCreepCount(role)) {
                 this.spawn(role, spawnName);
@@ -123,6 +135,9 @@ export class Task_Spawn extends Task_Task {
         Util_Logger.info("There are " + message.join(", ") + " in this room.");
     }
 
+    /**
+     * @todo currently the flag needs_claimer needs to be set manually
+     */
     private spawn(role: string, spawnName: string) {
         let spawn = Game.spawns[spawnName];
         let newName = spawn.createCreep(Task_Spawn.bodyParts(role, spawn), undefined, {
@@ -139,6 +154,9 @@ export class Task_Spawn extends Task_Task {
             let roleName = r.name();
             if (roleName === Settings.ROLE_SCOUT) {
                 creep.notifyWhenAttacked(false);
+            }
+            if (roleName === Settings.ROLE_CLAIMER) {
+                spawn.memory.needs_claimer = false;
             }
             Util_Logger.info("Spawning new " + roleName + ": " + newName + ".");
         } else if (this.creepsOfRole(role).length < Task_Spawn.minimumCreepCount(role)) {
