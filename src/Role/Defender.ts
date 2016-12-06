@@ -13,7 +13,7 @@ export class Role_Defender extends Role_Role {
         if (energyCapacityAvailable < 550) {
             return [ATTACK, ATTACK, ATTACK, TOUGH, MOVE];
         } else {
-            return [ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE];
+            return [ATTACK, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE, MOVE];
         }
     }
 
