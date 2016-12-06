@@ -30,18 +30,18 @@ npm install
 ```
 
 #### copy config file
-adjust your screeps home directory in the "screeps.json"
+adjust your screeps credentials in the "screeps.json"
 ```
 cp screeps.json.dist screeps.json
 ```
 
-#### build project and copy files into "sim" subdirectory
+#### build project and upload files into "sim" branch
 select the "sim" directory once when you are in the simulation
 ```
 gulp deploy-sim
 ```
 
-#### build project and copy files into "world" subdirectory
+#### build project and upload files into "world" branch
 select the "world" directory once when in the world
 ```
 gulp deploy-world
@@ -61,4 +61,5 @@ I am a PHP developer in my day to day job, so please be indulgent with my coding
 
 ## Credits
 
+The build script is ~~based on~~ stolen from the great https://github.com/screepers/screeps-typescript-starter repository.
 The behavior tree implementation is heavily based on http://behavior3.com.
