@@ -51,13 +51,13 @@ let loadRoomPrototype = function() {
         targets.sort(function(a: Structure, b: Structure) {
             let multiplierA = a.structureType === STRUCTURE_WALL ? 100000 : 100;
             let prioA = Math.floor(a.hits / a.hitsMax * multiplierA);
-            if (a.hits < 10000) {
+            if (a.hits < 1000) {
                 prioA = -1;
             }
 
             let multiplierB = b.structureType === STRUCTURE_WALL ? 100000 : 100;
             let prioB = Math.floor(b.hits / b.hitsMax * multiplierB);
-            if (b.hits < 10000) {
+            if (b.hits < 1000) {
                 prioB = -1;
             }
 
