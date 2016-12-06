@@ -67,7 +67,7 @@ export class Role_Wallie extends Role_Role {
                 new Tree_Composite_Sequence([
                     new Action_AssignNearestFilledStorageAsTarget(),
                     new Tree_Composite_Priority([
-                        new Action_Withdraw(this.creep, this.creep.room.findNearestFilledStorage(this.creep)[0], RESOURCE_ENERGY),
+                        new Action_Withdraw(this.creep, this.creep.findNearestFilledStorage(), RESOURCE_ENERGY),
                         new Action_MoveToTarget(),
                     ]),
                 ]),

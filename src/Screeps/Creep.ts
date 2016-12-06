@@ -79,6 +79,28 @@ let loadCreepPrototype = function() {
     Creep.prototype.moveToRoom = function(this: Creep, room: string): number {
         return this.moveTo(new RoomPosition(25, 25, room));
     };
+
+    Creep.prototype.findNearestFilledStorage = function(this: Creep) {
+        let targets = this.room.findFilledStorages();
+        targets.sort(function(a: Structure, b: Structure) {
+            return a.pos.getRangeTo(this) - b.pos.getRangeTo(this);
+        });
+
+        return targets[0] as StructureContainer|StructureStorage;
+    };
+
+    Room.prototype.findNearestUnfilledStorage = function(this: Creep) {
+        let targets = this.room.find(FIND_STRUCTURES, {
+            filter: (structure: StructureContainer|StructureStorage) => {
+                return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
+            },
+        });
+        targets.sort(function(a: StructureContainer, b: StructureContainer) {
+            return a.pos.getRangeTo(this) - b.pos.getRangeTo(this);
+        });
+
+        return targets[0] as StructureContainer|StructureStorage;
+    };
 };
 
 export = loadCreepPrototype;

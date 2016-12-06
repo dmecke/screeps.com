@@ -88,28 +88,6 @@ let loadRoomPrototype = function() {
         }) as StructureContainer[]|StructureStorage[];
     };
 
-    Room.prototype.findNearestFilledStorage = function(this: Room, creep: Creep) {
-        let targets = this.findFilledStorages();
-        targets.sort(function(a: Structure, b: Structure) {
-            return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
-        });
-
-        return targets as StructureContainer[]|StructureStorage[];
-    };
-
-    Room.prototype.findNearestUnfilledStorage = function(this: Room, creep: Creep) {
-        let targets = this.find(FIND_STRUCTURES, {
-            filter: (structure: StructureContainer|StructureStorage) => {
-                return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
-            },
-        });
-        targets.sort(function(a: StructureContainer, b: StructureContainer) {
-            return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
-        });
-
-        return targets as StructureContainer[]|StructureStorage[];
-    };
-
     Room.prototype.findSpawnsInNeedOfEnergy = function(this: Room) {
         let targets = this.find(FIND_STRUCTURES, {
             filter: (structure: StructureExtension|StructureSpawn) => {
