@@ -19,6 +19,9 @@ import {Action_MoveToTarget} from "../Action/MoveToTarget";
 import {Action_HarvestTarget} from "../Action/HarvestTarget";
 import {Action_BuildTarget} from "../Action/BuildTarget";
 import {Role_Role} from "./Role";
+import {Check_IsInRoom} from "../Check/IsInRoom";
+import {Action_MoveToRoom} from "../Action/MoveToRoom";
+import {Tree_Composite_MemoryPriority} from "../Tree/Composite/MemoryPriority";
 
 /**
  * repairs and builds structures; helps with upgrading when nothing to do
@@ -29,7 +32,7 @@ export class Role_Builder extends Role_Role {
         if (energyCapacityAvailable < 550) {
             return [WORK, CARRY, MOVE, MOVE, MOVE];
         } else {
-            return [WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE];
+            return [WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
     }
 
@@ -40,60 +43,66 @@ export class Role_Builder extends Role_Role {
     public tree(): Tree_Tree {
         return new Tree_Tree(
             "Builder",
-            new Tree_Composite_Priority([
-                new Tree_Composite_Sequence([
-                    new Tree_Decorator_Inverter(
-                        new Check_CreepCarriesNothing(),
-                    ),
-                    new Action_AssignHighestPriorityDamagedStructureAsTarget(),
-                    new Tree_Composite_Priority([
-                        new Action_Repair(this.creep, this.creep.room.findDamagedStructuresByPriority(this.creep)[0]),
-                        new Action_MoveToTarget(),
-                    ]),
+            new Tree_Composite_Sequence([
+                new Tree_Composite_Priority([
+                    new Check_IsInRoom(this.creep, this.creep.homeRoom()),
+                    new Action_MoveToRoom(this.creep, this.creep.homeRoom()),
                 ]),
-                new Tree_Composite_Sequence([
-                    new Tree_Decorator_Inverter(
-                        new Check_CreepCarriesNothing(),
-                    ),
-                    new Action_AssignHighestPriorityConstructionSiteAsTarget(),
-                    new Tree_Composite_Priority([
-                        new Action_BuildTarget(),
-                        new Action_MoveToTarget(),
+                new Tree_Composite_MemoryPriority([
+                    new Tree_Composite_Sequence([
+                        new Tree_Decorator_Inverter(
+                            new Check_CreepCarriesNothing(),
+                        ),
+                        new Action_AssignHighestPriorityDamagedStructureAsTarget(),
+                        new Tree_Composite_Priority([
+                            new Action_Repair(this.creep, this.creep.room.findDamagedStructuresByPriority(this.creep)[0]),
+                            new Action_MoveToTarget(),
+                        ]),
                     ]),
-                ]),
-                new Tree_Composite_Sequence([
-                    new Tree_Decorator_Inverter(
-                        new Check_CreepCarriesNothing(),
-                    ),
-                    new Action_AssignControllerAsTarget(),
-                    new Tree_Composite_Priority([
-                        new Action_UpgradeController(this.creep),
-                        new Action_MoveToTarget(),
+                    new Tree_Composite_Sequence([
+                        new Tree_Decorator_Inverter(
+                            new Check_CreepCarriesNothing(),
+                        ),
+                        new Action_AssignHighestPriorityConstructionSiteAsTarget(),
+                        new Tree_Composite_Priority([
+                            new Action_BuildTarget(),
+                            new Action_MoveToTarget(),
+                        ]),
                     ]),
-                ]),
-                new Tree_Composite_Sequence([
-                    new Check_DroppedEnergyAvailable(this.creep, 5),
-                    new Action_AssignNearestDroppedEnergyAsTarget(),
-                    new Tree_Composite_Priority([
-                        new Action_PickUp(this.creep, this.creep.room.findNearestDroppedEnergy(this.creep)[0]),
-                        new Action_MoveToTarget(),
+                    new Tree_Composite_Sequence([
+                        new Tree_Decorator_Inverter(
+                            new Check_CreepCarriesNothing(),
+                        ),
+                        new Action_AssignControllerAsTarget(),
+                        new Tree_Composite_Priority([
+                            new Action_UpgradeController(this.creep),
+                            new Action_MoveToTarget(),
+                        ]),
                     ]),
-                ]),
-                new Tree_Composite_Sequence([
-                    new Action_AssignNearestFilledStorageAsTarget(),
-                    new Tree_Composite_Priority([
-                        new Action_Withdraw(this.creep, this.creep.findNearestFilledStorage(), RESOURCE_ENERGY),
-                        new Action_MoveToTarget(),
+                    new Tree_Composite_Sequence([
+                        new Check_DroppedEnergyAvailable(this.creep, 5),
+                        new Action_AssignNearestDroppedEnergyAsTarget(),
+                        new Tree_Composite_Priority([
+                            new Action_PickUp(this.creep, this.creep.room.findNearestDroppedEnergy(this.creep)[0]),
+                            new Action_MoveToTarget(),
+                        ]),
                     ]),
-                ]),
-                new Tree_Composite_Sequence([
-                    new Tree_Decorator_Inverter(
-                        new Check_CreepIsAtCarryLimit(),
-                    ),
-                    new Action_AssignHighestPrioritySourceAsTarget(),
-                    new Tree_Composite_Priority([
-                        new Action_HarvestTarget(),
-                        new Action_MoveToTarget(),
+                    new Tree_Composite_Sequence([
+                        new Action_AssignNearestFilledStorageAsTarget(),
+                        new Tree_Composite_Priority([
+                            new Action_Withdraw(this.creep, this.creep.findNearestFilledStorage(), RESOURCE_ENERGY),
+                            new Action_MoveToTarget(),
+                        ]),
+                    ]),
+                    new Tree_Composite_Sequence([
+                        new Tree_Decorator_Inverter(
+                            new Check_CreepIsAtCarryLimit(),
+                        ),
+                        new Action_AssignHighestPrioritySourceAsTarget(),
+                        new Tree_Composite_Priority([
+                            new Action_HarvestTarget(),
+                            new Action_MoveToTarget(),
+                        ]),
                     ]),
                 ]),
             ]),
