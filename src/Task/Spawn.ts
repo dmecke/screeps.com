@@ -177,7 +177,7 @@ export class Task_Spawn extends Task_Task {
         return _.filter(Game.creeps, function(creep: Creep) {
             let role = creep.role() as Role_Role;
 
-            return role.name() === roleName && creep.room.name === room.name;
+            return role.name() === roleName && (creep.room.name === room.name || role.name() === Settings.ROLE_SCOUT);
         });
     }
 }
