@@ -1,23 +1,18 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Settings} from "../Settings";
+import {Tree_Core_Tick} from "../Tree/Core/Tick";
 
 export class Action_ClaimController extends Tree_Core_Action {
 
-    private creep: Creep;
-
-    public constructor(creep: Creep) {
-        super();
-        this.creep = creep;
-    }
-
-    public tick(): number {
-        let room = this.creep.room;
+    public tick(tick: Tree_Core_Tick): number {
+        let creep = tick.target as Creep;
+        let room = creep.room;
 
         if (!room.hasController()) {
             return Settings.TREE_FAILURE;
         }
 
-        if (this.creep.claimController(room.controller) === OK) {
+        if (creep.claimController(room.controller) === OK) {
             return Settings.TREE_SUCCESS;
         }
 

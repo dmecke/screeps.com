@@ -18,6 +18,8 @@ export function loop() {
     new Task_Cleanup().execute();
     new Task_Spawn().execute();
     new Task_Roles().execute();
-    new Task_RoadPlanning().execute();
-    new Task_StructurePlanning().execute();
+    if (Game.time % 10 === 0) {
+        new Task_RoadPlanning().execute();
+        new Task_StructurePlanning().execute();
+    }
 }

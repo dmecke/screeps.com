@@ -1,5 +1,6 @@
 import {Tree_Tree} from "./Tree/Tree_Tree";
 import {Tree_Core_Blackboard} from "./Tree/Core/Blackboard";
+import {Role_Role} from "./Role/Role";
 
 export class RoleCreep {
 
@@ -9,9 +10,11 @@ export class RoleCreep {
 
     private blackboard: Tree_Core_Blackboard;
 
-    constructor(creep: Creep, tree: Tree_Tree) {
+    constructor(creep: Creep) {
         this.creep = creep;
-        this.tree = tree;
+
+        let role = creep.role() as Role_Role;
+        this.tree = role.tree();
         this.blackboard = new Tree_Core_Blackboard(creep);
     }
 

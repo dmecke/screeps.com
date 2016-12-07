@@ -1,17 +1,13 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Settings} from "../Settings";
+import {Tree_Core_Tick} from "../Tree/Core/Tick";
 
 export class Check_HostileCreepInRoom extends Tree_Core_Action {
 
-    private room: Room;
+    public tick(tick: Tree_Core_Tick): number {
+        let creep = tick.target as Creep;
 
-    public constructor(room: Room) {
-        super();
-        this.room = room;
-    }
-
-    public tick(): number {
-        let hostileCreeps = this.room.find(FIND_HOSTILE_CREEPS);
+        let hostileCreeps = creep.room.find(FIND_HOSTILE_CREEPS);
 
         if (hostileCreeps.length > 0) {
             return Settings.TREE_SUCCESS;

@@ -1,21 +1,20 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Settings} from "../Settings";
+import {Tree_Core_Tick} from "../Tree/Core/Tick";
 
 export class Check_DroppedEnergyAvailable extends Tree_Core_Action {
 
-    private creep: Creep;
-
     private range: number;
 
-    public constructor(creep: Creep, range?: number) {
+    public constructor(range?: number) {
         super();
-        this.creep = creep;
         this.range = range;
     }
 
-    public tick(): number {
-        let room = this.creep.room;
-        let droppedResources = room.findNearestDroppedEnergy(this.creep);
+    public tick(tick: Tree_Core_Tick): number {
+        let creep = tick.target as Creep;
+        let room = creep.room;
+        let droppedResources = room.findNearestDroppedEnergy(creep);
 
         if (droppedResources.length === 0) {
             return Settings.TREE_FAILURE;
@@ -25,7 +24,7 @@ export class Check_DroppedEnergyAvailable extends Tree_Core_Action {
             return Settings.TREE_SUCCESS;
         }
 
-        if (this.creep.pos.inRangeTo(droppedResources[0].pos, this.range)) {
+        if (creep.pos.inRangeTo(droppedResources[0].pos, this.range)) {
             return Settings.TREE_SUCCESS;
         }
 

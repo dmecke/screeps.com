@@ -2,15 +2,13 @@ import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Settings} from "../Settings";
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
 
-export class Check_AllStoragesFilled extends Tree_Core_Action {
+export class Action_AssignRandomAdjacentRoomAsTargetRoom extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
         let creep = tick.target as Creep;
 
-        if (creep.room.findFilledStorages().length === 0) {
-            return Settings.TREE_SUCCESS;
-        }
+        creep.memory.target_room = creep.room.findRandomAdjacentRoom();
 
-        return Settings.TREE_FAILURE;
+        return Settings.TREE_SUCCESS;
     }
 }
