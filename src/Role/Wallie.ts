@@ -9,9 +9,9 @@ export class Role_Wallie extends Role_Role {
 
     public static bodyParts(energyCapacityAvailable: number): string[] {
         if (energyCapacityAvailable < 550) {
-            return [WORK, WORK, CARRY, MOVE];
+            return [WORK, CARRY, MOVE, MOVE];
         } else {
-            return [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE];
+            return [WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
     }
 
