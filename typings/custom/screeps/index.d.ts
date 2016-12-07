@@ -28,6 +28,7 @@ interface Source {
 interface Creep {
     role(): Object;
     debug(): boolean;
+    blacklistedRooms(): string[];
     state(): string;
     carryAmount(): number;
     targetRoom(): string;

@@ -52,6 +52,10 @@ let loadCreepPrototype = function() {
         return this.memory.debug;
     };
 
+    Creep.prototype.blacklistedRooms = function(this: Creep): string[] {
+        return this.memory.blacklisted_rooms;
+    };
+
     Creep.prototype.carryAmount = function(this: Creep): number {
         return _.sum(this.carry);
     };

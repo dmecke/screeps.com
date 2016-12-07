@@ -146,6 +146,7 @@ export class Task_Spawn extends Task_Task {
         let spawn = Game.spawns[spawnName];
         let newName = spawn.createCreep(Task_Spawn.bodyParts(role, spawn), undefined, {
             blackboard: {},
+            blacklisted_rooms: Settings.BLACKLISTED_ROOMS,
             debug: false,
             experimental: false,
             home_room: spawn.room.name,
