@@ -75,9 +75,13 @@ export class Task_Spawn extends Task_Task {
 
     private static bodyParts(role: string, spawn: StructureSpawn) {
         let energyCapacityAvailable = spawn.room.energyCapacityAvailable;
+        let energyAvailable = spawn.room.energyAvailable;
+
         switch (role) {
             case Settings.ROLE_HARVESTER:
-                return Role_Harvester.bodyParts(energyCapacityAvailable);
+                let energy = spawn.room.creepsOfRole(Settings.ROLE_HARVESTER).length > 0 ? energyCapacityAvailable : energyAvailable;
+
+                return Role_Harvester.bodyParts(energy);
 
             case Settings.ROLE_BUILDER:
                 return Role_Builder.bodyParts(energyCapacityAvailable);
@@ -114,16 +118,16 @@ export class Task_Spawn extends Task_Task {
             if (Game.spawns.hasOwnProperty(spawnName)) {
                 let spawned = false;
                 let spawn = Game.spawns[spawnName];
-                if (Settings.WISHLIST_ROOMS.length > 0 && this.creepsOfRole(Settings.ROLE_CLAIMER, spawn.room).length < 1) {
+                if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(Settings.ROLE_CLAIMER).length < 1) {
                     this.spawn(Settings.ROLE_CLAIMER, spawnName, Settings.WISHLIST_ROOMS.pop());
                 }
                 for (let role of Task_Spawn.roles()) {
-                    if (this.creepsOfRole(role, spawn.room).length < Task_Spawn.minimumCreepCount(role)) {
+                    if (spawn.room.creepsOfRole(role).length < Task_Spawn.minimumCreepCount(role)) {
                         this.spawn(role, spawnName);
                         spawned = true;
                     }
                 }
-                if (!spawned && this.creepsOfRole(Settings.ROLE_BUILDER, spawn.room).length < Task_Spawn.BUILDER_MAXIMUM) {
+                if (!spawned && spawn.room.creepsOfRole(Settings.ROLE_BUILDER).length < Task_Spawn.BUILDER_MAXIMUM) {
                     this.spawn(Settings.ROLE_BUILDER, spawnName);
                 }
                 this.logStatistics(spawn.room);
@@ -134,7 +138,7 @@ export class Task_Spawn extends Task_Task {
     private logStatistics(room: Room): void {
         let message: string[] = [];
         for (let role of Task_Spawn.roles()) {
-            message.push(this.creepsOfRole(role, room).length + " " + role);
+            message.push(room.creepsOfRole(role).length + " " + role);
         }
         Util_Logger.info("There are " + message.join(", ") + " in room " + room.name + ".");
     }
@@ -158,22 +162,14 @@ export class Task_Spawn extends Task_Task {
                 creep.notifyWhenAttacked(false);
             }
             Util_Logger.info("Spawning new " + roleName + ": " + newName + ".");
-        } else if (this.creepsOfRole(role, spawn.room).length < Task_Spawn.minimumCreepCount(role)) {
+        } else if (spawn.room.creepsOfRole(role).length < Task_Spawn.minimumCreepCount(role)) {
             if (newName === ERR_NOT_ENOUGH_ENERGY) {
-                Util_Logger.warn("Not enough energy to spawn new " + role + ". There are only " + this.creepsOfRole(role, spawn.room).length + ", but there should be at least " + Task_Spawn.minimumCreepCount(role) + ".");
+                Util_Logger.warn("Not enough energy to spawn new " + role + ". There are only " + spawn.room.creepsOfRole(role).length + ", but there should be at least " + Task_Spawn.minimumCreepCount(role) + ".");
             } else if (newName === ERR_BUSY) {
-                Util_Logger.warn("Cannot spawn " + role + ", already busy spawning another creep. There are only " + this.creepsOfRole(role, spawn.room).length + ", but there should be at least " + Task_Spawn.minimumCreepCount(role) + ".");
+                Util_Logger.warn("Cannot spawn " + role + ", already busy spawning another creep. There are only " + spawn.room.creepsOfRole(role).length + ", but there should be at least " + Task_Spawn.minimumCreepCount(role) + ".");
             }
         }
 
         return newName;
-    }
-
-    private creepsOfRole(roleName: string, room: Room): Creep[] {
-        return _.filter(Game.creeps, function(creep: Creep) {
-            let role = creep.role() as Role_Role;
-
-            return role.name() === roleName && (creep.room.name === room.name || role.name() === Settings.ROLE_SCOUT || role.name() === Settings.ROLE_CLAIMER);
-        });
     }
 }

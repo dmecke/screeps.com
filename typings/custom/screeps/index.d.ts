@@ -18,6 +18,7 @@ interface Room {
     findRandomAdjacentRoom(): string;
     amountOfDroppedEnergy(): number;
     trackInfo(): void;
+    creepsOfRole(roleName: string): Creep[];
 }
 interface Source {
     priority(creep: Creep): number;
