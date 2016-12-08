@@ -114,8 +114,8 @@ export class Task_Spawn extends Task_Task {
             if (Game.spawns.hasOwnProperty(spawnName)) {
                 let spawned = false;
                 let spawn = Game.spawns[spawnName];
-                if (spawn.memory.needs_claimer) {
-                    this.spawn(Settings.ROLE_CLAIMER, spawnName);
+                if (Settings.WISHLIST_ROOMS.length > 0 && this.creepsOfRole(Settings.ROLE_CLAIMER, spawn.room).length < 1) {
+                    this.spawn(Settings.ROLE_CLAIMER, spawnName, Settings.WISHLIST_ROOMS.pop());
                 }
                 for (let role of Task_Spawn.roles()) {
                     if (this.creepsOfRole(role, spawn.room).length < Task_Spawn.minimumCreepCount(role)) {
@@ -139,10 +139,7 @@ export class Task_Spawn extends Task_Task {
         Util_Logger.info("There are " + message.join(", ") + " in room " + room.name + ".");
     }
 
-    /**
-     * @todo currently the flag needs_claimer needs to be set manually
-     */
-    private spawn(role: string, spawnName: string) {
+    private spawn(role: string, spawnName: string, targetRoom: string = ""): string|number {
         let spawn = Game.spawns[spawnName];
         let newName = spawn.createCreep(Task_Spawn.bodyParts(role, spawn), undefined, {
             blackboard: {},
@@ -151,7 +148,7 @@ export class Task_Spawn extends Task_Task {
             experimental: false,
             home_room: spawn.room.name,
             role,
-            target_room: spawn.room.name,
+            target_room: targetRoom ? targetRoom : spawn.room.name,
         });
         if (!Number(newName)) {
             let creep = Game.creeps[newName];
@@ -159,9 +156,6 @@ export class Task_Spawn extends Task_Task {
             let roleName = r.name();
             if (roleName === Settings.ROLE_SCOUT) {
                 creep.notifyWhenAttacked(false);
-            }
-            if (roleName === Settings.ROLE_CLAIMER) {
-                spawn.memory.needs_claimer = false;
             }
             Util_Logger.info("Spawning new " + roleName + ": " + newName + ".");
         } else if (this.creepsOfRole(role, spawn.room).length < Task_Spawn.minimumCreepCount(role)) {
@@ -171,13 +165,15 @@ export class Task_Spawn extends Task_Task {
                 Util_Logger.warn("Cannot spawn " + role + ", already busy spawning another creep. There are only " + this.creepsOfRole(role, spawn.room).length + ", but there should be at least " + Task_Spawn.minimumCreepCount(role) + ".");
             }
         }
+
+        return newName;
     }
 
     private creepsOfRole(roleName: string, room: Room): Creep[] {
         return _.filter(Game.creeps, function(creep: Creep) {
             let role = creep.role() as Role_Role;
 
-            return role.name() === roleName && (creep.room.name === room.name || role.name() === Settings.ROLE_SCOUT);
+            return role.name() === roleName && (creep.room.name === room.name || role.name() === Settings.ROLE_SCOUT || role.name() === Settings.ROLE_CLAIMER);
         });
     }
 }

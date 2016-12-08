@@ -6,6 +6,7 @@ export class Settings {
     public static BUILD_DISTANCE_CONTAINER = 1; // how far should a container be placed next to a structure?
 
     public static BLACKLISTED_ROOMS = ["W49N71"];
+    public static WISHLIST_ROOMS = ["W46N73"];
 
     public static TREE_SUCCESS = 1;
     public static TREE_FAILURE = 2;
