@@ -18,7 +18,7 @@ export class Task_Spawn extends Task_Task {
     public static NUMBER_OF_TRANSPORTER = 0; // 4; currently not needed as all creeps take the energy directly from the containers near the sources
     public static NUMBER_OF_SPAWN_SUPPLIER = 3;
     public static NUMBER_OF_WALLIE = 2;
-    public static NUMBER_OF_DEFENDER = 3;
+    public static NUMBER_OF_DEFENDER = 0;
     public static NUMBER_OF_SCOUT = 1;
     public static NUMBER_OF_CLAIMER = 0;
     public static NUMBER_OF_BUILDER = 1;
