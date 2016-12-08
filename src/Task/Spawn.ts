@@ -118,7 +118,7 @@ export class Task_Spawn extends Task_Task {
             if (Game.spawns.hasOwnProperty(spawnName)) {
                 let spawned = false;
                 let spawn = Game.spawns[spawnName];
-                if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(Settings.ROLE_CLAIMER).length < 1) {
+                if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(Settings.ROLE_CLAIMER).length < 2) {
                     this.spawn(Settings.ROLE_CLAIMER, spawnName, Settings.WISHLIST_ROOMS.pop());
                 }
                 for (let role of Task_Spawn.roles()) {
