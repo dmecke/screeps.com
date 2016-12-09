@@ -1,9 +1,11 @@
+import loadStringPrototype = require("./Screeps/String");
 import loadRoomPositionPrototype = require("./Screeps/RoomPosition");
 import loadCreepPrototype = require("./Screeps/Creep");
 import loadStructureTowerPrototype = require("./Screeps/StructureTower");
 import loadRoomPrototype = require("./Screeps/Room");
 import loadSourcePrototype = require("./Screeps/Source");
 
+loadStringPrototype();
 loadRoomPositionPrototype();
 loadCreepPrototype();
 loadStructureTowerPrototype();

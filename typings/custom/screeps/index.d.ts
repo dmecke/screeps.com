@@ -48,3 +48,7 @@ interface StructureTower {
     memory: any;
     debug(): boolean;
 }
+interface String {
+    numberFormat(decimals: number, decPoint: string, thousandsSep: string): string;
+    pad(length: number, padString?: string): string;
+}

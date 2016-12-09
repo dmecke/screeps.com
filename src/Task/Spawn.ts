@@ -114,12 +114,14 @@ export class Task_Spawn extends Task_Task {
     }
 
     public execute() {
+        Util_Logger.info("");
+        Util_Logger.info("=== <span style='color: #5599e6'>Report</span> ===");
         for (let spawnName in Game.spawns) {
             if (Game.spawns.hasOwnProperty(spawnName)) {
                 let spawned = false;
                 let spawn = Game.spawns[spawnName];
                 if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(Settings.ROLE_CLAIMER).length < 2) {
-                    this.spawn(Settings.ROLE_CLAIMER, spawnName, Settings.WISHLIST_ROOMS.pop());
+                    this.spawn(Settings.ROLE_CLAIMER, spawnName, Settings.WISHLIST_ROOMS[0]); // @todo handle all wishlist rooms, not just the first
                 }
                 for (let role of Task_Spawn.roles()) {
                     if (spawn.room.creepsOfRole(role).length < Task_Spawn.minimumCreepCount(role)) {
@@ -135,12 +137,31 @@ export class Task_Spawn extends Task_Task {
         }
     }
 
+    // @todo extract reporting to own task
+    // @todo order rooms from east to west (and if equal from north to south)
+    // @todo show global creep counts separated from rooms (in a general statistics row above the room statistics)
     private logStatistics(room: Room): void {
         let message: string[] = [];
         for (let role of Task_Spawn.roles()) {
-            message.push(room.creepsOfRole(role).length + " " + role);
+            let color = room.creepsOfRole(role).length >= Task_Spawn.minimumCreepCount(role) ? "#79CB44" : "#ff5646";
+            message.push(role + " <span style='color:" + color + "'>" + room.creepsOfRole(role).length + " / " + Task_Spawn.minimumCreepCount(role) + "</span>");
         }
-        Util_Logger.info("There are " + message.join(", ") + " in room " + room.name + ".");
+        Util_Logger.info(room.name + ": " + this.getLevelReport(room) + "  |  " + this.getEnergyReport(room) + "  |  " + message.join("  |  "));
+    }
+
+    private getLevelReport(room: Room): string {
+        let formattedProgress = room.controller.progress.toString().numberFormat(0, ",", ".");
+        let formattedProgressTotal = room.controller.progressTotal.toString().numberFormat(0, ",", ".");
+
+        return "RCL " + room.controller.level + "  " + ("          ".substring(0, 8 - formattedProgress.length) + formattedProgress) + " / " + ("          ".substring(0, 8 - formattedProgressTotal.length) + formattedProgressTotal);
+    }
+
+    private getEnergyReport(room: Room): string {
+        let color = room.energyAvailable === room.energyCapacityAvailable ? "#79CB44" : "#ffd85b";
+        let available = room.energyAvailable.toString();
+        let capacity = room.energyCapacityAvailable.toString();
+
+        return "Energy <span style='color: " + color + "'>" + available.pad(4) + " / " + capacity.pad(4) + "</span>";
     }
 
     private spawn(role: string, spawnName: string, targetRoom: string = ""): string|number {
@@ -162,12 +183,6 @@ export class Task_Spawn extends Task_Task {
                 creep.notifyWhenAttacked(false);
             }
             Util_Logger.info("Spawning new " + roleName + ": " + newName + ".");
-        } else if (spawn.room.creepsOfRole(role).length < Task_Spawn.minimumCreepCount(role)) {
-            if (newName === ERR_NOT_ENOUGH_ENERGY) {
-                Util_Logger.warn("Not enough energy to spawn new " + role + ". There are only " + spawn.room.creepsOfRole(role).length + ", but there should be at least " + Task_Spawn.minimumCreepCount(role) + ".");
-            } else if (newName === ERR_BUSY) {
-                Util_Logger.warn("Cannot spawn " + role + ", already busy spawning another creep. There are only " + spawn.room.creepsOfRole(role).length + ", but there should be at least " + Task_Spawn.minimumCreepCount(role) + ".");
-            }
         }
 
         return newName;
