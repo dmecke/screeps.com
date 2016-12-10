@@ -159,7 +159,7 @@ export class Task_Spawn extends Task_Task {
         let stack = room.memory.progress_stack;
         let change = stack.slice(-1).pop() - stack[0];
 
-        return "RCL " + room.controller.level + "  " + formattedProgress.pad(10) + " / " + formattedProgressTotal.pad(10) + " " + ("(+" + change.toString() + ")").pad(7);
+        return "RCL " + room.controller.level + "  " + formattedProgress.pad(10) + " / " + formattedProgressTotal.pad(10) + " " + ("(+" + change.toString().numberFormat(0, ",", ".") + ")").pad(8);
     }
 
     private trackControllerProgress(room: Room): void {
