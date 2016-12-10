@@ -112,6 +112,20 @@ let loadCreepPrototype = function() {
         return targets[0] as StructureContainer|StructureStorage;
     };
 
+    Creep.prototype.findNearestUnfilledControllerStorage = function(this: Creep): StructureContainer|StructureStorage {
+        let targets = this.room.find(FIND_STRUCTURES, {
+            filter: (structure: StructureContainer|StructureStorage) => {
+                return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] < structure.storeCapacity && structure.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, { filter: (s: Structure) => s.structureType === STRUCTURE_CONTROLLER });
+            },
+        });
+        let creep = this;
+        targets.sort(function(a: StructureContainer, b: StructureContainer) {
+            return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
+        });
+
+        return targets[0] as StructureContainer|StructureStorage;
+    };
+
     Creep.prototype.findNearestTowerInNeedOfEnergy = function(this: Creep): StructureTower {
         let towers = this.room.findTowersInNeedOfEnergy();
         let creep = this;

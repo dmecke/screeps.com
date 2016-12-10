@@ -14,7 +14,7 @@ export class Role_Factory {
 
     public static NUMBER_OF_HARVESTER = 4;
     public static NUMBER_OF_UPGRADER = 1;
-    public static NUMBER_OF_TRANSPORTER = 0; // 4; currently not needed as all creeps take the energy directly from the containers near the sources
+    public static NUMBER_OF_TRANSPORTER = 2; // 4; currently not needed as all creeps take the energy directly from the containers near the sources
     public static NUMBER_OF_SPAWN_SUPPLIER = 3;
     public static NUMBER_OF_WALLIE = 2;
     public static NUMBER_OF_DEFENDER = 0;
@@ -62,6 +62,7 @@ export class Role_Factory {
         switch (role) {
             case Settings.ROLE_SCOUT:
             case Settings.ROLE_CLAIMER:
+            case Settings.ROLE_TRANSPORTER:
                 return true;
 
             default:

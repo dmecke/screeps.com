@@ -1,5 +1,3 @@
-import {Check_IsInHomeRoom} from "../Check/IsInHomeRoom";
-import {Action_MoveToHomeRoom} from "../Action/MoveToHomeRoom";
 import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
 import {Check_CreepIsAtCarryLimit} from "../Check/CreepIsAtCarryLimit";
 import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";
@@ -19,13 +17,16 @@ import {Check_AllSpawnsFilled} from "../Check/AllSpawnsFilled";
 import {Action_AssignNearestSpawnInNeedOfEnergyAsTarget} from "../Action/AssignNearestSpawnInNeedOfEnergyAsTarget";
 import {Tree_Composite_MemoryPriority} from "../Tree/Composite/MemoryPriority";
 import {Tree_Tree} from "../Tree/Tree_Tree";
+import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
+import {Settings} from "../Settings";
+import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
 
 export = new Tree_Tree(
     "Harvester",
     new Tree_Composite_Sequence([
         new Tree_Composite_Priority([
-            new Check_IsInHomeRoom(),
-            new Action_MoveToHomeRoom(),
+            new Check_IsInTargetRoom(),
+            new Action_MoveToTargetRoom(),
         ]),
         new Tree_Composite_MemoryPriority([
             new Tree_Composite_Sequence([
@@ -39,7 +40,10 @@ export = new Tree_Tree(
                 ]),
             ]),
             new Tree_Composite_Sequence([
-                new Check_RoomHasCreepsOfRole("SpawnSupplier", 1),
+                new Tree_Composite_Priority([
+                    new Check_RoomHasCreepsOfRole(Settings.ROLE_SPAWN_SUPPLIER, 1),
+                    new Check_RoomHasCreepsOfRole(Settings.ROLE_TRANSPORTER, 1),
+                ]),
                 new Tree_Composite_Priority([
                     new Tree_Composite_Sequence([
                         new Action_AssignHighestPrioritySourceAsTarget(),
