@@ -18,6 +18,7 @@ import {Task_StructurePlanning} from "./Task/StructurePlanning";
 import {Task_Roles} from "./Task/Roles";
 import {Task_Spawn} from "./Task/Spawn";
 import {Task_Tower} from "./Task/Tower";
+import {Task_Report} from "./Task/Report";
 
 export function loop() {
     new Task_Cleanup().execute();
@@ -28,4 +29,5 @@ export function loop() {
         new Task_RoadPlanning().execute();
         new Task_StructurePlanning().execute();
     }
+    new Task_Report().execute();
 }
