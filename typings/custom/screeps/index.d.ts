@@ -41,6 +41,7 @@ interface Creep {
     isInHomeRoom(): boolean;
     moveToRoom(room: string): number;
     findNearestFilledStorage(): StructureStorage|StructureContainer;
+    findNearestFilledSourceStorage(): StructureStorage|StructureContainer;
     findNearestUnfilledStorage(): StructureStorage|StructureContainer;
     findNearestUnfilledControllerStorage(): StructureStorage|StructureContainer;
     findNearestTowerInNeedOfEnergy(): Tower;

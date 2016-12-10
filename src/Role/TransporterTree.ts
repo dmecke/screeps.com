@@ -9,8 +9,8 @@ import {Action_MoveToHomeRoom} from "../Action/MoveToHomeRoom";
 import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 import {Action_WithdrawFromTarget} from "../Action/WithdrawFromTarget";
 import {Action_AssignNearestUnfilledControllerStorageAsTarget} from "../Action/AssignNearestUnfilledControllerStorageAsTarget";
-import {Action_AssignNearestFilledStorageAsTarget} from "../Action/AssignNearestFilledStorageAsTarget";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
+import {Action_AssignNearestFilledSourceStorageAsTarget} from "../Action/AssignNearestFilledSourceStorageAsTarget";
 
 export = new Tree_Tree(
     "Transporter",
@@ -34,7 +34,7 @@ export = new Tree_Tree(
                 new Check_IsInTargetRoom(),
                 new Action_MoveToTargetRoom(),
             ]),
-            new Action_AssignNearestFilledStorageAsTarget(),
+            new Action_AssignNearestFilledSourceStorageAsTarget(),
             new Tree_Composite_Priority([
                 new Action_WithdrawFromTarget(RESOURCE_ENERGY),
                 new Action_MoveToTarget(),

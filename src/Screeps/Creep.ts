@@ -98,6 +98,17 @@ let loadCreepPrototype = function() {
         return targets[0] as StructureContainer|StructureStorage;
     };
 
+    Creep.prototype.findNearestFilledSourceStorage = function(this: Creep): StructureContainer|StructureStorage {
+        let targets = this.room.findFilledStorages();
+        targets = _.filter(targets, (structure: StructureStorage|StructureContainer) => structure.pos.findInRange(FIND_SOURCES, Settings.BUILD_DISTANCE_CONTAINER).length > 0);
+        let creep = this;
+        targets.sort(function(a: Structure, b: Structure) {
+            return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
+        });
+
+        return targets[0] as StructureContainer|StructureStorage;
+    };
+
     Creep.prototype.findNearestUnfilledStorage = function(this: Creep): StructureContainer|StructureStorage {
         let targets = this.room.find(FIND_STRUCTURES, {
             filter: (structure: StructureContainer|StructureStorage) => {
@@ -115,7 +126,7 @@ let loadCreepPrototype = function() {
     Creep.prototype.findNearestUnfilledControllerStorage = function(this: Creep): StructureContainer|StructureStorage {
         let targets = this.room.find(FIND_STRUCTURES, {
             filter: (structure: StructureContainer|StructureStorage) => {
-                return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] < structure.storeCapacity && structure.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, { filter: (s: Structure) => s.structureType === STRUCTURE_CONTROLLER });
+                return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] < structure.storeCapacity && structure.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, { filter: (s: Structure) => s.structureType === STRUCTURE_CONTROLLER }).length > 0;
             },
         });
         let creep = this;
