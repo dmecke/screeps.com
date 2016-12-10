@@ -156,7 +156,7 @@ export class Task_Spawn extends Task_Task {
         let formattedProgress = room.controller.progress.toString().numberFormat(0, ",", ".");
         let formattedProgressTotal = room.controller.progressTotal.toString().numberFormat(0, ",", ".");
 
-        return "RCL " + room.controller.level + "  " + ("          ".substring(0, 8 - formattedProgress.length) + formattedProgress) + " / " + ("          ".substring(0, 8 - formattedProgressTotal.length) + formattedProgressTotal);
+        return "RCL " + room.controller.level + "  " + ("          ".substring(0, 10 - formattedProgress.length) + formattedProgress) + " / " + ("          ".substring(0, 10 - formattedProgressTotal.length) + formattedProgressTotal);
     }
 
     private getEnergyReport(room: Room): string {
