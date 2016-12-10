@@ -121,7 +121,7 @@ let loadRoomPrototype = function() {
     };
 
     Room.prototype.trackInfo = function(this: Room): void {
-        this.memory = {
+        this.memory.info = {
             dropped_energy: this.amountOfDroppedEnergy(),
             energy_available: this.energyAvailable,
             energy_capacity_available: this.energyCapacityAvailable,
