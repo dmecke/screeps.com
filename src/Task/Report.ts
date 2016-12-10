@@ -54,6 +54,7 @@ export class Task_Report extends Task_Task {
     }
 
     private logStatistics(room: Room): void {
+        let attack = room.find(FIND_HOSTILE_CREEPS).length > 0 ? "<span style='color: #ff5646'>!!!</span>" : "   ";
         let message: string[] = [];
         for (let role of Role_Factory.roles()) {
             if (!Role_Factory.isRoomIndependant(role)) {
@@ -61,7 +62,7 @@ export class Task_Report extends Task_Task {
                 message.push(role + " <span style='color:" + color + "'>" + room.creepsOfRole(role).length + " / " + Role_Factory.minimumCreepCount(role) + "</span>");
             }
         }
-        Util_Logger.info(room.name + ": " + this.getLevelReport(room) + "  |  " + this.getEnergyReport(room) + "  |  " + message.join("  |  "));
+        Util_Logger.info(room.name + ": " + attack + " " + this.getLevelReport(room) + "  |  " + this.getEnergyReport(room) + "  |  " + message.join("  |  "));
     }
 
     private getLevelReport(room: Room): string {
