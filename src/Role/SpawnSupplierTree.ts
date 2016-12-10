@@ -23,10 +23,7 @@ export = new Tree_Tree(
             new Tree_Decorator_Inverter(
                 new Check_CreepCarriesNothing(),
             ),
-            new Tree_Decorator_Inverter(
-                new Check_AllSpawnsFilled(),
-            ),
-            new Action_AssignNearestSpawnInNeedOfEnergyAsTarget(),
+            new Action_AssignNearestTowerInNeedOfEnergyAsTarget(),
             new Tree_Composite_Priority([
                 new Action_TransferToTarget(RESOURCE_ENERGY),
                 new Action_MoveToTarget(),
@@ -36,7 +33,10 @@ export = new Tree_Tree(
             new Tree_Decorator_Inverter(
                 new Check_CreepCarriesNothing(),
             ),
-            new Action_AssignNearestTowerInNeedOfEnergyAsTarget(),
+            new Tree_Decorator_Inverter(
+                new Check_AllSpawnsFilled(),
+            ),
+            new Action_AssignNearestSpawnInNeedOfEnergyAsTarget(),
             new Tree_Composite_Priority([
                 new Action_TransferToTarget(RESOURCE_ENERGY),
                 new Action_MoveToTarget(),
