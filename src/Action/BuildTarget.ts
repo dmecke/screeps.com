@@ -8,11 +8,7 @@ export class Action_BuildTarget extends Tree_Core_Action {
         let creep = tick.target as Creep;
         let constructionSite = tick.blackboard.get("target", tick.tree.id) as ConstructionSite;
 
-        let status = creep.build(constructionSite);
-        if (creep.name === "Bella") {
-            console.log(status, JSON.stringify(constructionSite));
-        }
-        if (status !== OK) {
+        if (creep.build(constructionSite) !== OK) {
             return Settings.TREE_FAILURE;
         }
 
