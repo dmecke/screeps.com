@@ -20,7 +20,7 @@ export class Task_Spawn extends Task_Task {
                         spawned = true;
                     }
                 }
-                if (!spawned && spawn.room.creepsOfRole(Settings.ROLE_BUILDER).length < Role_Factory.BUILDER_MAXIMUM) {
+                if (!spawned && spawn.room.creepsOfRole(Settings.ROLE_BUILDER).length < Settings.BUILDER_MAXIMUM) {
                     this.spawn(Settings.ROLE_BUILDER, spawnName);
                 }
             }

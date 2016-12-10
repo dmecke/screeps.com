@@ -22,4 +22,15 @@ export class Settings {
     public static ROLE_UPGRADER = "Upgrader";
     public static ROLE_WALLIE = "Wallie";
     public static ROLE_CLAIMER = "Claimer";
+
+    public static NUMBER_OF_HARVESTER = 4;
+    public static NUMBER_OF_UPGRADER = 1;
+    public static NUMBER_OF_TRANSPORTER = 4;
+    public static NUMBER_OF_SPAWN_SUPPLIER = 3;
+    public static NUMBER_OF_WALLIE = 2;
+    public static NUMBER_OF_DEFENDER = 0;
+    public static NUMBER_OF_SCOUT = 1;
+    public static NUMBER_OF_CLAIMER = 0;
+    public static NUMBER_OF_BUILDER = 1;
+    public static BUILDER_MAXIMUM = 5;
 }

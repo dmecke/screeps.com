@@ -20,6 +20,7 @@ import {Tree_Tree} from "../Tree/Tree_Tree";
 import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 import {Settings} from "../Settings";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
+import {Check_IsInHomeRoom} from "../Check/IsInHomeRoom";
 
 export = new Tree_Tree(
     "Harvester",
@@ -42,7 +43,9 @@ export = new Tree_Tree(
             new Tree_Composite_Sequence([
                 new Tree_Composite_Priority([
                     new Check_RoomHasCreepsOfRole(Settings.ROLE_SPAWN_SUPPLIER, 1),
-                    new Check_RoomHasCreepsOfRole(Settings.ROLE_TRANSPORTER, 1),
+                    new Tree_Decorator_Inverter(
+                        new Check_IsInHomeRoom(),
+                    ),
                 ]),
                 new Tree_Composite_Priority([
                     new Tree_Composite_Sequence([
