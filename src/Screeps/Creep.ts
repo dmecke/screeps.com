@@ -68,20 +68,8 @@ let loadCreepPrototype = function() {
         return this.memory.target_room;
     };
 
-    Creep.prototype.moveToTargetRoom = function(this: Creep): void {
-        this.moveToRoom(this.targetRoom());
-    };
-
     Creep.prototype.isInRoom = function(this: Creep, room: string): boolean {
         return this.room.name === room;
-    };
-
-    Creep.prototype.isInTargetRoom = function(this: Creep): boolean {
-        return this.isInRoom(this.targetRoom());
-    };
-
-    Creep.prototype.isInHomeRoom = function(this: Creep): boolean {
-        return this.isInRoom(this.homeRoom());
     };
 
     Creep.prototype.moveToRoom = function(this: Creep, room: string): number {
