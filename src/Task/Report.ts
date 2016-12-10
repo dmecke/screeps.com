@@ -1,10 +1,12 @@
 import {Task_Task} from "./Task";
 import {Util_Logger} from "../Util/Logger";
-import {Task_Spawn} from "./Spawn";
+import {Role_Factory} from "../Role/Factory";
 
 export class Task_Report extends Task_Task {
 
     private static SIMULATION_ROOM = "sim";
+
+    private rooms: Room[] = [];
 
     public execute(): void {
         Util_Logger.info("");
@@ -13,30 +15,41 @@ export class Task_Report extends Task_Task {
 
         for (let name in Game.rooms) {
             if (Game.rooms.hasOwnProperty(name)) {
-                this.handleRoom(Game.rooms[name]);
+                if (this.needToReport(Game.rooms[name])) {
+                    this.rooms.push(Game.rooms[name]);
+                }
             }
+        }
+
+        this.orderRooms();
+
+        for (let room of this.rooms) {
+            this.logStatistics(room);
         }
     }
 
-    private handleRoom(room: Room): void {
+    private needToReport(room: Room): boolean {
         if (room.controller === undefined) {
-            return;
+            return false;
         }
 
         if (!room.controller.my) {
-            return;
+            return false;
         }
 
-        this.logStatistics(room);
+        return true;
     }
 
-    // @todo order rooms from east to west (and if equal from north to south)
+    private orderRooms(): void {
+        // @todo order rooms from east to west (and if equal from north to south)
+    }
+
     // @todo show global creep counts separated from rooms (in a general statistics row above the room statistics)
     private logStatistics(room: Room): void {
         let message: string[] = [];
-        for (let role of Task_Spawn.roles()) {
-            let color = room.creepsOfRole(role).length >= Task_Spawn.minimumCreepCount(role) ? "#79CB44" : "#ff5646";
-            message.push(role + " <span style='color:" + color + "'>" + room.creepsOfRole(role).length + " / " + Task_Spawn.minimumCreepCount(role) + "</span>");
+        for (let role of Role_Factory.roles()) {
+            let color = room.creepsOfRole(role).length >= Role_Factory.minimumCreepCount(role) ? "#79CB44" : "#ff5646";
+            message.push(role + " <span style='color:" + color + "'>" + room.creepsOfRole(role).length + " / " + Role_Factory.minimumCreepCount(role) + "</span>");
         }
         Util_Logger.info(room.name + ": " + this.getLevelReport(room) + "  |  " + this.getEnergyReport(room) + "  |  " + message.join("  |  "));
     }
