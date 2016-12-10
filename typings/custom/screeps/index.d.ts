@@ -50,6 +50,6 @@ interface StructureTower {
     debug(): boolean;
 }
 interface String {
-    numberFormat(decimals: number, decPoint: string, thousandsSep: string): string;
+    format(): string;
     pad(length: number, padString?: string): string;
 }

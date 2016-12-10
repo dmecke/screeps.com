@@ -67,12 +67,12 @@ export class Task_Report extends Task_Task {
 
     private getLevelReport(room: Room): string {
         this.trackControllerProgress(room);
-        let formattedProgress = room.controller.progress.toString().numberFormat(0, ",", ".");
-        let formattedProgressTotal = room.controller.progressTotal.toString().numberFormat(0, ",", ".");
+        let formattedProgress = room.controller.progress.toString().format();
+        let formattedProgressTotal = room.controller.progressTotal.toString().format();
         let stack = room.memory.progress_stack;
         let change = stack.slice(-1).pop() - stack[0];
 
-        return "RCL " + room.controller.level + "  " + formattedProgress.pad(10) + " / " + formattedProgressTotal.pad(10) + " " + ("(+" + change.toString().numberFormat(0, ",", ".") + ")").pad(8);
+        return "RCL " + room.controller.level + "  " + formattedProgress.pad(10) + " / " + formattedProgressTotal.pad(10) + " " + ("(+" + change.toString().format() + ")").pad(8);
     }
 
     private trackControllerProgress(room: Room): void {
