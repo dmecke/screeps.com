@@ -1,4 +1,3 @@
-import {Util_Logger} from "../Util/Logger";
 import {Task_Task} from "./Task";
 import {Settings} from "../Settings";
 import {Role_Role} from "../Role/Role";
@@ -45,7 +44,6 @@ export class Task_Spawn extends Task_Task {
             if (roleName === Settings.ROLE_SCOUT) {
                 creep.notifyWhenAttacked(false);
             }
-            Util_Logger.info("Spawning new " + roleName + ": " + newName + ".");
         }
 
         return newName;
