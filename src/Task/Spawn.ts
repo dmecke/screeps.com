@@ -24,6 +24,8 @@ export class Task_Spawn extends Task_Task {
     public static NUMBER_OF_BUILDER = 1;
     public static BUILDER_MAXIMUM = 5;
 
+    private static SIMULATION_ROOM = "sim";
+
     private static minimumCreepCount(role: string) {
         switch (role) {
             case Settings.ROLE_HARVESTER:
@@ -115,7 +117,8 @@ export class Task_Spawn extends Task_Task {
 
     public execute() {
         Util_Logger.info("");
-        Util_Logger.info("=== <span style='color: #5599e6'>Report</span> ===");
+        let tick = Game.rooms[Task_Spawn.SIMULATION_ROOM] ? " " + Game.time : "";
+        Util_Logger.info("=== <span style='color: #5599e6'>Report</span>" + tick + " ===");
         for (let spawnName in Game.spawns) {
             if (Game.spawns.hasOwnProperty(spawnName)) {
                 let spawned = false;
