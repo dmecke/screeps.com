@@ -16,7 +16,7 @@ import {Action_BuildTarget} from "../Action/BuildTarget";
 import {Check_AllSpawnsFilled} from "../Check/AllSpawnsFilled";
 import {Action_AssignNearestSpawnInNeedOfEnergyAsTarget} from "../Action/AssignNearestSpawnInNeedOfEnergyAsTarget";
 import {Tree_Composite_MemoryPriority} from "../Tree/Composite/MemoryPriority";
-import {Tree_Tree} from "../Tree/Tree_Tree";
+import {Tree_Tree} from "../Tree/Tree";
 import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 import {Settings} from "../Settings";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";

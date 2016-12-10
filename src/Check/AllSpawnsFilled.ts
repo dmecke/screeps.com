@@ -7,7 +7,7 @@ export class Check_AllSpawnsFilled extends Tree_Core_Action {
     public tick(tick: Tree_Core_Tick): number {
         let creep = tick.target as Creep;
 
-        if (creep.room.findSpawnsInNeedOfEnergy().length === 0) {
+        if (creep.room.findSpawns().inNeedOfEnergy().none()) {
             return Settings.TREE_SUCCESS;
         }
 

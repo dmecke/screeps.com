@@ -1,5 +1,5 @@
 import {Task_Task} from "./Task";
-import {Tree_Tree} from "../Tree/Tree_Tree";
+import {Tree_Tree} from "../Tree/Tree";
 import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
 import {Tree_Core_Blackboard} from "../Tree/Core/Blackboard";
 import {Tree_Composite_Sequence} from "../Tree/Composite/Sequence";

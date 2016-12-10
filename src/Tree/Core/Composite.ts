@@ -1,5 +1,5 @@
 import {Tree_Core_BaseNode} from "./BaseNode";
-import {Tree_Tree} from "../Tree_Tree";
+import {Tree_Tree} from "../Tree";
 
 export abstract class Tree_Core_Composite extends Tree_Core_BaseNode {
 

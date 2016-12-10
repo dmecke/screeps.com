@@ -1,3 +1,58 @@
+interface IStructures {
+    none(): boolean;
+    exist(): boolean;
+    notWall(): IStructures;
+    notRampart(): IStructures;
+    onlyMine(): IStructures;
+    notHostile(): IStructures;
+    closestByPath(pos: RoomPosition): Structure;
+}
+interface IConstructionSites {
+    orderByPriority(creep: Creep): IConstructionSites;
+    closestByPath(pos: RoomPosition): ConstructionSite;
+    first(): ConstructionSite;
+}
+interface ISources {
+    withContainer(): ISources;
+    withoutHarvester(): ISources;
+    orderByPriority(creep: Creep): ISources;
+    closestByPath(pos: RoomPosition): Source;
+    first(): Source;
+}
+interface IDepots {
+    contains(resource: string): IDepots;
+    notFull(): IDepots;
+    nextToController(): IDepots;
+    nextToSource(): IDepots;
+    nextToMySpawn(): IDepots;
+    canStore(amount: number): IDepots;
+    closestByPath(pos: RoomPosition): StructureContainer|StructureStorage;
+}
+interface ISpawns {
+    inNeedOfEnergy(): ISpawns;
+    closestByPath(pos: RoomPosition): StructureSpawn|StructureExtension;
+    none(): boolean;
+    exist(): boolean;
+}
+interface ITowers {
+    inNeedOfEnergy(): ITowers;
+    closestByPath(pos: RoomPosition): StructureTower;
+    none(): boolean;
+    exist(): boolean;
+}
+interface IDroppedResources {
+    is(resource: string): IDroppedResources;
+    closestByPath(pos: RoomPosition): Resource;
+    none(): boolean;
+    exist(): boolean;
+}
+interface IWallsAndRamparts {
+    withNotMaxHitpoints(): IWallsAndRamparts;
+    orderByPriority(): IWallsAndRamparts;
+    closestByPath(pos: RoomPosition): StructureWall|StructureRampart
+    first(): StructureWall|StructureRampart
+}
+
 interface RoomPosition {
     positionsInRange(range: number): RoomPosition[];
     outerPositionsInRange(range: number): RoomPosition[];
@@ -6,16 +61,14 @@ interface RoomPosition {
 }
 interface Room {
     hasController(): boolean;
-    findSourcesByPriority(creep: Creep): Array<Source>;
-    findConstructionSitesByPriority(creep: Creep): Array<ConstructionSite>;
-    findDamagedStructuresByPriority(from: Creep|StructureTower): Structure[];
-    findDamagedWallsByPriority(): Array<StructureWall|StructureRampart>;
-    findNearestDroppedEnergy(creep: Creep): Array<Resource>;
-    findNearestDroppedResource(creep: Creep): Array<Resource>;
-    findFilledStorages(): Array<StructureStorage|StructureContainer>;
-    findSpawnsInNeedOfEnergy(): Array<StructureSpawn|StructureExtension|StructureContainer>;
-    findNearestSpawnInNeedOfEnergy(creep: Creep): StructureSpawn|StructureExtension|StructureContainer;
-    findTowersInNeedOfEnergy(): StructureTower[];
+    findStructures(): IStructures;
+    findSources(): ISources;
+    findDepots(): IDepots;
+    findSpawns(): ISpawns;
+    findTowers(): ITowers;
+    findDroppedResources(): IDroppedResources;
+    findWallsAndRamparts(): IWallsAndRamparts;
+    findConstructionSites(): IConstructionSites;
     findRandomAdjacentRoom(): string;
     amountOfDroppedEnergy(): number;
     trackInfo(): void;
@@ -40,11 +93,6 @@ interface Creep {
     isInTargetRoom(): boolean;
     isInHomeRoom(): boolean;
     moveToRoom(room: string): number;
-    findNearestFilledStorage(): StructureStorage|StructureContainer;
-    findNearestFilledSourceStorage(): StructureStorage|StructureContainer;
-    findNearestUnfilledStorage(): StructureStorage|StructureContainer;
-    findNearestUnfilledControllerStorage(): StructureStorage|StructureContainer;
-    findNearestTowerInNeedOfEnergy(): Tower;
 }
 interface StructureTower {
     name: string;

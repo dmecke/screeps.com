@@ -14,7 +14,7 @@ import {Action_AssignNearestDroppedEnergyAsTarget} from "../Action/AssignNearest
 import {Action_PickUpTarget} from "../Action/PickUpTarget";
 import {Action_AssignNearestFilledStorageAsTarget} from "../Action/AssignNearestFilledStorageAsTarget";
 import {Action_WithdrawFromTarget} from "../Action/WithdrawFromTarget";
-import {Tree_Tree} from "../Tree/Tree_Tree";
+import {Tree_Tree} from "../Tree/Tree";
 import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
 

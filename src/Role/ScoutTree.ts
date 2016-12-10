@@ -1,4 +1,4 @@
-import {Tree_Tree} from "../Tree/Tree_Tree";
+import {Tree_Tree} from "../Tree/Tree";
 import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
 import {Tree_Composite_Sequence} from "../Tree/Composite/Sequence";
 import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";

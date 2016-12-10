@@ -1,4 +1,4 @@
-import {Tree_Tree} from "../Tree/Tree_Tree";
+import {Tree_Tree} from "../Tree/Tree";
 import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
 import {Action_UpgradeController} from "../Action/UpgradeController";
 import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";

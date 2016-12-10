@@ -13,10 +13,8 @@ export class Check_DroppedEnergyAvailable extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
         let creep = tick.target as Creep;
-        let room = creep.room;
-        let droppedResources = room.findNearestDroppedEnergy(creep);
 
-        if (droppedResources.length === 0) {
+        if (creep.room.amountOfDroppedEnergy() === 0) {
             return Settings.TREE_FAILURE;
         }
 
@@ -24,7 +22,8 @@ export class Check_DroppedEnergyAvailable extends Tree_Core_Action {
             return Settings.TREE_SUCCESS;
         }
 
-        if (creep.pos.inRangeTo(droppedResources[0].pos, this.range)) {
+        let resource = creep.room.findDroppedResources().is(RESOURCE_ENERGY).closestByPath(creep.pos);
+        if (creep.pos.inRangeTo(resource.pos, this.range)) {
             return Settings.TREE_SUCCESS;
         }
 

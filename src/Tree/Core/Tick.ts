@@ -3,7 +3,7 @@ import {Util_Logger} from "../../Util/Logger";
 import {Settings} from "../../Settings";
 import {Tree_Core_Composite} from "./Composite";
 import {Tree_Core_Decorator} from "./Decorator";
-import {Tree_Tree} from "../Tree_Tree";
+import {Tree_Tree} from "../Tree";
 import {Tree_Core_Blackboard} from "./Blackboard";
 
 export class Tree_Core_Tick {

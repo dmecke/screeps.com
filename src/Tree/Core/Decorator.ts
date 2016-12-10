@@ -1,5 +1,5 @@
 import {Tree_Core_BaseNode} from "./BaseNode";
-import {Tree_Tree} from "../Tree_Tree";
+import {Tree_Tree} from "../Tree";
 
 export class Tree_Core_Decorator extends Tree_Core_BaseNode {
 

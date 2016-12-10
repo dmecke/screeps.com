@@ -1,4 +1,4 @@
-import {Tree_Tree} from "./Tree/Tree_Tree";
+import {Tree_Tree} from "./Tree/Tree";
 import {Tree_Core_Blackboard} from "./Tree/Core/Blackboard";
 import {Role_Role} from "./Role/Role";
 
