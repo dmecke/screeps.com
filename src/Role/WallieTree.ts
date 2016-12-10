@@ -13,43 +13,51 @@ import {Action_MoveToTarget} from "../Action/MoveToTarget";
 import {Action_PickUpTarget} from "../Action/PickUpTarget";
 import {Action_WithdrawFromTarget} from "../Action/WithdrawFromTarget";
 import {Action_RepairTarget} from "../Action/RepairTarget";
+import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
+import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
 
 export = new Tree_Tree(
     "Wallie",
-    new Tree_Composite_Priority([
-        new Tree_Composite_Sequence([
-            new Tree_Decorator_Inverter(
-                new Check_CreepCarriesNothing(),
-            ),
-            new Action_AssignHighestPriorityDamagedWallAsTarget(),
-            new Tree_Composite_Priority([
-                new Action_RepairTarget(),
-                new Action_MoveToTarget(),
-            ]),
+    new Tree_Composite_Sequence([
+        new Tree_Composite_Priority([
+            new Check_IsInTargetRoom(),
+            new Action_MoveToTargetRoom(),
         ]),
-        new Tree_Composite_Sequence([
-            new Tree_Decorator_Inverter(
-                new Check_CreepCarriesNothing(),
-            ),
-            new Action_AssignControllerAsTarget(),
-            new Tree_Composite_Priority([
-                new Action_UpgradeController(),
-                new Action_MoveToTarget(),
+        new Tree_Composite_Priority([
+            new Tree_Composite_Sequence([
+                new Tree_Decorator_Inverter(
+                    new Check_CreepCarriesNothing(),
+                ),
+                new Action_AssignHighestPriorityDamagedWallAsTarget(),
+                new Tree_Composite_Priority([
+                    new Action_RepairTarget(),
+                    new Action_MoveToTarget(),
+                ]),
             ]),
-        ]),
-        new Tree_Composite_Sequence([
-            new Check_DroppedEnergyAvailable(5),
-            new Action_AssignNearestDroppedEnergyAsTarget(),
-            new Tree_Composite_Priority([
-                new Action_PickUpTarget(),
-                new Action_MoveToTarget(),
+            new Tree_Composite_Sequence([
+                new Tree_Decorator_Inverter(
+                    new Check_CreepCarriesNothing(),
+                ),
+                new Action_AssignControllerAsTarget(),
+                new Tree_Composite_Priority([
+                    new Action_UpgradeController(),
+                    new Action_MoveToTarget(),
+                ]),
             ]),
-        ]),
-        new Tree_Composite_Sequence([
-            new Action_AssignNearestFilledStorageAsTarget(),
-            new Tree_Composite_Priority([
-                new Action_WithdrawFromTarget(RESOURCE_ENERGY),
-                new Action_MoveToTarget(),
+            new Tree_Composite_Sequence([
+                new Check_DroppedEnergyAvailable(5),
+                new Action_AssignNearestDroppedEnergyAsTarget(),
+                new Tree_Composite_Priority([
+                    new Action_PickUpTarget(),
+                    new Action_MoveToTarget(),
+                ]),
+            ]),
+            new Tree_Composite_Sequence([
+                new Action_AssignNearestFilledStorageAsTarget(),
+                new Tree_Composite_Priority([
+                    new Action_WithdrawFromTarget(RESOURCE_ENERGY),
+                    new Action_MoveToTarget(),
+                ]),
             ]),
         ]),
     ]),
