@@ -23,6 +23,15 @@ export class Task_Report extends Task_Task {
 
         this.orderRooms();
 
+        let message: string[] = [];
+        for (let role of Role_Factory.roles()) {
+            if (Role_Factory.isRoomIndependant(role)) {
+                let color = this.rooms[0].creepsOfRole(role).length >= Role_Factory.minimumCreepCount(role) ? "#79CB44" : "#ff5646";
+                message.push(role + " <span style='color:" + color + "'>" + this.rooms[0].creepsOfRole(role).length + " / " + Role_Factory.minimumCreepCount(role) + "</span>");
+            }
+        }
+        Util_Logger.info(message.join("  |  "));
+
         for (let room of this.rooms) {
             this.logStatistics(room);
         }
@@ -44,12 +53,13 @@ export class Task_Report extends Task_Task {
         // @todo order rooms from east to west (and if equal from north to south)
     }
 
-    // @todo show global creep counts separated from rooms (in a general statistics row above the room statistics)
     private logStatistics(room: Room): void {
         let message: string[] = [];
         for (let role of Role_Factory.roles()) {
-            let color = room.creepsOfRole(role).length >= Role_Factory.minimumCreepCount(role) ? "#79CB44" : "#ff5646";
-            message.push(role + " <span style='color:" + color + "'>" + room.creepsOfRole(role).length + " / " + Role_Factory.minimumCreepCount(role) + "</span>");
+            if (!Role_Factory.isRoomIndependant(role)) {
+                let color = room.creepsOfRole(role).length >= Role_Factory.minimumCreepCount(role) ? "#79CB44" : "#ff5646";
+                message.push(role + " <span style='color:" + color + "'>" + room.creepsOfRole(role).length + " / " + Role_Factory.minimumCreepCount(role) + "</span>");
+            }
         }
         Util_Logger.info(room.name + ": " + this.getLevelReport(room) + "  |  " + this.getEnergyReport(room) + "  |  " + message.join("  |  "));
     }

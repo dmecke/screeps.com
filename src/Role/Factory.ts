@@ -58,6 +58,17 @@ export class Role_Factory {
         }
     }
 
+    public static isRoomIndependant(role: string) {
+        switch (role) {
+            case Settings.ROLE_SCOUT:
+            case Settings.ROLE_CLAIMER:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
     public static roles(): string[] {
         return [
             Settings.ROLE_CLAIMER,

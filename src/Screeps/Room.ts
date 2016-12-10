@@ -1,5 +1,6 @@
 import { Settings } from "../Settings";
 import {Role_Role} from "../Role/Role";
+import {Role_Factory} from "../Role/Factory";
 
 let loadRoomPrototype = function() {
     Room.prototype.hasController = function(this: Room) {
@@ -149,7 +150,7 @@ let loadRoomPrototype = function() {
         return _.filter(Game.creeps, function(creep: Creep) {
             let role = creep.role() as Role_Role;
 
-            return role.name() === roleName && (creep.room.name === room.name || role.name() === Settings.ROLE_SCOUT || role.name() === Settings.ROLE_CLAIMER);
+            return role.name() === roleName && (creep.room.name === room.name || Role_Factory.isRoomIndependant(roleName));
         });
     };
 };
