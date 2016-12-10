@@ -11,6 +11,7 @@ interface Room {
     findDamagedStructuresByPriority(from: Creep|StructureTower): Structure[];
     findDamagedWallsByPriority(): Array<StructureWall|StructureRampart>;
     findNearestDroppedEnergy(creep: Creep): Array<Resource>;
+    findNearestDroppedResource(creep: Creep): Array<Resource>;
     findFilledStorages(): Array<StructureStorage|StructureContainer>;
     findSpawnsInNeedOfEnergy(): Array<StructureSpawn|StructureExtension|StructureContainer>;
     findNearestSpawnInNeedOfEnergy(creep: Creep): StructureSpawn|StructureExtension|StructureContainer;

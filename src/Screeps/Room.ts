@@ -66,6 +66,15 @@ let loadRoomPrototype = function() {
         return targets as Resource[];
     };
 
+    Room.prototype.findNearestDroppedResource = function(this: Room, creep: Creep): Resource[] {
+        let targets = this.find(FIND_DROPPED_RESOURCES);
+        targets.sort((a: Resource, b: Resource) => {
+            return a.pos.getRangeTo(creep) - b.pos.getRangeTo(creep);
+        });
+
+        return targets as Resource[];
+    };
+
     Room.prototype.amountOfDroppedEnergy = function(this: Room): number {
         return _.sum(this.find(FIND_DROPPED_ENERGY), (energy: Resource) => energy.amount);
     };
