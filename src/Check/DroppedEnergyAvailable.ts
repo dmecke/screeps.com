@@ -23,6 +23,10 @@ export class Check_DroppedEnergyAvailable extends Tree_Core_Action {
         }
 
         let resource = creep.room.findDroppedResources().is(RESOURCE_ENERGY).closestByPath(creep.pos);
+        if (!resource) {
+            return TREE_FAILURE;
+        }
+
         if (creep.pos.inRangeTo(resource.pos, this.range)) {
             return TREE_SUCCESS;
         }

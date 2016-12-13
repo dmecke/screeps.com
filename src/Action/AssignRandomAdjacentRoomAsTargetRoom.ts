@@ -7,6 +7,10 @@ export class Action_AssignRandomAdjacentRoomAsTargetRoom extends Tree_Core_Actio
     public tick(tick: Tree_Core_Tick): number {
         let creep = tick.target as Creep;
 
+        if (creep.room.name === "sim") {
+            return TREE_FAILURE;
+        }
+
         let targetRoom = creep.room.findRandomAdjacentRoom();
         if (creep.blacklistedRooms().indexOf(targetRoom) !== -1) {
             return TREE_FAILURE;
