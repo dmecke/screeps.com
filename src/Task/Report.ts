@@ -8,7 +8,7 @@ export class Task_Report extends Task_Task {
 
     public execute(): void {
         Util_Logger.info("");
-        Util_Logger.info("=== <span style='color: #5599e6'>Report</span>" + Game.time.toString().format() + " ===");
+        Util_Logger.info("=== <span style='color: #5599e6'>Report</span> " + Game.time.toString().format() + " ===");
 
         for (let name in Game.rooms) {
             if (Game.rooms.hasOwnProperty(name)) {

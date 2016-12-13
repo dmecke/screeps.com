@@ -4,6 +4,7 @@ import loadCreepPrototype = require("./Screeps/Creep");
 import loadStructureTowerPrototype = require("./Screeps/StructureTower");
 import loadRoomPrototype = require("./Screeps/Room");
 import loadSourcePrototype = require("./Screeps/Source");
+import consoleCommands = require("./consoleCommands");
 
 loadStringPrototype();
 loadRoomPositionPrototype();
@@ -11,6 +12,7 @@ loadCreepPrototype();
 loadStructureTowerPrototype();
 loadRoomPrototype();
 loadSourcePrototype();
+consoleCommands();
 
 import {Task_Cleanup} from "./Task/Cleanup";
 import {Task_RoadPlanning} from "./Task/RoadPlanning";
