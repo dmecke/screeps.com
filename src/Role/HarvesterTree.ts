@@ -18,9 +18,9 @@ import {Action_AssignNearestSpawnInNeedOfEnergyAsTarget} from "../Action/AssignN
 import {Tree_Composite_MemoryPriority} from "../Tree/Composite/MemoryPriority";
 import {Tree_Tree} from "../Tree/Tree";
 import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
-import {Settings} from "../Settings";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
 import {Check_IsInHomeRoom} from "../Check/IsInHomeRoom";
+import {ROLE_SPAWN_SUPPLIER} from "../Constants";
 
 export = new Tree_Tree(
     "Harvester",
@@ -42,7 +42,7 @@ export = new Tree_Tree(
             ]),
             new Tree_Composite_Sequence([
                 new Tree_Composite_Priority([
-                    new Check_RoomHasCreepsOfRole(Settings.ROLE_SPAWN_SUPPLIER, 1),
+                    new Check_RoomHasCreepsOfRole(ROLE_SPAWN_SUPPLIER, 1),
                     new Tree_Decorator_Inverter(
                         new Check_IsInHomeRoom(),
                     ),

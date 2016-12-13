@@ -1,6 +1,6 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
-import {Settings} from "../Settings";
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
+import {TREE_FAILURE, TREE_SUCCESS} from "../Constants";
 
 export class Action_ReserveController extends Tree_Core_Action {
 
@@ -9,13 +9,13 @@ export class Action_ReserveController extends Tree_Core_Action {
         let room = creep.room;
 
         if (!room.hasController()) {
-            return Settings.TREE_FAILURE;
+            return TREE_FAILURE;
         }
 
         if (creep.reserveController(room.controller) === OK) {
-            return Settings.TREE_SUCCESS;
+            return TREE_SUCCESS;
         }
 
-        return Settings.TREE_FAILURE;
+        return TREE_FAILURE;
     }
 }

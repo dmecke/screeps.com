@@ -1,4 +1,3 @@
-import {Settings} from "../Settings";
 import {Util_Logger} from "../Util/Logger";
 import {Role_Harvester} from "../Role/Harvester";
 import {Role_Builder} from "../Role/Builder";
@@ -10,36 +9,37 @@ import {Role_Defender} from "../Role/Defender";
 import {Role_Scout} from "../Role/Scout";
 import {Role_Role} from "../Role/Role";
 import {Role_Claimer} from "../Role/Claimer";
+import {ROLE_HARVESTER, ROLE_BUILDER, ROLE_UPGRADER, ROLE_TRANSPORTER, ROLE_SPAWN_SUPPLIER, ROLE_WALLIE, ROLE_DEFENDER, ROLE_SCOUT, ROLE_CLAIMER} from "../Constants";
 
 let loadCreepPrototype = function() {
 
     Creep.prototype.role = function(this: Creep): Role_Role {
         switch (this.memory.role) {
-            case Settings.ROLE_HARVESTER:
+            case ROLE_HARVESTER:
                 return new Role_Harvester(this);
 
-            case Settings.ROLE_BUILDER:
+            case ROLE_BUILDER:
                 return new Role_Builder(this);
 
-            case Settings.ROLE_UPGRADER:
+            case ROLE_UPGRADER:
                 return new Role_Upgrader(this);
 
-            case Settings.ROLE_TRANSPORTER:
+            case ROLE_TRANSPORTER:
                 return new Role_Transporter(this);
 
-            case Settings.ROLE_SPAWN_SUPPLIER:
+            case ROLE_SPAWN_SUPPLIER:
                 return new Role_SpawnSupplier(this);
 
-            case Settings.ROLE_WALLIE:
+            case ROLE_WALLIE:
                 return new Role_Wallie(this);
 
-            case Settings.ROLE_DEFENDER:
+            case ROLE_DEFENDER:
                 return new Role_Defender(this);
 
-            case Settings.ROLE_SCOUT:
+            case ROLE_SCOUT:
                 return new Role_Scout(this);
 
-            case Settings.ROLE_CLAIMER:
+            case ROLE_CLAIMER:
                 return new Role_Claimer(this);
 
             default:

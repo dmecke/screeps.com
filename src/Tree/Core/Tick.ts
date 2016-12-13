@@ -1,10 +1,10 @@
 import {Tree_Core_BaseNode} from "./BaseNode";
 import {Util_Logger} from "../../Util/Logger";
-import {Settings} from "../../Settings";
 import {Tree_Core_Composite} from "./Composite";
 import {Tree_Core_Decorator} from "./Decorator";
 import {Tree_Tree} from "../Tree";
 import {Tree_Core_Blackboard} from "./Blackboard";
+import {TREE_RUNNING, TREE_FAILURE, TREE_SUCCESS, TREE_ERROR} from "../../Constants";
 
 export class Tree_Core_Tick {
 
@@ -40,22 +40,22 @@ export class Tree_Core_Tick {
             let color = "";
             let statusName = "";
             switch (status) {
-                case Settings.TREE_SUCCESS:
+                case TREE_SUCCESS:
                     color = "#8BFF61";
                     statusName = "SUCCESS";
                     break;
 
-                case Settings.TREE_FAILURE:
+                case TREE_FAILURE:
                     color = "#FF6C0D";
                     statusName = "FAILURE";
                     break;
 
-                case Settings.TREE_RUNNING:
+                case TREE_RUNNING:
                     color = "#8bc5ff";
                     statusName = "RUNNING";
                     break;
 
-                case Settings.TREE_ERROR:
+                case TREE_ERROR:
                     color = "#FF444E";
                     statusName = "-ERROR-";
                     break;

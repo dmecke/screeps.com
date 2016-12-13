@@ -8,21 +8,6 @@ export class Settings {
     public static BLACKLISTED_ROOMS = ["W49N71"];
     public static WISHLIST_ROOMS = ["W46N73"];
 
-    public static TREE_SUCCESS = 1;
-    public static TREE_FAILURE = 2;
-    public static TREE_RUNNING = 3;
-    public static TREE_ERROR = 4;
-
-    public static ROLE_HARVESTER = "Harvester";
-    public static ROLE_BUILDER = "Builder";
-    public static ROLE_DEFENDER = "Defender";
-    public static ROLE_SCOUT = "Scout";
-    public static ROLE_SPAWN_SUPPLIER = "SpawnSupplier";
-    public static ROLE_TRANSPORTER = "Transporter";
-    public static ROLE_UPGRADER = "Upgrader";
-    public static ROLE_WALLIE = "Wallie";
-    public static ROLE_CLAIMER = "Claimer";
-
     public static NUMBER_OF_HARVESTER = 4;
     public static NUMBER_OF_UPGRADER = 1;
     public static NUMBER_OF_TRANSPORTER = 4;

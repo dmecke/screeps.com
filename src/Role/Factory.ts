@@ -9,36 +9,37 @@ import {Role_SpawnSupplier} from "./SpawnSupplier";
 import {Role_Defender} from "./Defender";
 import {Role_Scout} from "./Scout";
 import {Role_Claimer} from "./Claimer";
+import {ROLE_CLAIMER, ROLE_SCOUT, ROLE_DEFENDER, ROLE_WALLIE, ROLE_SPAWN_SUPPLIER, ROLE_TRANSPORTER, ROLE_HARVESTER, ROLE_BUILDER, ROLE_UPGRADER} from "../Constants";
 
 export class Role_Factory {
 
     public static minimumCreepCount(role: string) {
         switch (role) {
-            case Settings.ROLE_HARVESTER:
+            case ROLE_HARVESTER:
                 return Settings.NUMBER_OF_HARVESTER;
 
-            case Settings.ROLE_BUILDER:
+            case ROLE_BUILDER:
                 return Settings.NUMBER_OF_BUILDER;
 
-            case Settings.ROLE_UPGRADER:
+            case ROLE_UPGRADER:
                 return Settings.NUMBER_OF_UPGRADER;
 
-            case Settings.ROLE_TRANSPORTER:
+            case ROLE_TRANSPORTER:
                 return Settings.NUMBER_OF_TRANSPORTER;
 
-            case Settings.ROLE_SPAWN_SUPPLIER:
+            case ROLE_SPAWN_SUPPLIER:
                 return Settings.NUMBER_OF_SPAWN_SUPPLIER;
 
-            case Settings.ROLE_WALLIE:
+            case ROLE_WALLIE:
                 return Settings.NUMBER_OF_WALLIE;
 
-            case Settings.ROLE_DEFENDER:
+            case ROLE_DEFENDER:
                 return Settings.NUMBER_OF_DEFENDER;
 
-            case Settings.ROLE_SCOUT:
+            case ROLE_SCOUT:
                 return Settings.NUMBER_OF_SCOUT;
 
-            case Settings.ROLE_CLAIMER:
+            case ROLE_CLAIMER:
                 return Settings.NUMBER_OF_CLAIMER;
 
             default:
@@ -49,9 +50,9 @@ export class Role_Factory {
 
     public static isRoomIndependant(role: string) {
         switch (role) {
-            case Settings.ROLE_SCOUT:
-            case Settings.ROLE_CLAIMER:
-            case Settings.ROLE_TRANSPORTER:
+            case ROLE_SCOUT:
+            case ROLE_CLAIMER:
+            case ROLE_TRANSPORTER:
                 return true;
 
             default:
@@ -61,15 +62,15 @@ export class Role_Factory {
 
     public static roles(): string[] {
         return [
-            Settings.ROLE_CLAIMER,
-            Settings.ROLE_SCOUT,
-            Settings.ROLE_DEFENDER,
-            Settings.ROLE_WALLIE,
-            Settings.ROLE_BUILDER,
-            Settings.ROLE_UPGRADER,
-            Settings.ROLE_TRANSPORTER,
-            Settings.ROLE_SPAWN_SUPPLIER,
-            Settings.ROLE_HARVESTER,
+            ROLE_CLAIMER,
+            ROLE_SCOUT,
+            ROLE_DEFENDER,
+            ROLE_WALLIE,
+            ROLE_BUILDER,
+            ROLE_UPGRADER,
+            ROLE_TRANSPORTER,
+            ROLE_SPAWN_SUPPLIER,
+            ROLE_HARVESTER,
         ];
     }
 
@@ -78,33 +79,33 @@ export class Role_Factory {
         let energyAvailable = spawn.room.energyAvailable;
 
         switch (role) {
-            case Settings.ROLE_HARVESTER:
-                let energy = spawn.room.creepsOfRole(Settings.ROLE_HARVESTER).length > 0 ? energyCapacityAvailable : energyAvailable;
+            case ROLE_HARVESTER:
+                let energy = spawn.room.creepsOfRole(ROLE_HARVESTER).length > 0 ? energyCapacityAvailable : energyAvailable;
 
                 return Role_Harvester.bodyParts(energy);
 
-            case Settings.ROLE_BUILDER:
+            case ROLE_BUILDER:
                 return Role_Builder.bodyParts(energyCapacityAvailable);
 
-            case Settings.ROLE_WALLIE:
+            case ROLE_WALLIE:
                 return Role_Wallie.bodyParts(energyCapacityAvailable);
 
-            case Settings.ROLE_UPGRADER:
+            case ROLE_UPGRADER:
                 return Role_Upgrader.bodyParts(energyCapacityAvailable);
 
-            case Settings.ROLE_TRANSPORTER:
+            case ROLE_TRANSPORTER:
                 return Role_Transporter.bodyParts(energyCapacityAvailable);
 
-            case Settings.ROLE_SPAWN_SUPPLIER:
+            case ROLE_SPAWN_SUPPLIER:
                 return Role_SpawnSupplier.bodyParts(energyCapacityAvailable);
 
-            case Settings.ROLE_DEFENDER:
+            case ROLE_DEFENDER:
                 return Role_Defender.bodyParts(energyCapacityAvailable);
 
-            case Settings.ROLE_SCOUT:
+            case ROLE_SCOUT:
                 return Role_Scout.bodyParts(energyCapacityAvailable);
 
-            case Settings.ROLE_CLAIMER:
+            case ROLE_CLAIMER:
                 return Role_Claimer.bodyParts(energyCapacityAvailable);
 
             default:

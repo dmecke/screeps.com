@@ -2,6 +2,7 @@ import {Task_Task} from "./Task";
 import {Settings} from "../Settings";
 import {Role_Role} from "../Role/Role";
 import {Role_Factory} from "../Role/Factory";
+import {ROLE_BUILDER, ROLE_CLAIMER, ROLE_SCOUT} from "../Constants";
 
 export class Task_Spawn extends Task_Task {
 
@@ -10,8 +11,8 @@ export class Task_Spawn extends Task_Task {
             if (Game.spawns.hasOwnProperty(spawnName)) {
                 let spawned = false;
                 let spawn = Game.spawns[spawnName];
-                if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(Settings.ROLE_CLAIMER).length < 2) {
-                    this.spawn(Settings.ROLE_CLAIMER, spawnName, Settings.WISHLIST_ROOMS[0]); // @todo handle all wishlist rooms, not just the first
+                if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(ROLE_CLAIMER).length < 2) {
+                    this.spawn(ROLE_CLAIMER, spawnName, Settings.WISHLIST_ROOMS[0]); // @todo handle all wishlist rooms, not just the first
                 }
                 for (let role of Role_Factory.roles()) {
                     if (spawn.room.creepsOfRole(role).length < Role_Factory.minimumCreepCount(role)) {
@@ -19,8 +20,8 @@ export class Task_Spawn extends Task_Task {
                         spawned = true;
                     }
                 }
-                if (!spawned && spawn.room.creepsOfRole(Settings.ROLE_BUILDER).length < Settings.BUILDER_MAXIMUM) {
-                    this.spawn(Settings.ROLE_BUILDER, spawnName);
+                if (!spawned && spawn.room.creepsOfRole(ROLE_BUILDER).length < Settings.BUILDER_MAXIMUM) {
+                    this.spawn(ROLE_BUILDER, spawnName);
                 }
             }
         }
@@ -41,7 +42,7 @@ export class Task_Spawn extends Task_Task {
             let creep = Game.creeps[newName];
             let r = creep.role() as Role_Role;
             let roleName = r.name();
-            if (roleName === Settings.ROLE_SCOUT) {
+            if (roleName === ROLE_SCOUT) {
                 creep.notifyWhenAttacked(false);
             }
         }

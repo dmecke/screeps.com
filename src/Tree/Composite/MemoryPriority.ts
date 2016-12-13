@@ -1,6 +1,6 @@
 import {Tree_Core_Composite} from "../Core/Composite";
-import {Settings} from "../../Settings";
 import {Tree_Core_Tick} from "../Core/Tick";
+import {TREE_RUNNING, TREE_FAILURE} from "../../Constants";
 
 export class Tree_Composite_MemoryPriority extends Tree_Core_Composite {
 
@@ -14,16 +14,16 @@ export class Tree_Composite_MemoryPriority extends Tree_Core_Composite {
             let child = this.children[i];
             let status = child.execute(tick);
 
-            if (status === Settings.TREE_RUNNING) {
+            if (status === TREE_RUNNING) {
                 tick.blackboard.set("running_child", i, tick.tree.id, this.id);
             }
 
-            if (status !== Settings.TREE_FAILURE) {
+            if (status !== TREE_FAILURE) {
 
                 return status;
             }
         }
 
-        return Settings.TREE_FAILURE;
+        return TREE_FAILURE;
     }
 }

@@ -1,6 +1,6 @@
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
-import {Settings} from "../Settings";
 import {Tree_Core_Action} from "../Tree/Core/Action";
+import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
 
 export class Action_AssignAttachedContainerOfSourceAsTarget extends Tree_Core_Action {
 
@@ -9,10 +9,10 @@ export class Action_AssignAttachedContainerOfSourceAsTarget extends Tree_Core_Ac
         let attachedContainer = source.attachedContainer();
 
         if (attachedContainer === undefined) {
-            return Settings.TREE_FAILURE;
+            return TREE_FAILURE;
         }
 
         tick.blackboard.set("target", attachedContainer, tick.tree.id);
-        return Settings.TREE_SUCCESS;
+        return TREE_SUCCESS;
     }
 }

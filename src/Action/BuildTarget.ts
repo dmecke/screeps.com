@@ -1,6 +1,6 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
-import {Settings} from "../Settings";
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
+import {TREE_FAILURE, TREE_RUNNING} from "../Constants";
 
 export class Action_BuildTarget extends Tree_Core_Action {
 
@@ -9,9 +9,9 @@ export class Action_BuildTarget extends Tree_Core_Action {
         let constructionSite = tick.blackboard.get("target", tick.tree.id) as ConstructionSite;
 
         if (creep.build(constructionSite) !== OK) {
-            return Settings.TREE_FAILURE;
+            return TREE_FAILURE;
         }
 
-        return Settings.TREE_RUNNING;
+        return TREE_RUNNING;
     }
 }

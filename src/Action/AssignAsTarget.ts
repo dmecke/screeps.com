@@ -1,6 +1,6 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
-import {Settings} from "../Settings";
+import {TREE_FAILURE, TREE_SUCCESS} from "../Constants";
 
 export abstract class Action_AssignAsTarget extends Tree_Core_Action {
 
@@ -9,11 +9,11 @@ export abstract class Action_AssignAsTarget extends Tree_Core_Action {
         let target = this.findTarget(creep);
 
         if (target === undefined || target === null) {
-            return Settings.TREE_FAILURE;
+            return TREE_FAILURE;
         }
 
         tick.blackboard.set("target", target, tick.tree.id);
-        return Settings.TREE_SUCCESS;
+        return TREE_SUCCESS;
     }
 
     protected abstract findTarget(creep: Creep): Object;

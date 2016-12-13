@@ -1,6 +1,6 @@
 import {Tree_Core_Tick} from "./Tick";
-import {Settings} from "../../Settings";
 import {Tree_Tree} from "../Tree";
+import {TREE_RUNNING} from "../../Constants";
 
 export abstract class Tree_Core_BaseNode {
 
@@ -21,7 +21,7 @@ export abstract class Tree_Core_BaseNode {
         let status = this.tick(tick);
         tick.afterTick(this, status);
 
-        if (status !== Settings.TREE_RUNNING) {
+        if (status !== TREE_RUNNING) {
             tick.blackboard.set("is_open", false, tick.tree.id, this.id);
             this.close(tick);
         }

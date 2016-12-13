@@ -1,6 +1,6 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
-import {Settings} from "../Settings";
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
+import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
 
 export class Action_CreateConstructionSiteNearTarget extends Tree_Core_Action {
 
@@ -19,9 +19,9 @@ export class Action_CreateConstructionSiteNearTarget extends Tree_Core_Action {
         let status = target.pos.createCloseContainerConstructionSite();
 
         if (status === OK) {
-            return Settings.TREE_SUCCESS;
+            return TREE_SUCCESS;
         }
 
-        return Settings.TREE_FAILURE;
+        return TREE_FAILURE;
     }
 }
