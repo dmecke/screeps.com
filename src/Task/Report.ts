@@ -4,14 +4,11 @@ import {Role_Factory} from "../Role/Factory";
 
 export class Task_Report extends Task_Task {
 
-    private static SIMULATION_ROOM = "sim";
-
     private rooms: Room[] = [];
 
     public execute(): void {
         Util_Logger.info("");
-        let tick = Game.rooms[Task_Report.SIMULATION_ROOM] ? " " + Game.time : "";
-        Util_Logger.info("=== <span style='color: #5599e6'>Report</span>" + tick + " ===");
+        Util_Logger.info("=== <span style='color: #5599e6'>Report</span>" + Game.time.toString().format() + " ===");
 
         for (let name in Game.rooms) {
             if (Game.rooms.hasOwnProperty(name)) {
