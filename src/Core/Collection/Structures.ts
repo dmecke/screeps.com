@@ -42,6 +42,12 @@ export class Structures implements IStructures {
         );
     }
 
+    public whichHaveNotMaxHitpoints(): Structures {
+        return new Structures(
+            _.filter(this.structures, (structure: Structure) => structure.hits < structure.hitsMax),
+        );
+    }
+
     public closestByPath(pos: RoomPosition): Structure {
         return pos.findClosestByPath(this.structures);
     }

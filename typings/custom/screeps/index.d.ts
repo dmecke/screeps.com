@@ -3,6 +3,7 @@ interface IStructures {
     exist(): boolean;
     notWall(): IStructures;
     notRampart(): IStructures;
+    whichHaveNotMaxHitpoints(): IStructures;
     onlyMine(): IStructures;
     notHostile(): IStructures;
     closestByPath(pos: RoomPosition): Structure;
