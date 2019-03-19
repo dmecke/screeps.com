@@ -85,6 +85,7 @@ interface Source {
 interface Creep {
     role(): Object;
     debug(): boolean;
+    toggleDebug(): void;
     blacklistedRooms(): string[];
     state(): string;
     carryAmount(): number;

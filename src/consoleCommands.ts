@@ -22,6 +22,19 @@ const consoleCommands = () => {
         return "";
     };
 
+    global.debug = (creepName: string) => {
+        for (const name in Game.creeps) {
+            if (Game.creeps.hasOwnProperty(name)) {
+                const creep = Game.creeps[name] as Creep;
+                if (creep.name === creepName) {
+                    creep.toggleDebug();
+                }
+            }
+        }
+
+        return "";
+    };
+
 };
 
 export = consoleCommands;

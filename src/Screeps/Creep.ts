@@ -52,6 +52,10 @@ const loadCreepPrototype = () => {
         return this.memory.debug;
     };
 
+    Creep.prototype.toggleDebug = function(this: Creep): void {
+        this.memory.debug = !this.memory.debug;
+    };
+
     Creep.prototype.blacklistedRooms = function(this: Creep): string[] {
         return this.memory.blacklisted_rooms;
     };
