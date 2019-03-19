@@ -3,8 +3,16 @@ import {Settings} from "../Settings";
 import {Role_Role} from "../Role/Role";
 import {Role_Factory} from "../Role/Factory";
 import {ROLE_BUILDER, ROLE_CLAIMER, ROLE_SCOUT} from "../Constants";
+import CreepNameGenerator from "../Util/CreepNameGenerator";
 
 export class Task_Spawn extends Task_Task {
+
+    private readonly creepNameGenerator: CreepNameGenerator;
+
+    public constructor(creepNameGenerator: CreepNameGenerator) {
+        super();
+        this.creepNameGenerator = creepNameGenerator;
+    }
 
     public execute() {
         for (const spawnName in Game.spawns) {
@@ -29,7 +37,7 @@ export class Task_Spawn extends Task_Task {
 
     private spawn(role: string, spawnName: string, targetRoom: string = ""): string|number {
         const spawn = Game.spawns[spawnName];
-        const newName = spawn.createCreep(Role_Factory.bodyParts(role, spawn), undefined, {
+        const newName = spawn.createCreep(Role_Factory.bodyParts(role, spawn), this.creepNameGenerator.generate(role), {
             blackboard: {},
             blacklisted_rooms: Settings.BLACKLISTED_ROOMS,
             debug: false,

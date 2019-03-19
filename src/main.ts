@@ -21,10 +21,11 @@ import {Task_Roles} from "./Task/Roles";
 import {Task_Spawn} from "./Task/Spawn";
 import {Task_Tower} from "./Task/Tower";
 import {Task_Report} from "./Task/Report";
+import CreepNameGenerator from "./Util/CreepNameGenerator";
 
 export function loop() {
     new Task_Cleanup().execute();
-    new Task_Spawn().execute();
+    new Task_Spawn(new CreepNameGenerator()).execute();
     new Task_Roles().execute();
     new Task_Tower().execute();
     if (Game.time % 10 === 0) {
