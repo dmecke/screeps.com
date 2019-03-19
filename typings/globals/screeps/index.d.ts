@@ -944,6 +944,11 @@ declare class GameMap {
      */
     getTerrainAt(pos: RoomPosition): string;
     /**
+     * Get room terrain for the specified room. This method works for any room in the world even if you have no access to it.
+     * @param roomName String name of the room.
+     */
+    getRoomTerrain(roomName: string): RoomTerrain;
+    /**
      * Check if the room with the given name is protected by temporary "newbie" walls.
      * @param roomName The room name.
      * @returns A boolean value.
@@ -951,6 +956,18 @@ declare class GameMap {
     isRoomProtected(roomName: string): boolean;
 
     isRoomAvailable(roomName: string): boolean;
+}
+/**
+ * Result of Object that contains all terrain for a room
+ */
+declare interface RoomTerrain {
+    /**
+     * Get terrain type at the specified room position. This method works for any room in the world even if you have no access to it.
+     * @param x X position in the room.
+     * @param y Y position in the room.
+     * @return number Number of terrain mask like: TERRAIN_MASK_SWAMP | TERRAIN_MASK_WALL
+     */
+    get(x: number, y: number): number;
 }
 /**
  * A global object representing the in-game market. You can use this object to track resource transactions to/from your

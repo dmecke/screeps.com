@@ -20,7 +20,7 @@ let loadRoomPositionPrototype = function() {
     {
         let self = this;
         return _.filter(this.positionsInRange(range), function(position: RoomPosition) {
-            return self.getRangeTo(position) === range && ["plain", "swamp"].indexOf(Game.map.getTerrainAt(position)) !== -1;
+            return self.getRangeTo(position) === range && [0, TERRAIN_MASK_SWAMP].indexOf(Game.map.getRoomTerrain(position.roomName).get(position.x, position.y)) !== -1;
         });
     };
 
