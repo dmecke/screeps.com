@@ -1,6 +1,6 @@
 export class Structures implements IStructures {
 
-    private structures: Structure[];
+    private readonly structures: Structure[];
 
     public constructor(structures: Structure[] = []) {
         this.structures = structures;
@@ -8,7 +8,7 @@ export class Structures implements IStructures {
 
     public onlyMine(): Structures {
         return new Structures(
-            _.filter(this.structures, function(structure: Structure) {
+            _.filter(this.structures, (structure: Structure) => {
                 if (structure instanceof OwnedStructure) {
                     return structure.my;
                 }
@@ -20,7 +20,7 @@ export class Structures implements IStructures {
 
     public notHostile(): Structures {
         return new Structures(
-            _.filter(this.structures, function(structure: Structure) {
+            _.filter(this.structures, (structure: Structure) => {
                 if (structure instanceof OwnedStructure) {
                     return structure.my;
                 }

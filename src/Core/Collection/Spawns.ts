@@ -8,7 +8,7 @@ export class Spawns implements ISpawns {
 
     public inNeedOfEnergy(): Spawns {
         return new Spawns(
-            _.filter(this.spawns, function(spawn: StructureSpawn|StructureExtension) {
+            _.filter(this.spawns, (spawn: StructureSpawn|StructureExtension) => {
                 return spawn.energy < spawn.energyCapacity;
             }),
         );

@@ -1,6 +1,6 @@
 export class DroppedResources implements IDroppedResources {
 
-    private droppedResources: Resource[];
+    private readonly droppedResources: Resource[];
 
     public constructor(droppedResources: Resource[] = []) {
         this.droppedResources = droppedResources;
@@ -8,7 +8,7 @@ export class DroppedResources implements IDroppedResources {
 
     public is(resource: string): DroppedResources {
         return new DroppedResources(
-            _.filter(this.droppedResources, function(r: Resource) {
+            _.filter(this.droppedResources, (r: Resource) => {
                 return r.resourceType === resource;
             }),
         );

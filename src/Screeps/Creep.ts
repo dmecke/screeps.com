@@ -11,7 +11,7 @@ import {Role_Role} from "../Role/Role";
 import {Role_Claimer} from "../Role/Claimer";
 import {ROLE_HARVESTER, ROLE_BUILDER, ROLE_UPGRADER, ROLE_TRANSPORTER, ROLE_SPAWN_SUPPLIER, ROLE_WALLIE, ROLE_DEFENDER, ROLE_SCOUT, ROLE_CLAIMER} from "../Constants";
 
-let loadCreepPrototype = function() {
+let loadCreepPrototype = () => {
 
     Creep.prototype.role = function(this: Creep): Role_Role {
         switch (this.memory.role) {

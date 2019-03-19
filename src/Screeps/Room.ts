@@ -10,7 +10,7 @@ import {Sources} from "../Core/Collection/Sources";
 import {Structures} from "../Core/Collection/Structures";
 import {ConstructionSites} from "../Core/Collection/ConstructionSites";
 
-let loadRoomPrototype = function() {
+let loadRoomPrototype = () => {
 
     Room.prototype.hasController = function(this: Room) {
         return this.controller !== undefined;
@@ -105,7 +105,7 @@ let loadRoomPrototype = function() {
 
     Room.prototype.creepsOfRole = function(this: Room, roleName: string): Creep[] {
         let room = this;
-        return _.filter(Game.creeps, function(creep: Creep) {
+        return _.filter(Game.creeps, (creep: Creep) => {
             let role = creep.role() as Role_Role;
 
             return role.name() === roleName && (creep.room.name === room.name || Role_Factory.isRoomIndependant(roleName));

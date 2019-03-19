@@ -10,7 +10,7 @@ export class Depots implements IDepots {
 
     public contains(resource: string): Depots {
         return new Depots(
-            _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
+            _.filter(this.depots, (depot: StructureStorage|StructureContainer) => {
                 return depot.store[resource] > 0;
             }),
         );
@@ -18,7 +18,7 @@ export class Depots implements IDepots {
 
     public notFull(): Depots {
         return new Depots(
-            _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
+            _.filter(this.depots, (depot: StructureStorage|StructureContainer) => {
                 return _.sum(depot.store) < depot.storeCapacity;
             }),
         );
@@ -26,7 +26,7 @@ export class Depots implements IDepots {
 
     public canStore(amount: number): Depots {
         return new Depots(
-            _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
+            _.filter(this.depots, (depot: StructureStorage|StructureContainer) => {
                 return _.sum(depot.store) + amount <= depot.storeCapacity;
             }),
         );
@@ -34,26 +34,26 @@ export class Depots implements IDepots {
 
     public nextToSource(): Depots {
         return new Depots(
-            _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
-                return depot.pos.findInRange(FIND_SOURCES, Settings.BUILD_DISTANCE_CONTAINER).length > 0
+            _.filter(this.depots, (depot: StructureStorage|StructureContainer) => {
+                return depot.pos.findInRange(FIND_SOURCES, Settings.BUILD_DISTANCE_CONTAINER).length > 0;
             }),
         );
     }
 
     public nextToMySpawn(): Depots {
         return new Depots(
-            _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
-                return depot.pos.findInRange(FIND_MY_SPAWNS, Settings.BUILD_DISTANCE_CONTAINER).length > 0
+            _.filter(this.depots, (depot: StructureStorage|StructureContainer) => {
+                return depot.pos.findInRange(FIND_MY_SPAWNS, Settings.BUILD_DISTANCE_CONTAINER).length > 0;
             }),
         );
     }
 
     public nextToController(): Depots {
         return new Depots(
-            _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
+            _.filter(this.depots, (depot: StructureStorage|StructureContainer) => {
                 return depot.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, {
                     filter: (structure: Structure) => structure.structureType === STRUCTURE_CONTROLLER,
-                }).length > 0
+                }).length > 0;
             }),
         );
     }

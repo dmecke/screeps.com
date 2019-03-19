@@ -1,7 +1,7 @@
 import {Settings} from "../Settings";
 import {Util_Logger} from "../Util/Logger";
 
-let loadRoomPositionPrototype = function() {
+let loadRoomPositionPrototype = () => {
 
     RoomPosition.prototype.positionsInRange = function(this: RoomPosition, range: number): RoomPosition[] {
         let positions: RoomPosition[] = [];
@@ -17,7 +17,7 @@ let loadRoomPositionPrototype = function() {
 
     RoomPosition.prototype.outerPositionsInRange = function(this: RoomPosition, range: number): RoomPosition[] {
         let self = this;
-        return _.filter(this.positionsInRange(range), function(position: RoomPosition) {
+        return _.filter(this.positionsInRange(range), (position: RoomPosition) => {
             return self.getRangeTo(position) === range && [0, TERRAIN_MASK_SWAMP].indexOf(Game.map.getRoomTerrain(position.roomName).get(position.x, position.y)) !== -1;
         });
     };

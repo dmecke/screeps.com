@@ -60,6 +60,6 @@ export class Task_Tower extends Task_Task {
                     new Action_RepairTarget(),
                 ]),
             ]),
-        )
+        );
     }
 }

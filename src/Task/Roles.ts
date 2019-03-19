@@ -10,5 +10,5 @@ export class Task_Roles {
                 new RoleCreep(creep).update();
             }
         }
-    };
+    }
 }

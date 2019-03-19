@@ -5,12 +5,9 @@
     "rules": {
         "max-line-length": false,
         "class-name": false,
-        "semicolon": false,
-        "only-arrow-functions": false,
         "no-console": false,
         "ordered-imports": false,
         "no-bitwise": false,
-        "adjacent-overload-signatures": false,
-        "prefer-const": false
+        "adjacent-overload-signatures": false
     }
 }

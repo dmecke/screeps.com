@@ -2,7 +2,7 @@ import {Settings} from "../../Settings";
 
 export class Sources implements ISources {
 
-    private sources: Source[];
+    private readonly sources: Source[];
 
     public constructor(sources: Source[] = []) {
         this.sources = sources;
@@ -10,20 +10,20 @@ export class Sources implements ISources {
 
     public withContainer(): Sources {
         return new Sources(
-            _.filter(this.sources, function(source: Source) {
+            _.filter(this.sources, (source: Source) => {
                 return source.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, {
                     filter: (structure: Structure) => structure.structureType === STRUCTURE_CONTAINER,
-                }).length > 0
+                }).length > 0;
             }),
         );
     }
 
     public withoutHarvester(): Sources {
         return new Sources(
-            _.filter(this.sources, function(source: Source) {
+            _.filter(this.sources, (source: Source) => {
                 return true; // @todo
             }),
-        )
+        );
     }
 
     public orderByPriority(creep: Creep): Sources {

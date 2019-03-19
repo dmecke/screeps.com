@@ -1,6 +1,6 @@
 import {Settings} from "../Settings";
 
-let loadSourcePrototype = function() {
+let loadSourcePrototype = () => {
 
     Source.prototype.priority = function(this: Source, creep: Creep): number {
         if (this.energy === 0) {
@@ -24,7 +24,7 @@ let loadSourcePrototype = function() {
     Source.prototype.harvestingSpots = function(this: Source): RoomPosition[] {
         let potentialHarvestingPositions = this.pos.outerPositionsInRange(1);
 
-        return _.filter(potentialHarvestingPositions, function(position: RoomPosition) {
+        return _.filter(potentialHarvestingPositions, (position: RoomPosition) => {
             let terrain = position.lookFor(LOOK_TERRAIN)[0];
             return (terrain === "plain" || terrain === "swamp") && position.lookFor(LOOK_CREEPS).length === 0;
         });

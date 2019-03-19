@@ -15,7 +15,7 @@ export class Task_StructurePlanning extends Task_Task {
             room.controller.pos.createCloseContainerConstructionSite();
         }
 
-        _.each(room.find(FIND_MY_SPAWNS), function(spawn: StructureSpawn) {
+        _.each(room.find(FIND_MY_SPAWNS), (spawn: StructureSpawn) => {
             if (!spawn.pos.hasCloseContainer()) {
                 spawn.pos.createCloseContainerConstructionSite();
             }

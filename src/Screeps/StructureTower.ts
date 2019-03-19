@@ -1,4 +1,4 @@
-let loadStructureTowerPrototype = function() {
+let loadStructureTowerPrototype = () => {
 
     const MEMORY_KEY_TOWERS = "towers";
 
