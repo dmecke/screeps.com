@@ -46,6 +46,7 @@ interface IDroppedResources {
     closestByPath(pos: RoomPosition): Resource;
     none(): boolean;
     exist(): boolean;
+    amount(): number;
 }
 interface IWallsAndRamparts {
     withNotMaxHitpoints(): IWallsAndRamparts;

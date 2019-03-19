@@ -73,7 +73,7 @@ let loadRoomPrototype = function() {
     };
 
     Room.prototype.amountOfDroppedEnergy = function(this: Room): number {
-        return _.sum(this.find(FIND_DROPPED_ENERGY), (energy: Resource) => energy.amount);
+        return this.findDroppedResources().is(RESOURCE_ENERGY).amount();
     };
 
     Room.prototype.findRandomAdjacentRoom = function(this: Room): string {

@@ -25,4 +25,8 @@ export class DroppedResources implements IDroppedResources {
     public exist(): boolean {
         return this.droppedResources.length > 0;
     }
+
+    public amount(): number {
+        return _.sum(this.droppedResources, (resource: Resource) => resource.amount);
+    }
 }
