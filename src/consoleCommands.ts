@@ -1,5 +1,6 @@
 import {Util_Logger} from "./Util/Logger";
 import {Role_Role} from "./Role/Role";
+import CreepRepository from "./Repository/CreepRepository";
 
 const consoleCommands = () => {
 
@@ -23,14 +24,7 @@ const consoleCommands = () => {
     };
 
     global.debug = (creepName: string) => {
-        for (const name in Game.creeps) {
-            if (Game.creeps.hasOwnProperty(name)) {
-                const creep = Game.creeps[name] as Creep;
-                if (creep.name === creepName) {
-                    creep.toggleDebug();
-                }
-            }
-        }
+        CreepRepository.findByName(creepName).toggleDebug();
 
         return "";
     };
