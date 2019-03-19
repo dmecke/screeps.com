@@ -10,7 +10,7 @@ export class Spawns implements ISpawns {
         return new Spawns(
             _.filter(this.spawns, function(spawn: StructureSpawn|StructureExtension) {
                 return spawn.energy < spawn.energyCapacity;
-            })
+            }),
         );
     }
 

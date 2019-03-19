@@ -11,8 +11,6 @@
         "ordered-imports": false,
         "no-bitwise": false,
         "adjacent-overload-signatures": false,
-        "prefer-const": false,
-        "trailing-comma": false,
-        "one-line": false
+        "prefer-const": false
     }
 }

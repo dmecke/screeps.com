@@ -1,6 +1,6 @@
 export class Towers implements ITowers {
 
-    private towers: StructureTower[];
+    private readonly towers: StructureTower[];
 
     public constructor(towers: StructureTower[] = []) {
         this.towers = towers;
@@ -8,7 +8,7 @@ export class Towers implements ITowers {
 
     public inNeedOfEnergy(): Towers {
         return new Towers(
-            _.filter(this.towers, (tower: StructureTower) => tower.energy < tower.energyCapacity)
+            _.filter(this.towers, (tower: StructureTower) => tower.energy < tower.energyCapacity),
         );
     }
 

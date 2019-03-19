@@ -12,7 +12,7 @@ export class Depots implements IDepots {
         return new Depots(
             _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
                 return depot.store[resource] > 0;
-            })
+            }),
         );
     }
 
@@ -20,7 +20,7 @@ export class Depots implements IDepots {
         return new Depots(
             _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
                 return _.sum(depot.store) < depot.storeCapacity;
-            })
+            }),
         );
     }
 
@@ -28,7 +28,7 @@ export class Depots implements IDepots {
         return new Depots(
             _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
                 return _.sum(depot.store) + amount <= depot.storeCapacity;
-            })
+            }),
         );
     }
 
@@ -36,7 +36,7 @@ export class Depots implements IDepots {
         return new Depots(
             _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
                 return depot.pos.findInRange(FIND_SOURCES, Settings.BUILD_DISTANCE_CONTAINER).length > 0
-            })
+            }),
         );
     }
 
@@ -44,7 +44,7 @@ export class Depots implements IDepots {
         return new Depots(
             _.filter(this.depots, function(depot: StructureStorage|StructureContainer) {
                 return depot.pos.findInRange(FIND_MY_SPAWNS, Settings.BUILD_DISTANCE_CONTAINER).length > 0
-            })
+            }),
         );
     }
 
@@ -54,7 +54,7 @@ export class Depots implements IDepots {
                 return depot.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, {
                     filter: (structure: Structure) => structure.structureType === STRUCTURE_CONTROLLER,
                 }).length > 0
-            })
+            }),
         );
     }
 

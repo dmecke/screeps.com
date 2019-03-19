@@ -8,7 +8,7 @@ export class WallsAndRamparts implements IWallsAndRamparts {
 
     public withNotMaxHitpoints(): WallsAndRamparts {
         return new WallsAndRamparts(
-            _.filter(this.structures, (structure: StructureWall|StructureRampart) => structure.hits < structure.hitsMax)
+            _.filter(this.structures, (structure: StructureWall|StructureRampart) => structure.hits < structure.hitsMax),
         );
     }
 

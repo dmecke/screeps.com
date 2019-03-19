@@ -14,7 +14,7 @@ export class Structures implements IStructures {
                 }
 
                 return false;
-            })
+            }),
         );
     }
 
@@ -26,7 +26,7 @@ export class Structures implements IStructures {
                 }
 
                 return true;
-            })
+            }),
         );
     }
 

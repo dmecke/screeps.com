@@ -18,19 +18,19 @@ let loadRoomPrototype = function() {
 
     Room.prototype.findStructures = function(this: Room): Structures {
         return new Structures(
-            this.find(FIND_STRUCTURES) as Structure[]
+            this.find(FIND_STRUCTURES) as Structure[],
         );
     };
 
     Room.prototype.findSources = function(this: Room): Sources {
         return new Sources(
-            this.find(FIND_SOURCES) as Source[]
+            this.find(FIND_SOURCES) as Source[],
         );
     };
 
     Room.prototype.findConstructionSites = function(this: Room): ConstructionSites {
         return new ConstructionSites(
-            this.find(FIND_CONSTRUCTION_SITES) as ConstructionSite[]
+            this.find(FIND_CONSTRUCTION_SITES) as ConstructionSite[],
         );
     };
 
@@ -38,7 +38,7 @@ let loadRoomPrototype = function() {
         return new WallsAndRamparts(
             this.find(FIND_STRUCTURES, {
                 filter: (structure: Structure) => structure.structureType === STRUCTURE_WALL || structure.structureType === STRUCTURE_RAMPART,
-            }) as StructureWall[]|StructureRampart[]
+            }) as StructureWall[]|StructureRampart[],
         );
     };
 
@@ -46,7 +46,7 @@ let loadRoomPrototype = function() {
         return new Depots(
             this.find(FIND_STRUCTURES, {
                 filter: (structure: Structure) => structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE,
-            }) as StructureContainer[]|StructureStorage[]
+            }) as StructureContainer[]|StructureStorage[],
         );
     };
 
@@ -54,7 +54,7 @@ let loadRoomPrototype = function() {
         return new Spawns(
             this.find(FIND_STRUCTURES, {
                 filter: (structure: Structure) => structure.structureType === STRUCTURE_SPAWN || structure.structureType === STRUCTURE_EXTENSION,
-            }) as StructureSpawn[]|StructureExtension[]
+            }) as StructureSpawn[]|StructureExtension[],
         );
     };
 
@@ -62,13 +62,13 @@ let loadRoomPrototype = function() {
         return new Towers(
             this.find(FIND_STRUCTURES, {
                 filter: (structure: Structure) => structure.structureType === STRUCTURE_TOWER,
-            }) as StructureTower[]
+            }) as StructureTower[],
         );
     };
 
     Room.prototype.findDroppedResources = function(this: Room): DroppedResources {
         return new DroppedResources(
-            this.find(FIND_DROPPED_RESOURCES) as Resource[]
+            this.find(FIND_DROPPED_RESOURCES) as Resource[],
         );
     };
 

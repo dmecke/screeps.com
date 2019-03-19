@@ -2,8 +2,7 @@ import {Settings} from "../Settings";
 
 let loadSourcePrototype = function() {
 
-    Source.prototype.priority = function(this: Source, creep: Creep): number
-    {
+    Source.prototype.priority = function(this: Source, creep: Creep): number {
         if (this.energy === 0) {
             return -10000;
         }
@@ -22,8 +21,7 @@ let loadSourcePrototype = function() {
         return energyAvailable - distanceMalus;
     };
 
-    Source.prototype.harvestingSpots = function(this: Source): RoomPosition[]
-    {
+    Source.prototype.harvestingSpots = function(this: Source): RoomPosition[] {
         let potentialHarvestingPositions = this.pos.outerPositionsInRange(1);
 
         return _.filter(potentialHarvestingPositions, function(position: RoomPosition) {

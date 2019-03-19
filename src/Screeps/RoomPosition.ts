@@ -3,8 +3,7 @@ import {Util_Logger} from "../Util/Logger";
 
 let loadRoomPositionPrototype = function() {
 
-    RoomPosition.prototype.positionsInRange = function(this: RoomPosition, range: number): RoomPosition[]
-    {
+    RoomPosition.prototype.positionsInRange = function(this: RoomPosition, range: number): RoomPosition[] {
         let positions: RoomPosition[] = [];
         for (let x = -range; x <= range; x++) {
             for (let y = -range; y <= range; y++) {
@@ -16,16 +15,14 @@ let loadRoomPositionPrototype = function() {
         return positions;
     };
 
-    RoomPosition.prototype.outerPositionsInRange = function(this: RoomPosition, range: number): RoomPosition[]
-    {
+    RoomPosition.prototype.outerPositionsInRange = function(this: RoomPosition, range: number): RoomPosition[] {
         let self = this;
         return _.filter(this.positionsInRange(range), function(position: RoomPosition) {
             return self.getRangeTo(position) === range && [0, TERRAIN_MASK_SWAMP].indexOf(Game.map.getRoomTerrain(position.roomName).get(position.x, position.y)) !== -1;
         });
     };
 
-    RoomPosition.prototype.hasCloseContainer = function(this: RoomPosition): boolean
-    {
+    RoomPosition.prototype.hasCloseContainer = function(this: RoomPosition): boolean {
         let hasStructure = this.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, {
             filter: (structure: Structure) => structure.structureType === STRUCTURE_CONTAINER,
         }).length > 0;
@@ -37,8 +34,7 @@ let loadRoomPositionPrototype = function() {
         return hasStructure || hasConstructionSite;
     };
 
-    RoomPosition.prototype.createCloseContainerConstructionSite = function(this: RoomPosition): number
-    {
+    RoomPosition.prototype.createCloseContainerConstructionSite = function(this: RoomPosition): number {
         let positions = this.outerPositionsInRange(Settings.BUILD_DISTANCE_CONTAINER);
         let position = this.findClosestByPath(positions);
         if (null === position) {

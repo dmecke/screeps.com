@@ -14,7 +14,7 @@ export class Sources implements ISources {
                 return source.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, {
                     filter: (structure: Structure) => structure.structureType === STRUCTURE_CONTAINER,
                 }).length > 0
-            })
+            }),
         );
     }
 
@@ -22,7 +22,7 @@ export class Sources implements ISources {
         return new Sources(
             _.filter(this.sources, function(source: Source) {
                 return true; // @todo
-            })
+            }),
         )
     }
 

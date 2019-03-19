@@ -10,7 +10,7 @@ export class DroppedResources implements IDroppedResources {
         return new DroppedResources(
             _.filter(this.droppedResources, function(r: Resource) {
                 return r.resourceType === resource;
-            })
+            }),
         );
     }
 
