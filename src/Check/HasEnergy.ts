@@ -5,7 +5,7 @@ import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
 export class Check_HasEnergy extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
-        let tower = tick.target as StructureTower;
+        const tower = tick.target as StructureTower;
 
         if (tower.energy > 0) {
             return TREE_SUCCESS;

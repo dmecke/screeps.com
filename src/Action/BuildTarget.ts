@@ -5,8 +5,8 @@ import {TREE_FAILURE, TREE_RUNNING} from "../Constants";
 export class Action_BuildTarget extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
-        let creep = tick.target as Creep;
-        let constructionSite = tick.blackboard.get("target", tick.tree.id) as ConstructionSite;
+        const creep = tick.target as Creep;
+        const constructionSite = tick.blackboard.get("target", tick.tree.id) as ConstructionSite;
 
         if (creep.build(constructionSite) !== OK) {
             return TREE_FAILURE;

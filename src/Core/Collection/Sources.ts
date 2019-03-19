@@ -27,7 +27,7 @@ export class Sources implements ISources {
     }
 
     public orderByPriority(creep: Creep): Sources {
-        let sources = this.sources;
+        const sources = this.sources;
         sources.sort((a: Source, b: Source): number => b.priority(creep) - a.priority(creep));
 
         return new Sources(sources);

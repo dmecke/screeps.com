@@ -4,7 +4,7 @@ import {TREE_FAILURE, TREE_SUCCESS} from "../Constants";
 
 export class Check_DroppedEnergyAvailable extends Tree_Core_Action {
 
-    private range: number;
+    private readonly range: number;
 
     public constructor(range?: number) {
         super();
@@ -12,7 +12,7 @@ export class Check_DroppedEnergyAvailable extends Tree_Core_Action {
     }
 
     public tick(tick: Tree_Core_Tick): number {
-        let creep = tick.target as Creep;
+        const creep = tick.target as Creep;
 
         if (creep.room.amountOfDroppedEnergy() === 0) {
             return TREE_FAILURE;
@@ -22,7 +22,7 @@ export class Check_DroppedEnergyAvailable extends Tree_Core_Action {
             return TREE_SUCCESS;
         }
 
-        let resource = creep.room.findDroppedResources().is(RESOURCE_ENERGY).closestByPath(creep.pos);
+        const resource = creep.room.findDroppedResources().is(RESOURCE_ENERGY).closestByPath(creep.pos);
         if (!resource) {
             return TREE_FAILURE;
         }

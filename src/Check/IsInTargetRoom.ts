@@ -5,7 +5,7 @@ import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
 export class Check_IsInTargetRoom extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
-        let creep = tick.target as Creep;
+        const creep = tick.target as Creep;
 
         if (creep.isInRoom(creep.targetRoom())) {
             return TREE_SUCCESS;

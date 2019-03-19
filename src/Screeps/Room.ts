@@ -10,7 +10,7 @@ import {Sources} from "../Core/Collection/Sources";
 import {Structures} from "../Core/Collection/Structures";
 import {ConstructionSites} from "../Core/Collection/ConstructionSites";
 
-let loadRoomPrototype = () => {
+const loadRoomPrototype = () => {
 
     Room.prototype.hasController = function(this: Room) {
         return this.controller !== undefined;
@@ -77,9 +77,9 @@ let loadRoomPrototype = () => {
     };
 
     Room.prototype.findRandomAdjacentRoom = function(this: Room): string {
-        let rooms = new Rooms();
-        let exits = Game.map.describeExits(this.name);
-        for (let direction in exits) {
+        const rooms = new Rooms();
+        const exits = Game.map.describeExits(this.name);
+        for (const direction in exits) {
             if (exits.hasOwnProperty(direction) && Game.map.isRoomAvailable(exits[direction])) {
                 rooms.add(exits[direction]);
             }
@@ -104,9 +104,9 @@ let loadRoomPrototype = () => {
     };
 
     Room.prototype.creepsOfRole = function(this: Room, roleName: string): Creep[] {
-        let room = this;
+        const room = this;
         return _.filter(Game.creeps, (creep: Creep) => {
-            let role = creep.role() as Role_Role;
+            const role = creep.role() as Role_Role;
 
             return role.name() === roleName && (creep.room.name === room.name || Role_Factory.isRoomIndependant(roleName));
         });

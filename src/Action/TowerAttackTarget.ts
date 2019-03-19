@@ -5,8 +5,8 @@ import {TREE_FAILURE, TREE_SUCCESS, TREE_RUNNING} from "../Constants";
 export class Action_TowerAttackTarget extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
-        let tower = tick.target as StructureTower;
-        let target = tick.blackboard.get("target", tick.tree.id) as Creep;
+        const tower = tick.target as StructureTower;
+        const target = tick.blackboard.get("target", tick.tree.id) as Creep;
 
         if (tower.attack(target) !== OK) {
             return TREE_FAILURE;

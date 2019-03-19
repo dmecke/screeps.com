@@ -2,14 +2,14 @@ import {Settings} from "../../Settings";
 
 export class ConstructionSites implements IConstructionSites {
 
-    private constructionSites: ConstructionSite[];
+    private readonly constructionSites: ConstructionSite[];
 
     public constructor(constructionSites: ConstructionSite[] = []) {
         this.constructionSites = constructionSites;
     }
 
     public orderByPriority(creep: Creep): ConstructionSites {
-        let constructionSites = this.constructionSites;
+        const constructionSites = this.constructionSites;
         constructionSites.sort((a: ConstructionSite, b: ConstructionSite) => {
             let prioA = a.pos.getRangeTo(creep);
             prioA -= a.structureType === STRUCTURE_CONTAINER ? Settings.BUILD_PRIORITY_CONTAINER : 0;

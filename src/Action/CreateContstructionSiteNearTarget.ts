@@ -15,8 +15,8 @@ export class Action_CreateConstructionSiteNearTarget extends Tree_Core_Action {
     }
 
     public tick(tick: Tree_Core_Tick): number {
-        let target = tick.blackboard.get("target", tick.tree.id) as { pos: RoomPosition };
-        let status = target.pos.createCloseContainerConstructionSite();
+        const target = tick.blackboard.get("target", tick.tree.id) as { pos: RoomPosition };
+        const status = target.pos.createCloseContainerConstructionSite();
 
         if (status === OK) {
             return TREE_SUCCESS;

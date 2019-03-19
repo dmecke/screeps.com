@@ -9,10 +9,10 @@ export class Tree_Composite_MemoryPriority extends Tree_Core_Composite {
     }
 
     public tick(tick: Tree_Core_Tick): number {
-        let index = tick.blackboard.get("running_child", tick.tree.id, this.id);
+        const index = tick.blackboard.get("running_child", tick.tree.id, this.id);
         for (let i = index; i < this.children.length; i++) {
-            let child = this.children[i];
-            let status = child.execute(tick);
+            const child = this.children[i];
+            const status = child.execute(tick);
 
             if (status === TREE_RUNNING) {
                 tick.blackboard.set("running_child", i, tick.tree.id, this.id);

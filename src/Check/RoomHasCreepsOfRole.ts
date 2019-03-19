@@ -5,9 +5,9 @@ import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
 
 export class Check_RoomHasCreepsOfRole extends Tree_Core_Action {
 
-    private role: string;
+    private readonly role: string;
 
-    private amount: number;
+    private readonly amount: number;
 
     public constructor(role: string, amount: number) {
         super();
@@ -16,11 +16,11 @@ export class Check_RoomHasCreepsOfRole extends Tree_Core_Action {
     }
 
     public tick(tick: Tree_Core_Tick): number {
-        let creep = tick.target as Creep;
+        const creep = tick.target as Creep;
 
-        let creeps = creep.room.find(FIND_MY_CREEPS, {
+        const creeps = creep.room.find(FIND_MY_CREEPS, {
             filter: (c: Creep) => {
-                let role = c.role() as Role_Role;
+                const role = c.role() as Role_Role;
 
                 return role.name() === this.role;
             },

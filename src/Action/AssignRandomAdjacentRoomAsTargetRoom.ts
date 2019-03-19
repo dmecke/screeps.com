@@ -5,13 +5,13 @@ import {TREE_FAILURE, TREE_SUCCESS} from "../Constants";
 export class Action_AssignRandomAdjacentRoomAsTargetRoom extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
-        let creep = tick.target as Creep;
+        const creep = tick.target as Creep;
 
         if (creep.room.name === "sim") {
             return TREE_FAILURE;
         }
 
-        let targetRoom = creep.room.findRandomAdjacentRoom();
+        const targetRoom = creep.room.findRandomAdjacentRoom();
         if (creep.blacklistedRooms().indexOf(targetRoom) !== -1) {
             return TREE_FAILURE;
         }

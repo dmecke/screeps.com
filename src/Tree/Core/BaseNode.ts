@@ -18,7 +18,7 @@ export abstract class Tree_Core_BaseNode {
         }
 
         tick.beforeTick(this);
-        let status = this.tick(tick);
+        const status = this.tick(tick);
         tick.afterTick(this, status);
 
         if (status !== TREE_RUNNING) {

@@ -75,12 +75,12 @@ export class Role_Factory {
     }
 
     public static bodyParts(role: string, spawn: StructureSpawn): BodyPartConstant[] {
-        let energyCapacityAvailable = spawn.room.energyCapacityAvailable;
-        let energyAvailable = spawn.room.energyAvailable;
+        const energyCapacityAvailable = spawn.room.energyCapacityAvailable;
+        const energyAvailable = spawn.room.energyAvailable;
 
         switch (role) {
             case ROLE_HARVESTER:
-                let energy = spawn.room.creepsOfRole(ROLE_HARVESTER).length > 0 ? energyCapacityAvailable : energyAvailable;
+                const energy = spawn.room.creepsOfRole(ROLE_HARVESTER).length > 0 ? energyCapacityAvailable : energyAvailable;
 
                 return Role_Harvester.bodyParts(energy);
 

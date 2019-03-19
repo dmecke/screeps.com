@@ -11,7 +11,7 @@ import {Action_TowerAttackTarget} from "../Action/TowerAttackTarget";
 
 export class Task_Tower extends Task_Task {
     public execute(): void {
-        for (let name in Game.rooms) {
+        for (const name in Game.rooms) {
             if (Game.rooms.hasOwnProperty(name)) {
                 this.handleRoom(Game.rooms[name]);
             }
@@ -21,17 +21,17 @@ export class Task_Tower extends Task_Task {
     private handleRoom(room: Room): void {
         this.initializeRoomTowerMemory(room);
 
-        let towers = room.find(FIND_MY_STRUCTURES, {
+        const towers = room.find(FIND_MY_STRUCTURES, {
             filter: (structure: Structure) => structure.structureType === STRUCTURE_TOWER,
         }) as StructureTower[];
 
-        for (let tower of towers) {
+        for (const tower of towers) {
             this.tree().tick(tower, new Tree_Core_Blackboard(tower));
         }
     }
 
     private initializeRoomTowerMemory(room: Room): void {
-        let roomMemory = Memory.rooms[room.name];
+        const roomMemory = Memory.rooms[room.name];
         if (roomMemory === undefined) {
             return;
         }

@@ -4,7 +4,7 @@ import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
 
 export class Check_IsInRoom extends Tree_Core_Action {
 
-    private room: string;
+    private readonly room: string;
 
     public constructor(room: string) {
         super();
@@ -12,7 +12,7 @@ export class Check_IsInRoom extends Tree_Core_Action {
     }
 
     public tick(tick: Tree_Core_Tick): number {
-        let creep = tick.target as Creep;
+        const creep = tick.target as Creep;
 
         if (creep.isInRoom(this.room)) {
             return TREE_SUCCESS;

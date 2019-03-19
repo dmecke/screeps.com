@@ -4,9 +4,9 @@ import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
 
 export class Check_HasConstructionSiteNearTarget extends Tree_Core_Action {
 
-    private structureType: string;
+    private readonly structureType: string;
 
-    private range: number;
+    private readonly range: number;
 
     public constructor(structureType: string, range: number) {
         super();
@@ -15,9 +15,9 @@ export class Check_HasConstructionSiteNearTarget extends Tree_Core_Action {
     }
 
     public tick(tick: Tree_Core_Tick): number {
-        let target = tick.blackboard.get("target", tick.tree.id) as { pos: RoomPosition };
+        const target = tick.blackboard.get("target", tick.tree.id) as { pos: RoomPosition };
 
-        let constructionSites = _.filter(target.pos.findInRange(FIND_CONSTRUCTION_SITES, this.range),
+        const constructionSites = _.filter(target.pos.findInRange(FIND_CONSTRUCTION_SITES, this.range),
             (constructionSite: ConstructionSite) => constructionSite.structureType === this.structureType,
         );
 

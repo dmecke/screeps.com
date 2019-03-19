@@ -5,7 +5,7 @@ import {TREE_SUCCESS, TREE_FAILURE} from "../../Constants";
 export class Tree_Decorator_Inverter extends Tree_Core_Decorator {
 
     public tick(tick: Tree_Core_Tick): number {
-        let status = this.child.execute(tick);
+        const status = this.child.execute(tick);
 
         if (status === TREE_SUCCESS) {
             return TREE_FAILURE;

@@ -2,7 +2,7 @@ import {Task_Task} from "./Task";
 
 export class Task_StructurePlanning extends Task_Task {
     public execute(): void {
-        for (let name in Game.rooms) {
+        for (const name in Game.rooms) {
             if (Game.rooms.hasOwnProperty(name)) {
                 this.planContainers(Game.rooms[name]);
                 this.planExtensions(Game.rooms[name]);
@@ -23,12 +23,12 @@ export class Task_StructurePlanning extends Task_Task {
     }
 
     private planExtensions(room: Room): void {
-        let spawns = room.find(FIND_MY_SPAWNS) as StructureSpawn[];
+        const spawns = room.find(FIND_MY_SPAWNS) as StructureSpawn[];
         if (spawns.length === 0) {
             return;
         }
 
-        let position = new RoomPosition(
+        const position = new RoomPosition(
             spawns[0].pos.x + Math.floor(Math.random() * 10 - 5),
             spawns[0].pos.y + Math.floor(Math.random() * 10 - 5),
             spawns[0].pos.roomName,

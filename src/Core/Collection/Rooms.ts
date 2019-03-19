@@ -1,6 +1,6 @@
 export class Rooms {
 
-    private rooms: string[];
+    private readonly rooms: string[];
 
     public constructor(rooms: string[] = []) {
         this.rooms = rooms;
@@ -11,7 +11,7 @@ export class Rooms {
     }
 
     public random(): string {
-        let index = Math.floor(Math.random() * this.rooms.length);
+        const index = Math.floor(Math.random() * this.rooms.length);
 
         return this.rooms[index];
     }

@@ -12,8 +12,8 @@ export class Action_TransferToTarget extends Tree_Core_Action {
     }
 
     public tick(tick: Tree_Core_Tick): number {
-        let creep = tick.target as Creep;
-        let target = tick.blackboard.get("target", tick.tree.id) as Creep|StructureSpawn|Structure;
+        const creep = tick.target as Creep;
+        const target = tick.blackboard.get("target", tick.tree.id) as Creep|StructureSpawn|Structure;
 
         if (creep.transfer(target, this.resource) === OK) {
             return TREE_SUCCESS;

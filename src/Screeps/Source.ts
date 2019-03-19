@@ -1,6 +1,6 @@
 import {Settings} from "../Settings";
 
-let loadSourcePrototype = () => {
+const loadSourcePrototype = () => {
 
     Source.prototype.priority = function(this: Source, creep: Creep): number {
         if (this.energy === 0) {
@@ -15,17 +15,17 @@ let loadSourcePrototype = () => {
             return -10000;
         }
 
-        let energyAvailable = this.energy;
-        let distanceMalus = this.pos.getRangeTo(creep) * 100;
+        const energyAvailable = this.energy;
+        const distanceMalus = this.pos.getRangeTo(creep) * 100;
 
         return energyAvailable - distanceMalus;
     };
 
     Source.prototype.harvestingSpots = function(this: Source): RoomPosition[] {
-        let potentialHarvestingPositions = this.pos.outerPositionsInRange(1);
+        const potentialHarvestingPositions = this.pos.outerPositionsInRange(1);
 
         return _.filter(potentialHarvestingPositions, (position: RoomPosition) => {
-            let terrain = position.lookFor(LOOK_TERRAIN)[0];
+            const terrain = position.lookFor(LOOK_TERRAIN)[0];
             return (terrain === "plain" || terrain === "swamp") && position.lookFor(LOOK_CREEPS).length === 0;
         });
     };
@@ -35,7 +35,7 @@ let loadSourcePrototype = () => {
     };
 
     Source.prototype.attachedContainer = function(this: Source): StructureContainer {
-        let containers = _.filter(this.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER),
+        const containers = _.filter(this.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER),
             (structure: Structure) => structure.structureType === STRUCTURE_CONTAINER,
         );
 

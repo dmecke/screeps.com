@@ -14,7 +14,7 @@ export class Check_RoomHasStructure extends Tree_Core_Action {
     }
 
     public tick(): number {
-        let structures = this.room.find(FIND_STRUCTURES, {
+        const structures = this.room.find(FIND_STRUCTURES, {
             filter: (structure: Structure) => structure.structureType === this.structure,
         }).length;
 

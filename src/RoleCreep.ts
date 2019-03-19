@@ -8,12 +8,12 @@ export class RoleCreep {
 
     private tree: Tree_Tree;
 
-    private blackboard: Tree_Core_Blackboard;
+    private readonly blackboard: Tree_Core_Blackboard;
 
     constructor(creep: Creep) {
         this.creep = creep;
 
-        let role = creep.role() as Role_Role;
+        const role = creep.role() as Role_Role;
         this.tree = role.tree();
         this.blackboard = new Tree_Core_Blackboard(creep);
     }

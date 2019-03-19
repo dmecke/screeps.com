@@ -7,14 +7,14 @@ import {ROLE_BUILDER, ROLE_CLAIMER, ROLE_SCOUT} from "../Constants";
 export class Task_Spawn extends Task_Task {
 
     public execute() {
-        for (let spawnName in Game.spawns) {
+        for (const spawnName in Game.spawns) {
             if (Game.spawns.hasOwnProperty(spawnName)) {
                 let spawned = false;
-                let spawn = Game.spawns[spawnName];
+                const spawn = Game.spawns[spawnName];
                 if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(ROLE_CLAIMER).length < 2) {
                     this.spawn(ROLE_CLAIMER, spawnName, Settings.WISHLIST_ROOMS[0]); // @todo handle all wishlist rooms, not just the first
                 }
-                for (let role of Role_Factory.roles()) {
+                for (const role of Role_Factory.roles()) {
                     if (spawn.room.creepsOfRole(role).length < Role_Factory.minimumCreepCount(role)) {
                         this.spawn(role, spawnName);
                         spawned = true;
@@ -28,8 +28,8 @@ export class Task_Spawn extends Task_Task {
     }
 
     private spawn(role: string, spawnName: string, targetRoom: string = ""): string|number {
-        let spawn = Game.spawns[spawnName];
-        let newName = spawn.createCreep(Role_Factory.bodyParts(role, spawn), undefined, {
+        const spawn = Game.spawns[spawnName];
+        const newName = spawn.createCreep(Role_Factory.bodyParts(role, spawn), undefined, {
             blackboard: {},
             blacklisted_rooms: Settings.BLACKLISTED_ROOMS,
             debug: false,
@@ -39,9 +39,9 @@ export class Task_Spawn extends Task_Task {
             target_room: targetRoom ? targetRoom : spawn.room.name,
         });
         if (!Number(newName)) {
-            let creep = Game.creeps[newName];
-            let r = creep.role() as Role_Role;
-            let roleName = r.name();
+            const creep = Game.creeps[newName];
+            const r = creep.role() as Role_Role;
+            const roleName = r.name();
             if (roleName === ROLE_SCOUT) {
                 creep.notifyWhenAttacked(false);
             }

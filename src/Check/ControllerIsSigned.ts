@@ -4,7 +4,7 @@ import {TREE_FAILURE, TREE_SUCCESS} from "../Constants";
 
 export class Check_ControllerIsSigned extends Tree_Core_Action {
 
-    private message: string;
+    private readonly message: string;
 
     public constructor(message) {
         super();
@@ -12,8 +12,8 @@ export class Check_ControllerIsSigned extends Tree_Core_Action {
     }
 
     public tick(tick: Tree_Core_Tick): number {
-        let creep = tick.target as Creep;
-        let controller = creep.room.controller;
+        const creep = tick.target as Creep;
+        const controller = creep.room.controller;
 
         if (controller === undefined) {
             return TREE_FAILURE;

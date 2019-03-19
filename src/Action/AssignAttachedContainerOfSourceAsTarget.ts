@@ -5,8 +5,8 @@ import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
 export class Action_AssignAttachedContainerOfSourceAsTarget extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick) {
-        let source = tick.blackboard.get("target", tick.tree.id) as Source;
-        let attachedContainer = source.attachedContainer();
+        const source = tick.blackboard.get("target", tick.tree.id) as Source;
+        const attachedContainer = source.attachedContainer();
 
         if (attachedContainer === undefined) {
             return TREE_FAILURE;
