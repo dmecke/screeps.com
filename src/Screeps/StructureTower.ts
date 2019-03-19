@@ -3,16 +3,16 @@ let loadStructureTowerPrototype = function() {
     const MEMORY_KEY_TOWERS = "towers";
 
     Object.defineProperty(StructureTower.prototype, "name", {
-        get: function(this: StructureTower) {
+        get() {
             return "Tower_" + this.id;
         },
-        set: function(this: StructureTower) {
+        set(value) {
             throw new Error();
         },
     });
 
     Object.defineProperty(StructureTower.prototype, "memory", {
-        get: function(this: StructureTower) {
+        get() {
             if (_.isUndefined(Memory[MEMORY_KEY_TOWERS])) {
                 Memory[MEMORY_KEY_TOWERS] = {};
             }
@@ -21,7 +21,7 @@ let loadStructureTowerPrototype = function() {
             }
             return Memory[MEMORY_KEY_TOWERS][this.name] = Memory[MEMORY_KEY_TOWERS][this.name] || {};
         },
-        set: function(this: StructureTower, value) {
+        set(value) {
             if (_.isUndefined(Memory[MEMORY_KEY_TOWERS])) {
                 Memory[MEMORY_KEY_TOWERS] = {};
             }

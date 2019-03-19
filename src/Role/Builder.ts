@@ -7,7 +7,7 @@ import tree = require("./BuilderTree");
  */
 export class Role_Builder extends Role_Role {
 
-    public static bodyParts(energyCapacityAvailable: number): string[] {
+    public static bodyParts(energyCapacityAvailable: number): BodyPartConstant[] {
         if (energyCapacityAvailable < 550) {
             return [WORK, CARRY, MOVE, MOVE, MOVE];
         } else {

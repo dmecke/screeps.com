@@ -5,9 +5,9 @@ export class Action_Drop extends Tree_Core_Action {
 
     private creep: Creep;
 
-    private resource: string;
+    private readonly resource: ResourceConstant;
 
-    public constructor(creep: Creep, resource: string) {
+    public constructor(creep: Creep, resource: ResourceConstant) {
         super();
         this.creep = creep;
         this.resource = resource;

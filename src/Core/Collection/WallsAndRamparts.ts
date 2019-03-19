@@ -1,8 +1,8 @@
 export class WallsAndRamparts implements IWallsAndRamparts {
 
-    private structures: (StructureWall|StructureRampart)[];
+    private readonly structures: Array<StructureWall|StructureRampart>;
 
-    public constructor(structures: (StructureWall|StructureRampart)[] = []) {
+    public constructor(structures: Array<StructureWall|StructureRampart> = []) {
         this.structures = structures;
     }
 

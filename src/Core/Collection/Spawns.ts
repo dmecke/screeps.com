@@ -1,8 +1,8 @@
 export class Spawns implements ISpawns {
 
-    private spawns: StructureSpawn[]|StructureExtension[];
+    private readonly spawns: Array<StructureSpawn|StructureExtension>;
 
-    public constructor(spawns: StructureSpawn[]|StructureExtension[] = []) {
+    public constructor(spawns: Array<StructureSpawn|StructureExtension> = []) {
         this.spawns = spawns;
     }
 

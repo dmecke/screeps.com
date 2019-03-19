@@ -4,7 +4,7 @@ import tree = require("./DefenderTree");
 
 export class Role_Defender extends Role_Role {
 
-    public static bodyParts(energyCapacityAvailable: number): string[] {
+    public static bodyParts(energyCapacityAvailable: number): BodyPartConstant[] {
         if (energyCapacityAvailable < 550) {
             return [ATTACK, ATTACK, MOVE, MOVE];
         } else {

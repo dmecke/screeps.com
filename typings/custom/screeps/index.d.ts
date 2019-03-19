@@ -79,7 +79,7 @@ interface Room {
 interface Source {
     priority(creep: Creep): number;
     harvestingSpots(): RoomPosition[];
-    attachedContainer(): Container;
+    attachedContainer(): StructureContainer;
     hasAttachedContainer(): boolean;
 }
 interface Creep {
@@ -95,6 +95,21 @@ interface Creep {
     isInTargetRoom(): boolean;
     isInHomeRoom(): boolean;
     moveToRoom(room: string): number;
+}
+interface CreepMemory {
+    role: string;
+    debug: boolean;
+    experimental: boolean;
+    home_room: string;
+    target_room: string;
+    blacklisted_rooms: string[];
+    blackboard: object;
+}
+interface RoomMemory {
+    info: object;
+    roads: object;
+    progress_stack: number[];
+    towers: object;
 }
 interface StructureTower {
     name: string;

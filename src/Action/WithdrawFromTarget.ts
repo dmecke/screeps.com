@@ -4,9 +4,9 @@ import {TREE_FAILURE, TREE_SUCCESS} from "../Constants";
 
 export class Action_WithdrawFromTarget extends Tree_Core_Action {
 
-    private resource: string;
+    private readonly resource: ResourceConstant;
 
-    public constructor(resource: string) {
+    public constructor(resource: ResourceConstant) {
         super();
         this.resource = resource;
     }

@@ -7,7 +7,7 @@ import tree = require("./ScoutTree");
  */
 export class Role_Scout extends Role_Role {
 
-    public static bodyParts(energyCapacityAvailable: number): string[] {
+    public static bodyParts(energyCapacityAvailable: number): BodyPartConstant[] {
         if (energyCapacityAvailable < 550) {
             return [MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
         } else {

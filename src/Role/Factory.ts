@@ -74,7 +74,7 @@ export class Role_Factory {
         ];
     }
 
-    public static bodyParts(role: string, spawn: StructureSpawn) {
+    public static bodyParts(role: string, spawn: StructureSpawn): BodyPartConstant[] {
         let energyCapacityAvailable = spawn.room.energyCapacityAvailable;
         let energyAvailable = spawn.room.energyAvailable;
 

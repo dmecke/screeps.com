@@ -7,7 +7,7 @@ import tree = require("./SpawnSupplierTree");
  */
 export class Role_SpawnSupplier extends Role_Role {
 
-    public static bodyParts(energyCapacityAvailable: number): string[] {
+    public static bodyParts(energyCapacityAvailable: number): BodyPartConstant[] {
         if (energyCapacityAvailable < 550) {
             return [WORK, CARRY, CARRY, MOVE, MOVE];
         } else {

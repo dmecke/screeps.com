@@ -7,7 +7,7 @@ import tree = require("./TransporterTree");
  */
 export class Role_Transporter extends Role_Role {
 
-    public static bodyParts(energyCapacityAvailable: number): string[] {
+    public static bodyParts(energyCapacityAvailable: number): BodyPartConstant[] {
         if (energyCapacityAvailable < 550) {
             return [CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
         } else {

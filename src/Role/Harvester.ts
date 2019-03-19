@@ -7,7 +7,7 @@ import tree = require("./HarvesterTree");
  */
 export class Role_Harvester extends Role_Role {
 
-    public static bodyParts(energyCapacityAvailable: number): string[] {
+    public static bodyParts(energyCapacityAvailable: number): BodyPartConstant[] {
         if (energyCapacityAvailable < 550) {
             return [WORK, WORK, CARRY, MOVE];
         } else {

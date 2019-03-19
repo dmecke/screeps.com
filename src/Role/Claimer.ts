@@ -7,7 +7,7 @@ import tree = require("./ClaimerTree");
  */
 export class Role_Claimer extends Role_Role {
 
-    public static bodyParts(energyCapacityAvailable: number): string[] {
+    public static bodyParts(energyCapacityAvailable: number): BodyPartConstant[] {
         if (energyCapacityAvailable < 1300) {
             return [CLAIM, MOVE];
         } else {

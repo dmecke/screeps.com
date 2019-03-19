@@ -15,7 +15,7 @@ export class Task_StructurePlanning extends Task_Task {
             room.controller.pos.createCloseContainerConstructionSite();
         }
 
-        _.each(room.find(FIND_MY_SPAWNS), function(spawn: Spawn) {
+        _.each(room.find(FIND_MY_SPAWNS), function(spawn: StructureSpawn) {
             if (!spawn.pos.hasCloseContainer()) {
                 spawn.pos.createCloseContainerConstructionSite();
             }
@@ -23,7 +23,7 @@ export class Task_StructurePlanning extends Task_Task {
     }
 
     private planExtensions(room: Room): void {
-        let spawns = room.find(FIND_MY_SPAWNS) as Spawn[];
+        let spawns = room.find(FIND_MY_SPAWNS) as StructureSpawn[];
         if (spawns.length === 0) {
             return;
         }

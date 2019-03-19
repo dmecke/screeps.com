@@ -16,5 +16,5 @@ export abstract class Action_AssignAsTarget extends Tree_Core_Action {
         return TREE_SUCCESS;
     }
 
-    protected abstract findTarget(creep: Creep): Object;
+    protected abstract findTarget(creep: Creep): object;
 }

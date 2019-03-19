@@ -5,18 +5,19 @@
     "author": "Daniel Mecke",
     "repository": "dmecke/screeps.com",
     "devDependencies": {
+        "@types/screeps": "^2.5.3",
+        "deep-equal": "^1.0.1",
         "gulp": "github:gulpjs/gulp#4.0",
-        "gulp-util": "*",
         "gulp-clean": "*",
+        "gulp-collect": "^0.1.0",
+        "gulp-rename": "*",
         "gulp-tslint": "*",
         "gulp-typescript": "*",
-        "gulp-rename": "*",
-        "gulp-collect": "^0.1.0",
+        "gulp-util": "*",
+        "lodash": "^4.14.0",
+        "q": "^1.4.1",
         "recast": "*",
         "tslint": "*",
-        "typescript": "*",
-        "q": "^1.4.1",
-        "lodash": "^4.14.0",
-        "deep-equal": "^1.0.1"
+        "typescript": "*"
     }
 }

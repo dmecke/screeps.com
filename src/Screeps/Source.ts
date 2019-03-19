@@ -36,7 +36,7 @@ let loadSourcePrototype = function() {
         return this.attachedContainer() !== undefined;
     };
 
-    Source.prototype.attachedContainer = function(this: Source): Container {
+    Source.prototype.attachedContainer = function(this: Source): StructureContainer {
         let containers = _.filter(this.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER),
             (structure: Structure) => structure.structureType === STRUCTURE_CONTAINER,
         );
@@ -45,7 +45,7 @@ let loadSourcePrototype = function() {
             return undefined;
         }
 
-        return containers[0] as Container;
+        return containers[0] as StructureContainer;
     };
 };
 
