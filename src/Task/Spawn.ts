@@ -24,7 +24,7 @@ export class Task_Spawn extends Task_Task {
         this.spawnRepository.findAll().forEach((spawn: StructureSpawn) => {
             let spawned = false;
             if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(ROLE_CLAIMER).length < 2) {
-                this.spawn(ROLE_CLAIMER, spawn, Settings.WISHLIST_ROOMS[0]); // @todo handle all wishlist rooms, not just the first
+                this.spawn(ROLE_CLAIMER, spawn, Settings.WISHLIST_ROOMS[Math.floor(Math.random() * Settings.WISHLIST_ROOMS.length)]);
             }
             for (const role of Role_Factory.roles()) {
                 if (spawn.room.creepsOfRole(role).length < Role_Factory.minimumCreepCount(role)) {
