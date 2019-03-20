@@ -21,6 +21,7 @@ import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
 import {Check_IsInHomeRoom} from "../Check/IsInHomeRoom";
 import {ROLE_SPAWN_SUPPLIER} from "../Constants";
+import {Check_TargetContainerIsFilled} from "../Check/TargetContainerIsFilled";
 
 export = new Tree_Tree(
     "Harvester",
@@ -52,6 +53,9 @@ export = new Tree_Tree(
                         new Action_AssignHighestPrioritySourceAsTarget(),
                         new Check_TargetSourceHasAttachedContainer(),
                         new Action_AssignAttachedContainerOfSourceAsTarget(),
+                        new Tree_Decorator_Inverter(
+                            new Check_TargetContainerIsFilled(),
+                        ),
                         new Tree_Composite_Priority([
                             new Action_TransferToTarget(RESOURCE_ENERGY),
                             new Action_MoveToTarget(),
