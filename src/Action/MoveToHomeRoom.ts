@@ -7,7 +7,10 @@ export class Action_MoveToHomeRoom extends Tree_Core_Action {
     public tick(tick: Tree_Core_Tick): number {
         const creep = tick.target as Creep;
 
-        if (creep.moveToRoom(creep.homeRoom()) !== OK) {
+        const status = creep.moveToRoom(creep.homeRoom());
+        if (status === ERR_TIRED) {
+            return TREE_RUNNING;
+        } else if (status !== OK) {
             return TREE_FAILURE;
         }
 

@@ -77,7 +77,7 @@ const loadCreepPrototype = () => {
     };
 
     Creep.prototype.moveToRoom = function(this: Creep, room: string): number {
-        return this.moveTo(new RoomPosition(25, 25, room));
+        return this.moveTo(new RoomPosition(25, 25, room), { visualizePathStyle: { stroke: "#ffaa00" } });
     };
 
     Creep.prototype.updateTargetRoom = function(this: Creep, room: string): void {
