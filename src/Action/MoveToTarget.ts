@@ -12,7 +12,10 @@ export class Action_MoveToTarget extends Tree_Core_Action {
             return TREE_FAILURE;
         }
 
-        if (creep.moveTo(target) !== OK) {
+        const status = creep.moveTo(target, { visualizePathStyle: { stroke: "#ffaa00" } });
+        if (status === ERR_TIRED) {
+            return TREE_RUNNING;
+        } else if (status !== OK) {
             return TREE_FAILURE;
         }
 
