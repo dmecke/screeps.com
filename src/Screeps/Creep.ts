@@ -79,6 +79,10 @@ const loadCreepPrototype = () => {
     Creep.prototype.moveToRoom = function(this: Creep, room: string): number {
         return this.moveTo(new RoomPosition(25, 25, room));
     };
+
+    Creep.prototype.updateTargetRoom = function(this: Creep, room: string): void {
+        this.memory.target_room = room;
+    };
 };
 
 export = loadCreepPrototype;

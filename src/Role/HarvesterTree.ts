@@ -22,6 +22,8 @@ import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
 import {Check_IsInHomeRoom} from "../Check/IsInHomeRoom";
 import {ROLE_SPAWN_SUPPLIER} from "../Constants";
 import {Check_TargetContainerIsFilled} from "../Check/TargetContainerIsFilled";
+import {Action_ChangeTargetRoom} from "../Action/ChangeTargetRoom";
+import RoomRepository from "../Repository/RoomRepository";
 
 export = new Tree_Tree(
     "Harvester",
@@ -85,6 +87,7 @@ export = new Tree_Tree(
                     new Action_MoveToTarget(),
                 ]),
             ]),
+            new Action_ChangeTargetRoom(new RoomRepository()),
         ]),
     ]),
 );

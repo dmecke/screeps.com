@@ -95,6 +95,7 @@ interface Creep {
     isInRoom(room: string): boolean;
     isInTargetRoom(): boolean;
     isInHomeRoom(): boolean;
+    updateTargetRoom(room: string): void;
     moveToRoom(room: string): number;
 }
 interface CreepMemory {
