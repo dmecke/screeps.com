@@ -22,6 +22,10 @@ export class Task_StructurePlanning extends Task_Task {
             positions.push(room.controller.pos);
         }
 
+        if (positions.length === 0) {
+            return;
+        }
+
         const averagePosition = new RoomPosition(
             _.sum(positions.map((position: RoomPosition) => position.x)) / positions.length + Math.floor(Math.random() * 10 - 5),
             _.sum(positions.map((position: RoomPosition) => position.y)) / positions.length + Math.floor(Math.random() * 10 - 5),
