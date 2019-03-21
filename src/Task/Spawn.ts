@@ -32,23 +32,26 @@ export class Task_Spawn extends Task_Task {
                 continue;
             }
             if (spawn.room.creepsOfRole(role).length < Role_Factory.minimumCreepCount(role)) {
-                this.spawn(role, spawn);
-                return;
+                if (this.spawn(role, spawn)) {
+                    return;
+                }
             }
         }
 
         if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(ROLE_CLAIMER).length < 2) {
-            this.spawn(ROLE_CLAIMER, spawn, Settings.WISHLIST_ROOMS[Math.floor(Math.random() * Settings.WISHLIST_ROOMS.length)]);
-            return;
+            if (this.spawn(ROLE_CLAIMER, spawn, Settings.WISHLIST_ROOMS[Math.floor(Math.random() * Settings.WISHLIST_ROOMS.length)])) {
+                return;
+            }
         }
 
         if (spawn.room.creepsOfRole(ROLE_BUILDER).length < Settings.BUILDER_MAXIMUM) {
-            this.spawn(ROLE_BUILDER, spawn);
-            return;
+             if (this.spawn(ROLE_BUILDER, spawn)) {
+                 return;
+             }
         }
     }
 
-    private spawn(role: string, spawn: StructureSpawn, targetRoom: string = ""): string|number {
+    private spawn(role: string, spawn: StructureSpawn, targetRoom: string = ""): boolean {
         const newName = spawn.createCreep(Role_Factory.bodyParts(role, spawn), this.creepNameGenerator.generate(role), {
             blackboard: {},
             blacklisted_rooms: Settings.BLACKLISTED_ROOMS,
@@ -65,8 +68,10 @@ export class Task_Spawn extends Task_Task {
             if (roleName === ROLE_SCOUT) {
                 creep.notifyWhenAttacked(false);
             }
+
+            return true;
         }
 
-        return newName;
+        return false;
     }
 }
