@@ -1,6 +1,8 @@
 import {Tree_Tree} from "./Tree/Tree";
 import {Tree_Core_Blackboard} from "./Tree/Core/Blackboard";
 import {Role_Role} from "./Role/Role";
+import {TREE_FAILURE} from "./Constants";
+import {Util_Logger} from "./Util/Logger";
 
 export class RoleCreep {
 
@@ -19,7 +21,10 @@ export class RoleCreep {
     }
 
     public update(): void {
-        this.tree.tick(this.creep, this.blackboard);
+        const status = this.tree.tick(this.creep, this.blackboard);
+        if (status === TREE_FAILURE) {
+            Util_Logger.warn(this.creep.name + " was not able to perform an action.");
+        }
         this.creep.room.trackInfo();
     }
 }
