@@ -23,4 +23,8 @@ export class Action_HarvestTarget extends Tree_Core_Action {
 
         return TREE_RUNNING;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "I try to harvest my current target.";
+    }
 }

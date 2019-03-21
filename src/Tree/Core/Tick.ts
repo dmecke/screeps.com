@@ -29,7 +29,7 @@ export class Tree_Core_Tick {
     public beforeTick(node: Tree_Core_BaseNode): void {
         if (this.target.debug()) {
             if (node instanceof Tree_Core_Composite || node instanceof Tree_Core_Decorator) {
-                Util_Logger.debug("    ".repeat(this.depth - 1) + node.constructor.name);
+                Util_Logger.debug("    ".repeat(this.depth - 1) + node.getDescription(this));
             }
         }
     }
@@ -64,7 +64,11 @@ export class Tree_Core_Tick {
                     throw new Error();
             }
 
-            Util_Logger.debug("    ".repeat(this.depth - 1) + "<span style='color: " + color + "'>" + statusName + "</span> " + node.constructor.name);
+            if (node instanceof Tree_Core_Composite || node instanceof Tree_Core_Decorator) {
+                Util_Logger.debug("    ".repeat(this.depth - 1) + "<span style='color: " + color + "'>" + statusName + "</span>");
+            } else {
+                Util_Logger.debug("    ".repeat(this.depth - 1) + "<span style='color: " + color + "'>" + statusName + "</span> " + node.getDescription(this));
+            }
         }
     }
 

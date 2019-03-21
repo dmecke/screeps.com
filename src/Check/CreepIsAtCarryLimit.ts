@@ -13,4 +13,8 @@ export class Check_CreepIsAtCarryLimit extends Tree_Core_Action {
 
         return TREE_FAILURE;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "I am at my carry limit.";
+    }
 }

@@ -1,6 +1,3 @@
-import {Check_CreepCarriesNothing} from "../Check/CreepCarriesNothing";
-import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";
-import {Check_AllSpawnsFilled} from "../Check/AllSpawnsFilled";
 import {Action_AssignNearestSpawnInNeedOfEnergyAsTarget} from "../Action/AssignNearestSpawnInNeedOfEnergyAsTarget";
 import {Action_TransferToTarget} from "../Action/TransferToTarget";
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
@@ -17,6 +14,9 @@ import {Action_WithdrawFromTarget} from "../Action/WithdrawFromTarget";
 import {Tree_Tree} from "../Tree/Tree";
 import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
+import {Check_ASpawnsIsInNeedOfEnergy} from "../Check/ASpawnsIsInNeedOfEnergy";
+import {Check_CreepCarriesSomething} from "../Check/CreepCarriesSomething";
+import {Check_FilledStorageAvailable} from "../Check/FilledStorageAvailable";
 
 export = new Tree_Tree(
     "SpawnSupplier",
@@ -27,9 +27,7 @@ export = new Tree_Tree(
         ]),
         new Tree_Composite_Priority([
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepCarriesNothing(),
-                ),
+                new Check_CreepCarriesSomething(),
                 new Action_AssignNearestTowerInNeedOfEnergyAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_TransferToTarget(RESOURCE_ENERGY),
@@ -37,12 +35,8 @@ export = new Tree_Tree(
                 ]),
             ]),
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepCarriesNothing(),
-                ),
-                new Tree_Decorator_Inverter(
-                    new Check_AllSpawnsFilled(),
-                ),
+                new Check_CreepCarriesSomething(),
+                new Check_ASpawnsIsInNeedOfEnergy(),
                 new Action_AssignNearestSpawnInNeedOfEnergyAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_TransferToTarget(RESOURCE_ENERGY),
@@ -50,9 +44,7 @@ export = new Tree_Tree(
                 ]),
             ]),
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepCarriesNothing(),
-                ),
+                new Check_CreepCarriesSomething(),
                 new Action_AssignControllerAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_UpgradeController(),
@@ -68,6 +60,7 @@ export = new Tree_Tree(
                 ]),
             ]),
             new Tree_Composite_Sequence([
+                new Check_FilledStorageAvailable(),
                 new Action_AssignNearestFilledStorageAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_WithdrawFromTarget(RESOURCE_ENERGY),

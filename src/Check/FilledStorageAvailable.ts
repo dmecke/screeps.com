@@ -1,13 +1,13 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
-import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
+import {TREE_FAILURE, TREE_SUCCESS} from "../Constants";
 
-export class Check_AllSpawnsFilled extends Tree_Core_Action {
+export class Check_FilledStorageAvailable extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
         const creep = tick.target as Creep;
 
-        if (creep.room.findSpawns().inNeedOfEnergy().none()) {
+        if (creep.room.findDepots().contains(RESOURCE_ENERGY).exist()) {
             return TREE_SUCCESS;
         }
 
@@ -15,6 +15,6 @@ export class Check_AllSpawnsFilled extends Tree_Core_Action {
     }
 
     public getDescription(tick: Tree_Core_Tick): string {
-        return "No spawn in this room needs any more energy.";
+        return "There is a filled storage available.";
     }
 }

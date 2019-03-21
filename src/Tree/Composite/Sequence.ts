@@ -15,4 +15,8 @@ export class Tree_Composite_Sequence extends Tree_Core_Composite {
 
         return TREE_SUCCESS;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "I try to do all of the following things.";
+    }
 }

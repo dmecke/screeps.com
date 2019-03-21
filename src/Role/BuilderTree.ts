@@ -1,13 +1,10 @@
 import {Tree_Tree} from "../Tree/Tree";
 import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
 import {Action_UpgradeController} from "../Action/UpgradeController";
-import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";
 import {Tree_Composite_Sequence} from "../Tree/Composite/Sequence";
 import {Check_DroppedEnergyAvailable} from "../Check/DroppedEnergyAvailable";
-import {Check_CreepCarriesNothing} from "../Check/CreepCarriesNothing";
 import {Action_AssignHighestPriorityDamagedStructureAsTarget} from "../Action/AssignHighestPriorityDamagedStructureAsTarget";
 import {Action_AssignHighestPriorityConstructionSiteAsTarget} from "../Action/AssignHighestPriorityConstructionSiteAsTarget";
-import {Check_CreepIsAtCarryLimit} from "../Check/CreepIsAtCarryLimit";
 import {Action_AssignHighestPrioritySourceAsTarget} from "../Action/AssignHighestPrioritySourceAsTarget";
 import {Action_AssignControllerAsTarget} from "../Action/AssignControllerAsTarget";
 import {Action_AssignNearestDroppedEnergyAsTarget} from "../Action/AssignNearestDroppedEnergyAsTarget";
@@ -21,6 +18,8 @@ import {Action_MoveToHomeRoom} from "../Action/MoveToHomeRoom";
 import {Action_PickUpTarget} from "../Action/PickUpTarget";
 import {Action_WithdrawFromTarget} from "../Action/WithdrawFromTarget";
 import {Action_RepairTarget} from "../Action/RepairTarget";
+import {Check_CreepCanCarryMore} from "../Check/CreepCanCarryMore";
+import {Check_CreepCarriesSomething} from "../Check/CreepCarriesSomething";
 
 export = new Tree_Tree(
     "Builder",
@@ -31,9 +30,7 @@ export = new Tree_Tree(
         ]),
         new Tree_Composite_MemoryPriority([
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepCarriesNothing(),
-                ),
+                new Check_CreepCarriesSomething(),
                 new Action_AssignHighestPriorityDamagedStructureAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_RepairTarget(),
@@ -41,9 +38,7 @@ export = new Tree_Tree(
                 ]),
             ]),
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepCarriesNothing(),
-                ),
+                new Check_CreepCarriesSomething(),
                 new Action_AssignHighestPriorityConstructionSiteAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_BuildTarget(),
@@ -51,9 +46,7 @@ export = new Tree_Tree(
                 ]),
             ]),
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepCarriesNothing(),
-                ),
+                new Check_CreepCarriesSomething(),
                 new Action_AssignControllerAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_UpgradeController(),
@@ -76,9 +69,7 @@ export = new Tree_Tree(
                 ]),
             ]),
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepIsAtCarryLimit(),
-                ),
+                new Check_CreepCanCarryMore(),
                 new Action_AssignHighestPrioritySourceAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_HarvestTarget(),

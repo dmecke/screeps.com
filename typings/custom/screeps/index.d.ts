@@ -28,6 +28,7 @@ interface IDepots {
     nextToMySpawn(): IDepots;
     canStore(amount: number): IDepots;
     closestByPath(pos: RoomPosition): StructureContainer|StructureStorage;
+    exist(): boolean;
 }
 interface ISpawns {
     inNeedOfEnergy(): ISpawns;

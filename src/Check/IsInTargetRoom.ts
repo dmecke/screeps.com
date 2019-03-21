@@ -13,4 +13,10 @@ export class Check_IsInTargetRoom extends Tree_Core_Action {
 
         return TREE_FAILURE;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        const creep = tick.target as Creep;
+
+        return "I am in my target room " + creep.targetRoom() + ".";
+    }
 }

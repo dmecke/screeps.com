@@ -61,4 +61,8 @@ export class Depots implements IDepots {
     public closestByPath(pos: RoomPosition): StructureStorage|StructureContainer {
         return pos.findClosestByPath(this.depots);
     }
+
+    public exist(): boolean {
+        return this.depots.length > 0;
+    }
 }

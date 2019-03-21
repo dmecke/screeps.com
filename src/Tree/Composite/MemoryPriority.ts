@@ -26,4 +26,8 @@ export class Tree_Composite_MemoryPriority extends Tree_Core_Composite {
 
         return TREE_FAILURE;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "I try to do the best of the following things and continue them until I am finished.";
+    }
 }

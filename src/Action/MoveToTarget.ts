@@ -37,4 +37,10 @@ export class Action_MoveToTarget extends Tree_Core_Action {
 
         return TREE_RUNNING;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        const target = tick.blackboard.get("target", tick.tree.id) as { pos: RoomPosition };
+
+        return "I try to move to my target at " + target.pos.x + "|" + target.pos.y + ".";
+    }
 }

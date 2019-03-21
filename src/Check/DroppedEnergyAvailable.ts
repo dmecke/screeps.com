@@ -33,4 +33,8 @@ export class Check_DroppedEnergyAvailable extends Tree_Core_Action {
 
         return TREE_FAILURE;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "There is dropped energy available.";
+    }
 }

@@ -1,6 +1,4 @@
 import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
-import {Check_CreepIsAtCarryLimit} from "../Check/CreepIsAtCarryLimit";
-import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";
 import {Action_AssignHighestPrioritySourceAsTarget} from "../Action/AssignHighestPrioritySourceAsTarget";
 import {Action_HarvestTarget} from "../Action/HarvestTarget";
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
@@ -13,17 +11,18 @@ import {Check_HasConstructionSiteNearTarget} from "../Check/HasContstructionSite
 import {Action_CreateConstructionSiteNearTarget} from "../Action/CreateContstructionSiteNearTarget";
 import {Action_AssignNearestConstructionSiteAsTarget} from "../Action/AssignNearestConstructionSiteAsTarget";
 import {Action_BuildTarget} from "../Action/BuildTarget";
-import {Check_AllSpawnsFilled} from "../Check/AllSpawnsFilled";
 import {Action_AssignNearestSpawnInNeedOfEnergyAsTarget} from "../Action/AssignNearestSpawnInNeedOfEnergyAsTarget";
 import {Tree_Composite_MemoryPriority} from "../Tree/Composite/MemoryPriority";
 import {Tree_Tree} from "../Tree/Tree";
 import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
-import {Check_IsInHomeRoom} from "../Check/IsInHomeRoom";
 import {ROLE_SPAWN_SUPPLIER} from "../Constants";
-import {Check_TargetContainerIsFilled} from "../Check/TargetContainerIsFilled";
 import {Action_ChangeTargetRoom} from "../Action/ChangeTargetRoom";
 import RoomRepository from "../Repository/RoomRepository";
+import {Check_CreepCanCarryMore} from "../Check/CreepCanCarryMore";
+import {Check_ASpawnsIsInNeedOfEnergy} from "../Check/ASpawnsIsInNeedOfEnergy";
+import {Check_IsNotInHomeRoom} from "../Check/IsNotInHomeRoom";
+import {Check_TargetContainerIsNotFull} from "../Check/TargetContainerIsNotFull";
 
 export = new Tree_Tree(
     "Harvester",
@@ -34,9 +33,7 @@ export = new Tree_Tree(
         ]),
         new Tree_Composite_MemoryPriority([
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepIsAtCarryLimit(),
-                ),
+                new Check_CreepCanCarryMore(),
                 new Action_AssignHighestPrioritySourceAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_HarvestTarget(),
@@ -46,18 +43,14 @@ export = new Tree_Tree(
             new Tree_Composite_Sequence([
                 new Tree_Composite_Priority([
                     new Check_RoomHasCreepsOfRole(ROLE_SPAWN_SUPPLIER, 1),
-                    new Tree_Decorator_Inverter(
-                        new Check_IsInHomeRoom(),
-                    ),
+                    new Check_IsNotInHomeRoom(),
                 ]),
                 new Tree_Composite_Priority([
                     new Tree_Composite_Sequence([
                         new Action_AssignHighestPrioritySourceAsTarget(),
                         new Check_TargetSourceHasAttachedContainer(),
                         new Action_AssignAttachedContainerOfSourceAsTarget(),
-                        new Tree_Decorator_Inverter(
-                            new Check_TargetContainerIsFilled(),
-                        ),
+                        new Check_TargetContainerIsNotFull(),
                         new Tree_Composite_Priority([
                             new Action_TransferToTarget(RESOURCE_ENERGY),
                             new Action_MoveToTarget(),
@@ -78,9 +71,7 @@ export = new Tree_Tree(
                 ]),
             ]),
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_AllSpawnsFilled(),
-                ),
+                new Check_ASpawnsIsInNeedOfEnergy(),
                 new Action_AssignNearestSpawnInNeedOfEnergyAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_TransferToTarget(RESOURCE_ENERGY),

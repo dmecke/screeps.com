@@ -15,4 +15,8 @@ export class Tree_Composite_Priority extends Tree_Core_Composite {
 
         return TREE_FAILURE;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "I try to do the best of the following things.";
+    }
 }

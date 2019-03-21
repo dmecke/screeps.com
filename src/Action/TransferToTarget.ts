@@ -13,12 +13,24 @@ export class Action_TransferToTarget extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
         const creep = tick.target as Creep;
-        const target = tick.blackboard.get("target", tick.tree.id) as Creep|StructureSpawn|Structure;
+        const target = this.getTarget(tick);
 
         if (creep.transfer(target, this.resource) === OK) {
             return TREE_SUCCESS;
         }
 
         return TREE_FAILURE;
+    }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        const creep = tick.target as Creep;
+        const amount = creep.carry[this.resource];
+        const roomPosition = this.getTarget(tick).pos;
+
+        return "I try to transfer all of my " + amount + " " + this.resource + " to my target at " + roomPosition.x + "|" + roomPosition.y + ".";
+    }
+
+    private getTarget(tick: Tree_Core_Tick): Creep|StructureSpawn|Structure {
+        return tick.blackboard.get("target", tick.tree.id);
     }
 }

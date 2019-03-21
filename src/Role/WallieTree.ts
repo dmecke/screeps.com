@@ -3,8 +3,6 @@ import {Tree_Composite_Priority} from "../Tree/Composite/Priority";
 import {Check_DroppedEnergyAvailable} from "../Check/DroppedEnergyAvailable";
 import {Tree_Composite_Sequence} from "../Tree/Composite/Sequence";
 import {Action_UpgradeController} from "../Action/UpgradeController";
-import {Tree_Decorator_Inverter} from "../Tree/Decorator/Inverter";
-import {Check_CreepCarriesNothing} from "../Check/CreepCarriesNothing";
 import {Action_AssignControllerAsTarget} from "../Action/AssignControllerAsTarget";
 import {Action_AssignNearestDroppedEnergyAsTarget} from "../Action/AssignNearestDroppedEnergyAsTarget";
 import {Action_AssignNearestFilledStorageAsTarget} from "../Action/AssignNearestFilledStorageAsTarget";
@@ -15,6 +13,7 @@ import {Action_WithdrawFromTarget} from "../Action/WithdrawFromTarget";
 import {Action_RepairTarget} from "../Action/RepairTarget";
 import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
+import {Check_CreepCarriesSomething} from "../Check/CreepCarriesSomething";
 
 export = new Tree_Tree(
     "Wallie",
@@ -25,9 +24,7 @@ export = new Tree_Tree(
         ]),
         new Tree_Composite_Priority([
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepCarriesNothing(),
-                ),
+                new Check_CreepCarriesSomething(),
                 new Action_AssignHighestPriorityDamagedWallAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_RepairTarget(),
@@ -35,9 +32,7 @@ export = new Tree_Tree(
                 ]),
             ]),
             new Tree_Composite_Sequence([
-                new Tree_Decorator_Inverter(
-                    new Check_CreepCarriesNothing(),
-                ),
+                new Check_CreepCarriesSomething(),
                 new Action_AssignControllerAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_UpgradeController(),

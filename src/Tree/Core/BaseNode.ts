@@ -1,6 +1,7 @@
 import {Tree_Core_Tick} from "./Tick";
 import {Tree_Tree} from "../Tree";
 import {TREE_RUNNING} from "../../Constants";
+import {Util_Logger} from "../../Util/Logger";
 
 export abstract class Tree_Core_BaseNode {
 
@@ -30,6 +31,11 @@ export abstract class Tree_Core_BaseNode {
         this.exit(tick);
 
         return status;
+    }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        Util_Logger.warn("Missing method getDescription() in " + this.constructor.name);
+        return this.constructor.name;
     }
 
     protected enter(tick: Tree_Core_Tick): void {

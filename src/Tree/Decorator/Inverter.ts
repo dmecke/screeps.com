@@ -17,4 +17,8 @@ export class Tree_Decorator_Inverter extends Tree_Core_Decorator {
 
         return status;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "I try to fail at the following thing.";
+    }
 }
