@@ -8,7 +8,7 @@ export abstract class Tree_Core_BaseNode {
 
     public abstract assignId(tree: Tree_Tree): void;
 
-    public execute(tick: Tree_Core_Tick) {
+    public execute(tick: Tree_Core_Tick): number {
         tick.enter(this);
         this.enter(tick);
 

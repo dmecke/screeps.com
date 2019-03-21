@@ -17,7 +17,7 @@ export class Tree_Tree {
         this.root.assignId(this);
     }
 
-    public tick(target: { name: string, debug(): boolean }, blackboard: Tree_Core_Blackboard) {
+    public tick(target: { name: string, debug(): boolean }, blackboard: Tree_Core_Blackboard): number {
         const tick = new Tree_Core_Tick(target, this, blackboard);
         if (target.debug()) {
             Util_Logger.debug(target.name + "'s behavior tree");
