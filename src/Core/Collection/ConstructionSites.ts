@@ -25,6 +25,14 @@ export class ConstructionSites implements IConstructionSites {
         return new ConstructionSites(constructionSites);
     }
 
+    public filterOnlyContainerForController(): ConstructionSites {
+        return new ConstructionSites(_.filter(this.constructionSites, (constructionSite: ConstructionSite) => {
+            return constructionSite.structureType === STRUCTURE_CONTAINER && constructionSite.pos.findInRange(FIND_STRUCTURES, Settings.BUILD_DISTANCE_CONTAINER, {
+                filter: (structure: Structure) => structure.structureType === STRUCTURE_CONTROLLER,
+            }).length > 0;
+        }));
+    }
+
     public closestByPath(pos: RoomPosition): ConstructionSite {
         return pos.findClosestByPath(this.constructionSites);
     }

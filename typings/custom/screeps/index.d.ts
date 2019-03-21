@@ -11,6 +11,7 @@ interface IStructures {
 interface IConstructionSites {
     orderByPriority(creep: Creep): IConstructionSites;
     closestByPath(pos: RoomPosition): ConstructionSite;
+    filterOnlyContainerForController(): IConstructionSites;
     first(): ConstructionSite;
 }
 interface ISources {
