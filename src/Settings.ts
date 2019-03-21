@@ -5,8 +5,8 @@ export class Settings {
     public static BUILD_PRIORITY_EXTENSION = 25;
     public static BUILD_DISTANCE_CONTAINER = 1; // how far should a container be placed next to a structure?
 
-    public static BLACKLISTED_ROOMS = ["E23S2"];
-    public static WISHLIST_ROOMS = ["E22S1", "E21S1", "E21S2"];
+    public static BLACKLISTED_ROOMS = [];
+    public static WISHLIST_ROOMS = ["E27N24"];
 
     public static NUMBER_OF_HARVESTER = 4;
     public static NUMBER_OF_UPGRADER = 1;
