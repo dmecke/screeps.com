@@ -4,7 +4,7 @@ import {TREE_FAILURE, TREE_SUCCESS, TREE_RUNNING} from "../Constants";
 
 export class Action_MoveToRoom extends Tree_Core_Action {
 
-    private room: string;
+    private readonly room: string;
 
     public constructor(room: string) {
         super();
@@ -26,5 +26,9 @@ export class Action_MoveToRoom extends Tree_Core_Action {
         }
 
         return TREE_RUNNING;
+    }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "I try to move to room " + this.room + ".";
     }
 }

@@ -1,27 +1,22 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
 import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
+import {Tree_Core_Tick} from "../Tree/Core/Tick";
 
-export class Check_RoomHasStructure extends Tree_Core_Action {
+export class Check_RoomHasController extends Tree_Core_Action {
 
-    private room: Room;
+    public tick(tick: Tree_Core_Tick): number {
+        const creep = tick.target as Creep;
 
-    private structure: string;
-
-    public constructor(room: Room, structure: string) {
-        super();
-        this.room = room;
-        this.structure = structure;
-    }
-
-    public tick(): number {
-        const structures = this.room.find(FIND_STRUCTURES, {
-            filter: (structure: Structure) => structure.structureType === this.structure,
-        }).length;
-
-        if (structures > 0) {
+        if (creep.room.hasController()) {
             return TREE_SUCCESS;
         }
 
         return TREE_FAILURE;
+    }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        const creep = tick.target as Creep;
+
+        return "The room " + creep.room.name + " has a controller.";
     }
 }

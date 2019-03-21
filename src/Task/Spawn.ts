@@ -22,20 +22,30 @@ export class Task_Spawn extends Task_Task {
 
     public execute() {
         this.spawnRepository.findAll().forEach((spawn: StructureSpawn) => {
-            let spawned = false;
-            if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(ROLE_CLAIMER).length < 2) {
-                this.spawn(ROLE_CLAIMER, spawn, Settings.WISHLIST_ROOMS[Math.floor(Math.random() * Settings.WISHLIST_ROOMS.length)]);
-            }
-            for (const role of Role_Factory.roles()) {
-                if (spawn.room.creepsOfRole(role).length < Role_Factory.minimumCreepCount(role)) {
-                    this.spawn(role, spawn);
-                    spawned = true;
-                }
-            }
-            if (!spawned && spawn.room.creepsOfRole(ROLE_BUILDER).length < Settings.BUILDER_MAXIMUM) {
-                this.spawn(ROLE_BUILDER, spawn);
-            }
+            this.spawnInSpawner(spawn);
         });
+    }
+
+    private spawnInSpawner(spawn: StructureSpawn): void {
+        for (const role of Role_Factory.roles()) {
+            if (role === ROLE_CLAIMER) {
+                continue;
+            }
+            if (spawn.room.creepsOfRole(role).length < Role_Factory.minimumCreepCount(role)) {
+                this.spawn(role, spawn);
+                return;
+            }
+        }
+
+        if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(ROLE_CLAIMER).length < 2) {
+            this.spawn(ROLE_CLAIMER, spawn, Settings.WISHLIST_ROOMS[Math.floor(Math.random() * Settings.WISHLIST_ROOMS.length)]);
+            return;
+        }
+
+        if (spawn.room.creepsOfRole(ROLE_BUILDER).length < Settings.BUILDER_MAXIMUM) {
+            this.spawn(ROLE_BUILDER, spawn);
+            return;
+        }
     }
 
     private spawn(role: string, spawn: StructureSpawn, targetRoom: string = ""): string|number {

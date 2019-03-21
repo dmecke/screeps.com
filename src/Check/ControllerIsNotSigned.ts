@@ -20,11 +20,13 @@ export class Check_ControllerIsNotSigned extends Tree_Core_Action {
         }
 
         if (this.message === "" && controller.sign === undefined) {
-            return TREE_SUCCESS;
+            return TREE_FAILURE;
         }
 
-        if (controller.sign && controller.sign.username === creep.owner.username && controller.sign.text === this.message) {
-            return TREE_SUCCESS;
+        if (controller.sign) {
+            if (controller.sign.username !== creep.owner.username || controller.sign.text !== this.message) {
+                return TREE_SUCCESS;
+            }
         }
 
         return TREE_FAILURE;
@@ -34,6 +36,6 @@ export class Check_ControllerIsNotSigned extends Tree_Core_Action {
         const creep = tick.target as Creep;
         const room = creep.room;
 
-        return "The controller in " + room.name + " is signed with our message '" + this.message + "'.";
+        return "The controller in " + room.name + " is not signed with our message '" + this.message + "'.";
     }
 }

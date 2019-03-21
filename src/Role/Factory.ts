@@ -62,15 +62,15 @@ export class Role_Factory {
 
     public static roles(): string[] {
         return [
-            ROLE_CLAIMER,
-            ROLE_SCOUT,
-            ROLE_DEFENDER,
-            ROLE_WALLIE,
-            ROLE_BUILDER,
-            ROLE_UPGRADER,
-            ROLE_TRANSPORTER,
-            ROLE_SPAWN_SUPPLIER,
             ROLE_HARVESTER,
+            ROLE_UPGRADER,
+            ROLE_BUILDER,
+            ROLE_SPAWN_SUPPLIER,
+            ROLE_TRANSPORTER,
+            ROLE_CLAIMER,
+            ROLE_DEFENDER,
+            ROLE_SCOUT,
+            ROLE_WALLIE,
         ];
     }
 

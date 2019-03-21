@@ -25,4 +25,8 @@ export class Action_SignController extends Tree_Core_Action {
 
         return TREE_FAILURE;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "I try to sign the controller with '" + this.message + "'.";
+    }
 }

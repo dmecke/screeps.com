@@ -8,11 +8,14 @@ import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
 import {Action_AssignRandomAdjacentRoomAsTargetRoom} from "../Action/AssignRandomAdjacentRoomAsTargetRoom";
 import {Check_IsNotInTargetRoom} from "../Check/IsNotInTargetRoom";
 import {Check_ControllerIsNotSigned} from "../Check/ControllerIsNotSigned";
+import {Check_RoomHasController} from "../Check/RoomHasStructure";
+import {Check_TargetRoomCanBeReached} from "../Check/TargetRoomCanBeReached";
 
 export = new Tree_Tree(
     "Scout",
     new Tree_Composite_Priority([
         new Tree_Composite_Sequence([
+            new Check_RoomHasController(),
             new Check_ControllerIsNotSigned(""),
             new Action_AssignControllerAsTarget(),
             new Tree_Composite_Priority([
@@ -21,6 +24,10 @@ export = new Tree_Tree(
             ]),
         ]),
         new Tree_Composite_Sequence([
+            new Tree_Composite_Priority([
+                new Check_TargetRoomCanBeReached(),
+                new Action_AssignRandomAdjacentRoomAsTargetRoom(),
+            ]),
             new Tree_Composite_Priority([
                 new Check_IsNotInTargetRoom(),
                 new Action_AssignRandomAdjacentRoomAsTargetRoom(),

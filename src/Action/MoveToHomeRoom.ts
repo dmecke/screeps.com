@@ -20,4 +20,10 @@ export class Action_MoveToHomeRoom extends Tree_Core_Action {
 
         return TREE_RUNNING;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        const creep = tick.target as Creep;
+
+        return "I try to move to my home room " + creep.homeRoom() + ".";
+    }
 }
