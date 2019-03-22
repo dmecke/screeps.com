@@ -112,7 +112,6 @@ export class Task_Report extends Task_Task {
         const energyPerSecond = this.getEnergyChange(room) / room.memory.progress_stack.length / Settings.AVERAGE_TICK_DURATION;
         const neededEnergyToUpgrade = room.controller.progressTotal - room.controller.progress;
         let secondsToUpgrade = Math.floor(neededEnergyToUpgrade / energyPerSecond);
-        console.log(secondsToUpgrade);
 
         const hoursToUpgrade = Math.floor(secondsToUpgrade / 3600);
         secondsToUpgrade -= hoursToUpgrade * 3600;
