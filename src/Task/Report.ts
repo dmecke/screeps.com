@@ -1,6 +1,7 @@
 import {Task_Task} from "./Task";
 import {Util_Logger} from "../Util/Logger";
 import {Role_Factory} from "../Role/Factory";
+import {Settings} from "../Settings";
 
 export class Task_Report extends Task_Task {
 
@@ -9,6 +10,8 @@ export class Task_Report extends Task_Task {
     public execute(): void {
         Util_Logger.info("");
         Util_Logger.info("=== <span style='color: #5599e6'>Report</span> " + Game.time.toString().format() + " ===");
+
+        this.reportCpu();
 
         for (const name in Game.rooms) {
             if (Game.rooms.hasOwnProperty(name)) {
@@ -32,6 +35,19 @@ export class Task_Report extends Task_Task {
         for (const room of this.rooms) {
             this.logStatistics(room);
         }
+    }
+
+    private reportCpu(): void {
+        const used = Math.floor(Game.cpu.getUsed());
+        const cpuColor = used > Game.cpu.limit ? "#ff5646" : "#79CB44";
+        const cpuLimitColor = Game.cpu.tickLimit < Settings.CPU_BUCKET_BUFFER ? "#ffd85b" : "#79CB44";
+        const cpuReport = "CPU <span style='color: " + cpuColor + "'>" + used.toString().format() + "</span> / <span style='color: " + cpuLimitColor + "'>" + Game.cpu.tickLimit + "</span>";
+
+        const bucket = Game.cpu.bucket;
+        const bucketColor = bucket === Settings.CPU_BUCKET_MAXIMUM ? "#79CB44" : "#FF5646";
+        const bucketReport = "CPU Bucket <span style='color: " + bucketColor + "'>" + bucket + "</span> / " + Settings.CPU_BUCKET_MAXIMUM.toString().format();
+
+        Util_Logger.info(cpuReport + "  |  " + bucketReport);
     }
 
     private needToReport(room: Room): boolean {
@@ -59,17 +75,20 @@ export class Task_Report extends Task_Task {
                 message.push(role + " <span style='color:" + color + "'>" + room.creepsOfRole(role).length + " / " + Role_Factory.minimumCreepCount(role) + "</span>");
             }
         }
-        Util_Logger.info(room.name + ": " + attack + " " + this.getLevelReport(room) + "  |  " + this.getEnergyReport(room) + "  |  " + message.join("  |  "));
+        Util_Logger.info(room.name + "  |  " + attack + "  |  " + this.getLevelReport(room) + "  |  " + message.join("  |  "));
     }
 
     private getLevelReport(room: Room): string {
         this.trackControllerProgress(room);
-        const formattedProgress = room.controller.progress.toString().format();
-        const formattedProgressTotal = room.controller.progressTotal.toString().format();
-        const stack = room.memory.progress_stack;
-        const change = stack.slice(-1).pop() - stack[0];
 
-        return "RCL " + room.controller.level + "  " + formattedProgress.pad(10) + " / " + formattedProgressTotal.pad(10) + " " + ("(+" + change.toString().format() + ")").pad(8);
+        const roomControlLevel = "RCL " + room.controller.level;
+        const formattedProgress = room.controller.progress.toString().format().pad(10);
+        const formattedProgressTotal = room.controller.progressTotal.toString().format().pad(10);
+        const energyChange = ("(+" + this.getEnergyChange(room).toString().format() + ")").pad(8);
+        const energyReport = this.getEnergyReport(room);
+        const estimatedUpgradeTime = this.getEstimatedUpgradeTime(room);
+
+        return roomControlLevel + "  |  " + formattedProgress + " / " + formattedProgressTotal + "  |  " + energyChange + "  |  " + energyReport + "  |  " + estimatedUpgradeTime;
     }
 
     private trackControllerProgress(room: Room): void {
@@ -87,5 +106,28 @@ export class Task_Report extends Task_Task {
         const capacity = room.energyCapacityAvailable.toString();
 
         return "Energy <span style='color: " + color + "'>" + available.pad(4) + " / " + capacity.pad(4) + "</span>";
+    }
+
+    private getEstimatedUpgradeTime(room: Room): string {
+        const energyPerSecond = this.getEnergyChange(room) / room.memory.progress_stack.length / Settings.AVERAGE_TICK_DURATION;
+        const neededEnergyToUpgrade = room.controller.progressTotal - room.controller.progress;
+        let secondsToUpgrade = Math.floor(neededEnergyToUpgrade / energyPerSecond);
+        console.log(secondsToUpgrade);
+
+        const hoursToUpgrade = Math.floor(secondsToUpgrade / 3600);
+        secondsToUpgrade -= hoursToUpgrade * 3600;
+
+        const minutesToUpgrade = Math.floor(secondsToUpgrade / 60);
+        secondsToUpgrade -= minutesToUpgrade * 60;
+
+        const nextUpgrade = hoursToUpgrade.toString().pad(2, "0") + ":" + minutesToUpgrade.toString().pad(2, "0") + ":" + secondsToUpgrade.toString().pad(2, "0");
+
+        return "Next Upgrade <span style='color: #79CB44'>" + nextUpgrade + "</span>";
+    }
+
+    private getEnergyChange(room: Room): number {
+        const stack = room.memory.progress_stack;
+
+        return stack.slice(-1).pop() - stack[0];
     }
 }

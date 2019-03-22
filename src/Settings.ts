@@ -18,4 +18,9 @@ export class Settings {
     public static NUMBER_OF_CLAIMER = 0;
     public static NUMBER_OF_BUILDER = 1;
     public static BUILDER_MAXIMUM = 5;
+
+    public static AVERAGE_TICK_DURATION = 2.9; // @todo calculate this: store the current timestamp every x ticks and compare how much time has passed
+
+    public static CPU_BUCKET_MAXIMUM = 10000;
+    public static CPU_BUCKET_BUFFER = 500;
 }
