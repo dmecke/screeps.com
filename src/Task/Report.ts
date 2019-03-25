@@ -45,7 +45,7 @@ export class Task_Report extends Task_Task {
 
         const bucket = Game.cpu.bucket;
         const bucketColor = bucket === Settings.CPU_BUCKET_MAXIMUM ? "#79CB44" : "#FF5646";
-        const bucketReport = "CPU Bucket <span style='color: " + bucketColor + "'>" + bucket + "</span> / " + Settings.CPU_BUCKET_MAXIMUM.toString().format();
+        const bucketReport = "CPU Bucket <span style='color: " + bucketColor + "'>" + bucket.toString().format() + "</span> / " + Settings.CPU_BUCKET_MAXIMUM.toString().format();
 
         Util_Logger.info(cpuReport + "  |  " + bucketReport);
     }
@@ -86,7 +86,7 @@ export class Task_Report extends Task_Task {
         const formattedProgressTotal = room.controller.progressTotal.toString().format().pad(10);
         const energyChange = ("(+" + this.getEnergyChange(room).toString().format() + ")").pad(8);
         const energyReport = this.getEnergyReport(room);
-        const estimatedUpgradeTime = this.getEstimatedUpgradeTime(room);
+        const estimatedUpgradeTime = this.getEstimatedUpgradeTimeReport(room);
 
         return roomControlLevel + "  |  " + formattedProgress + " / " + formattedProgressTotal + "  |  " + energyChange + "  |  " + energyReport + "  |  " + estimatedUpgradeTime;
     }
@@ -108,10 +108,21 @@ export class Task_Report extends Task_Task {
         return "Energy <span style='color: " + color + "'>" + available.pad(4) + " / " + capacity.pad(4) + "</span>";
     }
 
+    private getEstimatedUpgradeTimeReport(room: Room): string {
+        const energyPerSecond = this.getEnergyPerSecond(room);
+        const color = energyPerSecond === 0 ? "#ff5646" : "#79CB44";
+        const estimatedUpgradeTime = energyPerSecond === 0 ? "-".pad(8) : this.getEstimatedUpgradeTime(room);
+
+        return "Next Upgrade <span style='color: " + color + "'>" + estimatedUpgradeTime + "</span>";
+    }
+
+    private getEnergyPerSecond(room: Room): number {
+        return this.getEnergyChange(room) / room.memory.progress_stack.length / Settings.AVERAGE_TICK_DURATION;
+    }
+
     private getEstimatedUpgradeTime(room: Room): string {
-        const energyPerSecond = this.getEnergyChange(room) / room.memory.progress_stack.length / Settings.AVERAGE_TICK_DURATION;
         const neededEnergyToUpgrade = room.controller.progressTotal - room.controller.progress;
-        let secondsToUpgrade = Math.floor(neededEnergyToUpgrade / energyPerSecond);
+        let secondsToUpgrade = Math.floor(neededEnergyToUpgrade / this.getEnergyPerSecond(room));
 
         const hoursToUpgrade = Math.floor(secondsToUpgrade / 3600);
         secondsToUpgrade -= hoursToUpgrade * 3600;
@@ -119,9 +130,7 @@ export class Task_Report extends Task_Task {
         const minutesToUpgrade = Math.floor(secondsToUpgrade / 60);
         secondsToUpgrade -= minutesToUpgrade * 60;
 
-        const nextUpgrade = hoursToUpgrade.toString().pad(2, "0") + ":" + minutesToUpgrade.toString().pad(2, "0") + ":" + secondsToUpgrade.toString().pad(2, "0");
-
-        return "Next Upgrade <span style='color: #79CB44'>" + nextUpgrade + "</span>";
+        return hoursToUpgrade.toString().pad(2, "0") + ":" + minutesToUpgrade.toString().pad(2, "0") + ":" + secondsToUpgrade.toString().pad(2, "0");
     }
 
     private getEnergyChange(room: Room): number {

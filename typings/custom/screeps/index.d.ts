@@ -77,6 +77,7 @@ interface Room {
     amountOfDroppedEnergy(): number;
     trackInfo(): void;
     creepsOfRole(roleName: string): Creep[];
+    isUndeveloped(): boolean;
 }
 interface Source {
     priority(creep: Creep): number;

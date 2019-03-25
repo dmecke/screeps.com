@@ -23,10 +23,11 @@ import {Task_Tower} from "./Task/Tower";
 import {Task_Report} from "./Task/Report";
 import CreepNameGenerator from "./Util/CreepNameGenerator";
 import SpawnRepository from "./Repository/SpawnRepository";
+import RoomRepository from "./Repository/RoomRepository";
 
 export function loop() {
     new Task_Cleanup().execute();
-    new Task_Spawn(new SpawnRepository(), new CreepNameGenerator()).execute();
+    new Task_Spawn(new SpawnRepository(), new RoomRepository(), new CreepNameGenerator()).execute();
     new Task_Roles().execute();
     new Task_Tower().execute();
     if (Game.time % 10 === 0) {

@@ -13,4 +13,18 @@ export default class RoomRepository {
 
         return rooms;
     }
+
+    public findUndeveloped(): Room[] {
+        const rooms = [];
+        for (const key in Game.rooms) {
+            if (Game.rooms.hasOwnProperty(key)) {
+                const room = Game.rooms[key];
+                if (room.controller !== undefined && room.controller.my && room.findSpawns().none()) {
+                    rooms.push(room);
+                }
+            }
+        }
+
+        return rooms;
+    }
 }

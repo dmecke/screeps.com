@@ -5,18 +5,22 @@ import {Role_Factory} from "../Role/Factory";
 import {ROLE_BUILDER, ROLE_CLAIMER, ROLE_SCOUT} from "../Constants";
 import CreepNameGenerator from "../Util/CreepNameGenerator";
 import SpawnRepository from "../Repository/SpawnRepository";
+import RoomRepository from "../Repository/RoomRepository";
 
 export class Task_Spawn extends Task_Task {
 
     private readonly spawnRepository: SpawnRepository;
+    private readonly roomRepository: RoomRepository;
     private readonly creepNameGenerator: CreepNameGenerator;
 
     public constructor(
         spawnRepository: SpawnRepository,
+        roomRepository: RoomRepository,
         creepNameGenerator: CreepNameGenerator,
     ) {
         super();
         this.spawnRepository = spawnRepository;
+        this.roomRepository = roomRepository;
         this.creepNameGenerator = creepNameGenerator;
     }
 
@@ -38,7 +42,14 @@ export class Task_Spawn extends Task_Task {
             }
         }
 
-        if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(ROLE_CLAIMER).length < 2) {
+        const undevelopedRooms = this.roomRepository.findUndeveloped();
+        if (undevelopedRooms.length > 0) {
+            if (this.spawn(ROLE_BUILDER, spawn, undevelopedRooms[0].name)) {
+                return;
+            }
+        }
+
+        if (Settings.WISHLIST_ROOMS.length > 0 && spawn.room.creepsOfRole(ROLE_CLAIMER).length < 1) {
             if (this.spawn(ROLE_CLAIMER, spawn, Settings.WISHLIST_ROOMS[Math.floor(Math.random() * Settings.WISHLIST_ROOMS.length)])) {
                 return;
             }

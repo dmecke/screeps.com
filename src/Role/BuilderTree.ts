@@ -13,20 +13,20 @@ import {Action_MoveToTarget} from "../Action/MoveToTarget";
 import {Action_HarvestTarget} from "../Action/HarvestTarget";
 import {Action_BuildTarget} from "../Action/BuildTarget";
 import {Tree_Composite_MemoryPriority} from "../Tree/Composite/MemoryPriority";
-import {Check_IsInHomeRoom} from "../Check/IsInHomeRoom";
-import {Action_MoveToHomeRoom} from "../Action/MoveToHomeRoom";
 import {Action_PickUpTarget} from "../Action/PickUpTarget";
 import {Action_WithdrawFromTarget} from "../Action/WithdrawFromTarget";
 import {Action_RepairTarget} from "../Action/RepairTarget";
 import {Check_CreepCanCarryMore} from "../Check/CreepCanCarryMore";
 import {Check_CreepCarriesSomething} from "../Check/CreepCarriesSomething";
+import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
+import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 
 export = new Tree_Tree(
     "Builder",
     new Tree_Composite_Sequence([
         new Tree_Composite_Priority([
-            new Check_IsInHomeRoom(),
-            new Action_MoveToHomeRoom(),
+            new Check_IsInTargetRoom(),
+            new Action_MoveToTargetRoom(),
         ]),
         new Tree_Composite_MemoryPriority([
             new Tree_Composite_Sequence([

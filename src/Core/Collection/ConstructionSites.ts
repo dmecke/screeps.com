@@ -12,10 +12,12 @@ export class ConstructionSites implements IConstructionSites {
         const constructionSites = this.constructionSites;
         constructionSites.sort((a: ConstructionSite, b: ConstructionSite) => {
             let prioA = a.pos.getRangeTo(creep);
+            prioA -= a.structureType === STRUCTURE_SPAWN ? Settings.BUILD_PRIORITY_SPAWN : 0;
             prioA -= a.structureType === STRUCTURE_CONTAINER ? Settings.BUILD_PRIORITY_CONTAINER : 0;
             prioA -= a.structureType === STRUCTURE_EXTENSION ? Settings.BUILD_PRIORITY_EXTENSION : 0;
 
             let prioB = b.pos.getRangeTo(creep);
+            prioB -= b.structureType === STRUCTURE_SPAWN ? Settings.BUILD_PRIORITY_SPAWN : 0;
             prioB -= b.structureType === STRUCTURE_CONTAINER ? Settings.BUILD_PRIORITY_CONTAINER : 0;
             prioB -= b.structureType === STRUCTURE_EXTENSION ? Settings.BUILD_PRIORITY_EXTENSION : 0;
 

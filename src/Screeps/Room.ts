@@ -111,6 +111,10 @@ const loadRoomPrototype = () => {
             return role.name() === roleName && (creep.room.name === room.name || Role_Factory.isRoomIndependant(roleName));
         });
     };
+
+    Room.prototype.isUndeveloped = function(this: Room): boolean {
+        return this.findSpawns().none();
+    };
 };
 
 export = loadRoomPrototype;
