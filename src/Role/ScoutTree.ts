@@ -23,7 +23,7 @@ export = new Tree_Tree(
                 new Action_MoveToTarget(),
             ]),
         ]),
-        new Tree_Composite_Sequence([
+        new Tree_Composite_MemorySequence([
             new Tree_Composite_Priority([
                 new Check_TargetRoomCanBeReached(),
                 new Action_AssignRandomAdjacentRoomAsTargetRoom(),

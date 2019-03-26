@@ -12,7 +12,14 @@ export class Action_MoveToTarget extends Tree_Core_Action {
             return TREE_FAILURE;
         }
 
-        const status = creep.moveTo(target, { visualizePathStyle: { stroke: "#ffaa00" } });
+        const nextSteps = creep.pos.findPathTo(target.pos);
+        if (nextSteps.length === 0) {
+            return TREE_SUCCESS;
+        }
+
+        const status = creep.move(nextSteps[0].direction);
+        const points = nextSteps.map((step) => new RoomPosition(step.x, step.y, creep.room.name));
+        new RoomVisual(creep.room.name).poly(points, { stroke: "#ffaa00", lineStyle: "dashed" });
         if (status === ERR_TIRED || status === ERR_BUSY) {
             return TREE_RUNNING;
         } else if (status !== OK) {
