@@ -30,7 +30,6 @@ export class Action_MoveToTarget extends Tree_Core_Action {
          * When a target tile is blocked, moveTo() still returns OK,
          * so we need to make sure the creep does not get stuck in a RUNNING state.
          */
-        const nextSteps = creep.pos.findPathTo(target.pos);
         if (nextSteps.length > 0) {
             const nextPosition = new RoomPosition(nextSteps[0].x, nextSteps[0].y, creep.room.name);
             if (nextPosition.lookFor(LOOK_CREEPS).length > 0) {
