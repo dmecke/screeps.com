@@ -10,6 +10,7 @@ import {Check_IsNotInTargetRoom} from "../Check/IsNotInTargetRoom";
 import {Check_ControllerIsNotSigned} from "../Check/ControllerIsNotSigned";
 import {Check_RoomHasController} from "../Check/RoomHasStructure";
 import {Check_TargetRoomCanBeReached} from "../Check/TargetRoomCanBeReached";
+import {Tree_Composite_MemorySequence} from "../Tree/Composite/MemorySequence";
 
 export = new Tree_Tree(
     "Scout",
