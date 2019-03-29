@@ -14,7 +14,7 @@ export class Settings {
     public static NUMBER_OF_TRANSPORTER = 4;
     public static NUMBER_OF_SPAWN_SUPPLIER = 3;
     public static NUMBER_OF_WALLIE = 2;
-    public static NUMBER_OF_DEFENDER = 0;
+    public static NUMBER_OF_DEFENDER = 1;
     public static NUMBER_OF_SCOUT = 1;
     public static NUMBER_OF_CLAIMER = 0;
     public static NUMBER_OF_BUILDER = 1;
