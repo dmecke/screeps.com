@@ -6,10 +6,16 @@ import {Action_AssignNearestHostileCreepAsTarget} from "../Action/AssignNearestH
 import {Action_MoveToTarget} from "../Action/MoveToTarget";
 import {Action_AttackTarget} from "../Action/AttackTarget";
 import {Action_RangeAttackTarget} from "../Action/RangeAttackTarget";
+import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
+import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
 
 export = new Tree_Tree(
     "Defender",
     new Tree_Composite_Sequence([
+        new Tree_Composite_Priority([
+            new Check_IsInTargetRoom(),
+            new Action_MoveToTargetRoom(),
+        ]),
         new Check_HostileCreepInRoom(),
         new Action_AssignNearestHostileCreepAsTarget(),
         new Tree_Composite_Priority([

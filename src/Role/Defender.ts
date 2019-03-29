@@ -6,9 +6,9 @@ export class Role_Defender extends Role_Role {
 
     public static bodyParts(energyCapacityAvailable: number): BodyPartConstant[] {
         if (energyCapacityAvailable < 550) {
-            return [ATTACK, ATTACK, MOVE, MOVE];
+            return [ATTACK, TOUGH, MOVE, MOVE];
         } else {
-            return [ATTACK, RANGED_ATTACK, RANGED_ATTACK, MOVE, MOVE, MOVE];
+            return [ATTACK, RANGED_ATTACK, TOUGH, TOUGH, MOVE, MOVE];
         }
     }
 
