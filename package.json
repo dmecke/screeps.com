@@ -14,7 +14,7 @@
         "gulp-tslint": "*",
         "gulp-typescript": "*",
         "gulp-util": "*",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.19",
         "q": "^1.4.1",
         "recast": "*",
         "tslint": "*",
