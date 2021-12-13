@@ -32,8 +32,10 @@ export class Task_Spawn extends Task_Task {
 
     private spawnInSpawner(spawn: StructureSpawn): void {
         const role = spawn.room.findNextRoleToSpawn();
-        if (this.spawn(role, spawn)) {
-            return;
+        if (role !== null) {
+            if (this.spawn(role, spawn)) {
+                return;
+            }
         }
 
         const undevelopedRooms = this.roomRepository.findUndeveloped();

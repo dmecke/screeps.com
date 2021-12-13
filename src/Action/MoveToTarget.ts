@@ -12,7 +12,7 @@ export class Action_MoveToTarget extends Tree_Core_Action {
             return TREE_FAILURE;
         }
 
-        const nextSteps = creep.pos.findPathTo(target.pos);
+        const nextSteps = creep.pos.findPathTo(target.pos); // @todo cache! recalculate if path is blocked
         if (nextSteps.length === 0) {
             return TREE_SUCCESS;
         }

@@ -110,7 +110,7 @@ export class Role_Factory {
 
             default:
                 Util_Logger.error("Cannot detect body parts. Illegal name '" + role + "'");
-                throw new Error();
+                throw new Error("Illegal role name'" + role + '"');
         }
     }
 }

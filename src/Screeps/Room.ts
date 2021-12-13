@@ -81,7 +81,7 @@ const loadRoomPrototype = () => {
         const rooms = new Rooms();
         const exits = Game.map.describeExits(this.name);
         for (const direction in exits) {
-            if (exits.hasOwnProperty(direction) && Game.map.isRoomAvailable(exits[direction])) {
+            if (exits.hasOwnProperty(direction) && Game.map.getRoomStatus(exits[direction]).status !== "closed") {
                 rooms.add(exits[direction]);
             }
         }
@@ -118,12 +118,18 @@ const loadRoomPrototype = () => {
     };
 
     Room.prototype.findNextRoleToSpawn = function(this: Room): string|null {
+        /**
+         * @todo attack "dependencies" to every role
+         * transporters for example are only useful when at least two containers exist
+         * also builders make no sense if there is nothing to build
+         * wallies make no sense if there are no walls
+         */
         const priorityOrder: string[] = [
             ROLE_HARVESTER,
             ROLE_HARVESTER,
+            ROLE_HARVESTER,
+            ROLE_HARVESTER,
             ROLE_SPAWN_SUPPLIER,
-            ROLE_HARVESTER,
-            ROLE_HARVESTER,
             ROLE_BUILDER,
         ];
         const existing: {}[] = [];

@@ -23,11 +23,11 @@ import {Check_CreepCanCarryMore} from "../Check/CreepCanCarryMore";
 import {Check_ASpawnsIsInNeedOfEnergy} from "../Check/ASpawnsIsInNeedOfEnergy";
 import {Check_IsNotInHomeRoom} from "../Check/IsNotInHomeRoom";
 import {Check_TargetContainerIsNotFull} from "../Check/TargetContainerIsNotFull";
-import {Check_TowerHasEnergy} from '../Check/HasEnergy';
 import {Check_CreepCarriesEnergy} from '../Check/CreepCarriesEnergy';
 
 export = new Tree_Tree(
     "Harvester",
+    // @todo extract chunks to reusable "feature sets" to be able to reuse them and increase readability
     new Tree_Composite_Sequence([
         new Tree_Composite_Priority([
             new Check_IsInTargetRoom(),
