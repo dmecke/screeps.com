@@ -9,6 +9,7 @@ import {WallsAndRamparts} from "../Core/Collection/WallsAndRamparts";
 import {Sources} from "../Core/Collection/Sources";
 import {Structures} from "../Core/Collection/Structures";
 import {ConstructionSites} from "../Core/Collection/ConstructionSites";
+import {ROLE_BUILDER, ROLE_CLAIMER, ROLE_HARVESTER, ROLE_SPAWN_SUPPLIER} from '../Constants';
 
 const loadRoomPrototype = () => {
 
@@ -114,6 +115,40 @@ const loadRoomPrototype = () => {
 
     Room.prototype.isUndeveloped = function(this: Room): boolean {
         return this.findSpawns().none();
+    };
+
+    Room.prototype.findNextRoleToSpawn = function(this: Room): string|null {
+        const priorityOrder: string[] = [
+            ROLE_HARVESTER,
+            ROLE_HARVESTER,
+            ROLE_SPAWN_SUPPLIER,
+            ROLE_HARVESTER,
+            ROLE_HARVESTER,
+            ROLE_BUILDER,
+        ];
+        const existing: {}[] = [];
+
+        for (const role of priorityOrder) {
+            if (!existing[role]) {
+                existing[role] = 0;
+            }
+            if (this.creepsOfRole(role).length <= existing[role]) {
+                return role;
+            }
+            existing[role]++;
+        }
+
+        // fill with rest of minimum required creeps
+        for (const role of Role_Factory.roles()) {
+            if (role === ROLE_CLAIMER) {
+                continue;
+            }
+            if (this.creepsOfRole(role).length < Role_Factory.minimumCreepCount(role)) {
+                return role;
+            }
+        }
+
+        return null;
     };
 };
 

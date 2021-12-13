@@ -23,6 +23,8 @@ import {Check_CreepCanCarryMore} from "../Check/CreepCanCarryMore";
 import {Check_ASpawnsIsInNeedOfEnergy} from "../Check/ASpawnsIsInNeedOfEnergy";
 import {Check_IsNotInHomeRoom} from "../Check/IsNotInHomeRoom";
 import {Check_TargetContainerIsNotFull} from "../Check/TargetContainerIsNotFull";
+import {Check_TowerHasEnergy} from '../Check/HasEnergy';
+import {Check_CreepCarriesEnergy} from '../Check/CreepCarriesEnergy';
 
 export = new Tree_Tree(
     "Harvester",
@@ -72,6 +74,7 @@ export = new Tree_Tree(
             ]),
             new Tree_Composite_Sequence([
                 new Check_ASpawnsIsInNeedOfEnergy(),
+                new Check_CreepCarriesEnergy(),
                 new Action_AssignNearestSpawnInNeedOfEnergyAsTarget(),
                 new Tree_Composite_Priority([
                     new Action_TransferToTarget(RESOURCE_ENERGY),

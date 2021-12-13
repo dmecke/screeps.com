@@ -2,12 +2,12 @@ import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
 import {TREE_SUCCESS, TREE_FAILURE} from "../Constants";
 
-export class Check_TowerHasEnergy extends Tree_Core_Action {
+export class Check_CreepCarriesEnergy extends Tree_Core_Action {
 
     public tick(tick: Tree_Core_Tick): number {
-        const tower = tick.target as StructureTower;
+        const creep = tick.target as Creep;
 
-        if (tower.energy > 0) {
+        if (creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0) {
             return TREE_SUCCESS;
         }
 
@@ -15,6 +15,8 @@ export class Check_TowerHasEnergy extends Tree_Core_Action {
     }
 
     public getDescription(tick: Tree_Core_Tick): string {
-        return "I have energy.";
+        const creep = tick.target as Creep;
+
+        return "I am carrying energy (" + creep.store.getUsedCapacity(RESOURCE_ENERGY) + ").";
     }
 }

@@ -31,15 +31,9 @@ export class Task_Spawn extends Task_Task {
     }
 
     private spawnInSpawner(spawn: StructureSpawn): void {
-        for (const role of Role_Factory.roles()) {
-            if (role === ROLE_CLAIMER) {
-                continue;
-            }
-            if (spawn.room.creepsOfRole(role).length < Role_Factory.minimumCreepCount(role)) {
-                if (this.spawn(role, spawn)) {
-                    return;
-                }
-            }
+        const role = spawn.room.findNextRoleToSpawn();
+        if (this.spawn(role, spawn)) {
+            return;
         }
 
         const undevelopedRooms = this.roomRepository.findUndeveloped();

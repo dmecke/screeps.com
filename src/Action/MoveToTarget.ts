@@ -35,6 +35,9 @@ export class Action_MoveToTarget extends Tree_Core_Action {
             if (nextPosition.lookFor(LOOK_CREEPS).length > 0) {
                 return TREE_FAILURE;
             }
+            if (nextPosition.lookFor(LOOK_STRUCTURES).length > 0) {
+                return TREE_FAILURE;
+            }
         }
 
         if (creep.pos.isEqualTo(target)) {

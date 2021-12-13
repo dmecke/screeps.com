@@ -22,4 +22,8 @@ export class Action_ChangeTargetRoom extends Tree_Core_Action {
 
         return TREE_SUCCESS;
     }
+
+    public getDescription(tick: Tree_Core_Tick): string {
+        return "I change my target room.";
+    }
 }

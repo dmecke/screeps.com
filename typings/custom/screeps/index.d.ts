@@ -78,6 +78,7 @@ interface Room {
     trackInfo(): void;
     creepsOfRole(roleName: string): Creep[];
     isUndeveloped(): boolean;
+    findNextRoleToSpawn(): string|null;
 }
 interface Source {
     priority(creep: Creep): number;

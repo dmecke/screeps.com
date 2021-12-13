@@ -5,7 +5,7 @@ import {Tree_Core_Blackboard} from "../Tree/Core/Blackboard";
 import {Tree_Composite_Sequence} from "../Tree/Composite/Sequence";
 import {Action_RepairTarget} from "../Action/RepairTarget";
 import {Action_AssignHighestPriorityDamagedStructureAsTarget} from "../Action/AssignHighestPriorityDamagedStructureAsTarget";
-import {Check_HasEnergy} from "../Check/HasEnergy";
+import {Check_TowerHasEnergy} from "../Check/HasEnergy";
 import {Action_AssignNearestHostileCreepAsTarget} from "../Action/AssignNearestHostileCreepAsTarget";
 import {Action_TowerAttackTarget} from "../Action/TowerAttackTarget";
 
@@ -46,7 +46,7 @@ export class Task_Tower extends Task_Task {
             "Tower",
             new Tree_Composite_Priority([
                 new Tree_Composite_Sequence([
-                    new Check_HasEnergy(),
+                    new Check_TowerHasEnergy(),
                     new Action_AssignNearestHostileCreepAsTarget(),
                     new Action_TowerAttackTarget(),
                 ]),
