@@ -19,7 +19,7 @@ export class Depots implements IDepots {
     public notFull(): Depots {
         return new Depots(
             _.filter(this.depots, (depot: StructureStorage|StructureContainer) => {
-                return _.sum(depot.store) < depot.storeCapacity;
+                return depot.store.getFreeCapacity() > 0;
             }),
         );
     }
@@ -27,7 +27,7 @@ export class Depots implements IDepots {
     public canStore(amount: number): Depots {
         return new Depots(
             _.filter(this.depots, (depot: StructureStorage|StructureContainer) => {
-                return _.sum(depot.store) + amount <= depot.storeCapacity;
+                return depot.store.getFreeCapacity() >= amount;
             }),
         );
     }

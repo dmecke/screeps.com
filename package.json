@@ -1,23 +1,23 @@
 {
-    "name": "Screeps",
+    "name": "screeps",
     "description": "My AI implementation for Screeps.",
     "license": "MIT",
     "author": "Daniel Mecke",
     "repository": "dmecke/screeps.com",
     "devDependencies": {
-        "@types/screeps": "^2.5.3",
-        "deep-equal": "^1.0.1",
-        "gulp": "^4.0",
-        "gulp-clean": "*",
+        "@types/screeps": "^3.2.4",
+        "deep-equal": "^2.0.5",
+        "gulp": "^4.0.2",
+        "gulp-clean": "^0.4.0",
         "gulp-collect": "^0.1.0",
-        "gulp-rename": "*",
-        "gulp-tslint": "*",
-        "gulp-typescript": "*",
-        "gulp-util": "*",
+        "gulp-rename": "^2.0.0",
+        "gulp-tslint": "^8.1.4",
+        "gulp-typescript": "^6.0.0-alpha.1",
+        "gulp-util": "^3.0.8",
         "lodash": "^4.17.21",
-        "q": "^1.4.1",
-        "recast": "*",
-        "tslint": "*",
-        "typescript": "*"
+        "q": "^1.5.1",
+        "recast": "^0.20.5",
+        "tslint": "^6.1.3",
+        "typescript": "^4.5.3"
     }
 }

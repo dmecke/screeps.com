@@ -7,7 +7,7 @@ export class Check_TargetContainerIsNotFull extends Tree_Core_Action {
     public tick(tick: Tree_Core_Tick): number {
         const container = tick.blackboard.get("target", tick.tree.id) as StructureContainer;
 
-        if (_.sum(container.store) < container.storeCapacity) {
+        if (container.store.getFreeCapacity() > 0) {
             return TREE_SUCCESS;
         }
 

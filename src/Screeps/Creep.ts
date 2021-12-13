@@ -61,7 +61,7 @@ const loadCreepPrototype = () => {
     };
 
     Creep.prototype.carryAmount = function(this: Creep): number {
-        return _.sum(this.carry);
+        return this.store.getUsedCapacity();
     };
 
     Creep.prototype.homeRoom = function(this: Creep): string {
