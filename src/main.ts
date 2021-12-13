@@ -26,13 +26,17 @@ import SpawnRepository from "./Repository/SpawnRepository";
 import RoomRepository from "./Repository/RoomRepository";
 
 export function loop() {
-    new Task_Cleanup().execute();
-    new Task_Spawn(new SpawnRepository(), new RoomRepository(), new CreepNameGenerator()).execute();
-    new Task_Roles().execute();
-    new Task_Tower().execute();
+    const tasks = [];
+
+    tasks.push(new Task_Cleanup());
+    tasks.push(new Task_Spawn(new SpawnRepository(), new RoomRepository(), new CreepNameGenerator()));
+    tasks.push(new Task_Roles());
+    tasks.push(new Task_Tower());
     if (Game.time % 10 === 0) {
-        new Task_RoadPlanning().execute();
-        new Task_StructurePlanning().execute();
+        tasks.push(new Task_RoadPlanning());
+        tasks.push(new Task_StructurePlanning());
     }
-    new Task_Report().execute();
+    tasks.push(new Task_Report());
+
+    tasks.forEach(task => task.execute());
 }
