@@ -2,9 +2,9 @@ import {Settings} from "../../Settings";
 
 export class Depots implements IDepots {
 
-    private readonly depots: Array<StructureStorage|StructureContainer>;
+    private readonly depots: (StructureStorage|StructureContainer)[];
 
-    public constructor(depots: Array<StructureStorage|StructureContainer> = []) {
+    public constructor(depots: (StructureStorage|StructureContainer)[] = []) {
         this.depots = depots;
     }
 

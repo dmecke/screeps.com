@@ -8,7 +8,7 @@ My ingame name is *dmecke*, drop me a line if you like.
 #### Automate everything
 The main goal is to achieve as few manual interactions as possible. At the very best none at all.
 
-#### Heavily base on behavior trees
+#### Heavily based on behavior trees
 As I gain more and more knowledge about the mechanics of the game, I need to adjust the AI correspondingly. This quickly becomes a mess with masses of precedural code. So the idea is to encapsulate actions and checks into small reusable classes and to leverage them in behavior trees that can be easily adjusted according to new findings.
 
 

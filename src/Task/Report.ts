@@ -38,16 +38,22 @@ export class Task_Report extends Task_Task {
     }
 
     private reportCpu(): void {
+        const reports = [];
+
         const used = Math.floor(Game.cpu.getUsed());
         const cpuColor = used > Game.cpu.limit ? "#ff5646" : "#79CB44";
         const cpuLimitColor = Game.cpu.tickLimit < Settings.CPU_BUCKET_BUFFER ? "#ffd85b" : "#79CB44";
         const cpuReport = "CPU <span style='color: " + cpuColor + "'>" + used.toString().format() + "</span> / <span style='color: " + cpuLimitColor + "'>" + Game.cpu.tickLimit + "</span>";
+	reports.push(cpuReport);
 
         const bucket = Game.cpu.bucket;
-        const bucketColor = bucket === Settings.CPU_BUCKET_MAXIMUM ? "#79CB44" : "#FF5646";
-        const bucketReport = "CPU Bucket <span style='color: " + bucketColor + "'>" + bucket.toString().format() + "</span> / " + Settings.CPU_BUCKET_MAXIMUM.toString().format();
+	if (bucket) {
+            const bucketColor = bucket === Settings.CPU_BUCKET_MAXIMUM ? "#79CB44" : "#FF5646";
+            const bucketReport = "CPU Bucket <span style='color: " + bucketColor + "'>" + bucket.toString().format() + "</span> / " + Settings.CPU_BUCKET_MAXIMUM.toString().format();
+	    reports.push(bucketReport);
+	}
 
-        Util_Logger.info(cpuReport + "  |  " + bucketReport);
+        Util_Logger.info(reports.join("  |  "));
     }
 
     private needToReport(room: Room): boolean {
