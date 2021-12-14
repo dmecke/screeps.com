@@ -49,6 +49,19 @@ const loadRoomPositionPrototype = () => {
 
         return status;
     };
+
+    RoomPosition.prototype.canStepOn = function(this: RoomPosition): boolean {
+        if (this.lookFor(LOOK_CREEPS).length > 0) {
+            return false;
+        }
+        const unwalkableStructures = this.lookFor(LOOK_STRUCTURES)
+          .filter(structure => structure.structureType !== STRUCTURE_RAMPART);
+        if (unwalkableStructures.length > 0) {
+            return false;
+        }
+
+        return true;
+    }
 };
 
 export = loadRoomPositionPrototype;

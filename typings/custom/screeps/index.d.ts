@@ -62,6 +62,7 @@ interface RoomPosition {
     outerPositionsInRange(range: number): RoomPosition[];
     hasCloseContainer(): boolean;
     createCloseContainerConstructionSite(): number;
+    canStepOn(): boolean;
 }
 interface Room {
     hasController(): boolean;

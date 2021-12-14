@@ -32,10 +32,7 @@ export class Action_MoveToTarget extends Tree_Core_Action {
          */
         if (nextSteps.length > 0) {
             const nextPosition = new RoomPosition(nextSteps[0].x, nextSteps[0].y, creep.room.name);
-            if (nextPosition.lookFor(LOOK_CREEPS).length > 0) {
-                return TREE_FAILURE;
-            }
-            if (nextPosition.lookFor(LOOK_STRUCTURES).length > 0) {
+            if (!nextPosition.canStepOn()) {
                 return TREE_FAILURE;
             }
         }
