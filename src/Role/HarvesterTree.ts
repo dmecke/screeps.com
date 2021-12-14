@@ -16,7 +16,7 @@ import {Tree_Composite_MemoryPriority} from "../Tree/Composite/MemoryPriority";
 import {Tree_Tree} from "../Tree/Tree";
 import {Check_IsInTargetRoom} from "../Check/IsInTargetRoom";
 import {Action_MoveToTargetRoom} from "../Action/MoveToTargetRoom";
-import {ROLE_SPAWN_SUPPLIER} from "../Constants";
+import {ROLE_HARVESTER, ROLE_SPAWN_SUPPLIER} from "../Constants";
 import {Action_ChangeTargetRoom} from "../Action/ChangeTargetRoom";
 import RoomRepository from "../Repository/RoomRepository";
 import {Check_CreepCanCarryMore} from "../Check/CreepCanCarryMore";
@@ -24,6 +24,7 @@ import {Check_ASpawnsIsInNeedOfEnergy} from "../Check/ASpawnsIsInNeedOfEnergy";
 import {Check_IsNotInHomeRoom} from "../Check/IsNotInHomeRoom";
 import {Check_TargetContainerIsNotFull} from "../Check/TargetContainerIsNotFull";
 import {Check_CreepCarriesEnergy} from '../Check/CreepCarriesEnergy';
+import {Action_AssignHighestPriorityConstructionSiteAsTarget} from '../Action/AssignHighestPriorityConstructionSiteAsTarget';
 
 export = new Tree_Tree(
     "Harvester",
@@ -81,7 +82,18 @@ export = new Tree_Tree(
                     new Action_MoveToTarget(),
                 ]),
             ]),
-            new Action_ChangeTargetRoom(new RoomRepository()),
+            new Tree_Composite_Sequence([
+                new Check_CreepCarriesEnergy(),
+                new Action_AssignHighestPriorityConstructionSiteAsTarget(),
+                new Tree_Composite_Priority([
+                    new Action_BuildTarget(),
+                    new Action_MoveToTarget(),
+                ]),
+            ]),
+            new Tree_Composite_Sequence([
+                new Check_RoomHasCreepsOfRole(ROLE_HARVESTER, 3),
+                new Action_ChangeTargetRoom(new RoomRepository()),
+            ]),
         ]),
     ]),
 );
