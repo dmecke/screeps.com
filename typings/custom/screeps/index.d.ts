@@ -52,6 +52,7 @@ interface IDroppedResources {
 }
 interface IWallsAndRamparts {
     withNotMaxHitpoints(): IWallsAndRamparts;
+    filterOnlyRamparts(): IWallsAndRamparts;
     orderByPriority(): IWallsAndRamparts;
     closestByPath(pos: RoomPosition): StructureWall|StructureRampart
     first(): StructureWall|StructureRampart

@@ -6,11 +6,11 @@ export class Settings {
     public static BUILD_PRIORITY_EXTENSION = 25;
     public static BUILD_DISTANCE_CONTAINER = 1; // how far should a container be placed next to a structure?
 
-    public static BLACKLISTED_ROOMS = ["E26N24", "E26N25"];
-    public static WISHLIST_ROOMS = ["E27N24", "E28N25"];
+    public static BLACKLISTED_ROOMS = [];
+    public static WISHLIST_ROOMS = ["W23S38"];
 
     public static NUMBER_OF_HARVESTER = 4;
-    public static NUMBER_OF_UPGRADER = 1;
+    public static NUMBER_OF_UPGRADER = 2;
     public static NUMBER_OF_TRANSPORTER = 4;
     public static NUMBER_OF_SPAWN_SUPPLIER = 3;
     public static NUMBER_OF_WALLIE = 2;
@@ -20,7 +20,7 @@ export class Settings {
     public static NUMBER_OF_BUILDER = 1;
     public static BUILDER_MAXIMUM = 5;
 
-    public static AVERAGE_TICK_DURATION = 2.9; // @todo calculate this: store the current timestamp every x ticks and compare how much time has passed
+    public static AVERAGE_TICK_DURATION = 4.2; // @todo calculate this: store the current timestamp every x ticks and compare how much time has passed
 
     public static CPU_BUCKET_MAXIMUM = 10000;
     public static CPU_BUCKET_BUFFER = 500;

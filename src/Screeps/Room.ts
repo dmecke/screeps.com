@@ -119,7 +119,7 @@ const loadRoomPrototype = () => {
 
     Room.prototype.findNextRoleToSpawn = function(this: Room): string|null {
         /**
-         * @todo attack "dependencies" to every role
+         * @todo attach "dependencies" to every role
          * transporters for example are only useful when at least two containers exist
          * also builders make no sense if there is nothing to build
          * wallies make no sense if there are no walls

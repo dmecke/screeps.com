@@ -12,6 +12,12 @@ export class WallsAndRamparts implements IWallsAndRamparts {
         );
     }
 
+    public filterOnlyRamparts(): WallsAndRamparts {
+        return new WallsAndRamparts(
+            _.filter(this.structures, (structure: StructureWall|StructureRampart) => structure.structureType === STRUCTURE_RAMPART),
+        );
+    }
+
     public orderByPriority(): WallsAndRamparts {
         const structures = this.structures;
         structures.sort((a: Structure, b: Structure) => Math.floor(a.hits / 500) - Math.floor(b.hits / 500));
