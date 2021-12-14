@@ -1,6 +1,7 @@
 import {Tree_Core_Action} from "../Tree/Core/Action";
 import {Tree_Core_Tick} from "../Tree/Core/Tick";
 import {TREE_FAILURE, TREE_SUCCESS, TREE_RUNNING} from "../Constants";
+import {Pathfinding} from '../Core/Pathfinding';
 
 export class Action_MoveToTarget extends Tree_Core_Action {
 
@@ -12,7 +13,8 @@ export class Action_MoveToTarget extends Tree_Core_Action {
             return TREE_FAILURE;
         }
 
-        const nextSteps = creep.pos.findPathTo(target.pos); // @todo cache! recalculate if path is blocked
+        const pathfinding = new Pathfinding();
+        const nextSteps = pathfinding.findPath(creep.pos, target.pos);
         if (nextSteps.length === 0) {
             return TREE_SUCCESS;
         }

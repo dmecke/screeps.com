@@ -64,6 +64,7 @@ interface RoomPosition {
     hasCloseContainer(): boolean;
     createCloseContainerConstructionSite(): number;
     canStepOn(): boolean;
+    toString(): string;
 }
 interface Room {
     hasController(): boolean;
