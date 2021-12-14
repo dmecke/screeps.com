@@ -6,7 +6,8 @@ export class Task_RoadPlanning {
             room.memory.roads = {};
         }
     }
-    private static reduce(room: Room) {
+
+    private static reducePriority(room: Room) {
         for (const coordinate in room.memory.roads) {
             if (room.memory.roads.hasOwnProperty(coordinate)) {
                 room.memory.roads[coordinate]--;
@@ -19,15 +20,17 @@ export class Task_RoadPlanning {
             }
         }
     }
-    private static increment(room: Room) {
+
+    private static incrementPriorities(room: Room) {
         const creeps = room.find(FIND_MY_CREEPS) as Creep[];
         for (const creep of creeps) {
-            Task_RoadPlanning.incrementAtPosition(room, creep.pos);
+            Task_RoadPlanning.incrementPriorityAtPosition(room, creep.pos);
         }
     }
-    private static incrementAtPosition(room: Room, position: RoomPosition) {
+
+    private static incrementPriorityAtPosition(room: Room, position: RoomPosition) {
         const coordinate = position.x + "|" + position.y;
-        if (position.lookFor(LOOK_TERRAIN)[0] !== "swamp" || position.lookFor(LOOK_STRUCTURES).length > 0 || position.lookFor(LOOK_CONSTRUCTION_SITES).length > 0) {
+        if (this.checkRoadPlanningToBeRemovedAtPosition(position)) {
             delete room.memory.roads[coordinate];
             return;
         }
@@ -39,14 +42,31 @@ export class Task_RoadPlanning {
         stepCount += Settings.ROAD_PLANNING_STEP_COUNT;
         room.memory.roads[coordinate] = stepCount;
     }
+
+    private static checkRoadPlanningToBeRemovedAtPosition(position: RoomPosition): boolean {
+        if (position.lookFor(LOOK_TERRAIN)[0] !== "swamp") {
+            return true;
+        }
+
+        if (position.lookFor(LOOK_STRUCTURES).length > 0) {
+            return true;
+        }
+
+        if (position.lookFor(LOOK_CONSTRUCTION_SITES).length > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     public execute() {
         for (const name in Game.rooms) {
             if (Game.rooms.hasOwnProperty(name)) {
                 const room = Game.rooms[name];
 
                 Task_RoadPlanning.resetRoom(room);
-                Task_RoadPlanning.increment(room);
-                Task_RoadPlanning.reduce(room);
+                Task_RoadPlanning.incrementPriorities(room);
+                Task_RoadPlanning.reducePriority(room);
             }
         }
     }
